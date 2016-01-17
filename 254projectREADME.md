@@ -11,7 +11,3 @@ Study to replicate is from Wang, Lukowski, Hart, et al. (2015). Is Math Anxiety 
 (Attempting to replicate Study 2)
 
 
-
-
-
->>>>>>> c61226fa0d4289d9c905bca741920149a74e4348
