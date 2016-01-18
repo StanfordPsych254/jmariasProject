@@ -5,3 +5,20 @@ date: "January 16, 2016"
 output: html_document
 ---
 
+I plan on replicating Study 2 of Wang, Lukowski, Hart, et al. (2015), Is Math Anxiety Always Bad for Math Learning? The Role of Math Motivation. *Psychological Science, 26*, 1863-1876.
+
+Study 2 of Wang et al. is itself a replication of Study 1 in the same paper, which tested same-sex twin pairs on math anxiety, motivation, and performance. Study 2 was conducted with undergraduate students, and demonstrated that math performance follows an expected (Yerkes-Dodson) anxiety curve, but only for high math-motivated students; for low math-motivated students, the relationship between anxiety and performance is not a curve but a moderately negative, linear one. 
+
+I want to take on this study for replication because of its relevance to my interest in connecting the cognitive and social elements of educational psychology. I am currently part of a project that is looking at the influence of Executive Functions on numeracy, subitizing, and math ability, and working towards replicating Wang et al. would be an appropriate parallel to this work. I think looking at the influence of motivation on performance, especially through the lens of affective interference and anxiety on cognition - is an appropriate replication study for me as a psychologist and educational researcher. 
+
+The results of Study 2 of Wang et al. were obtained from 237 undergraduate students. In order to attempt to replicate this work on MTurk, I will need a similar number of participants as well as the following scales and items: 
+
+- The brief version of the Mathematics Anxiety Rating Scale (MARS-B; Suinn & Winston, 2003) to measure math anxiety.
+- The trait subscale from the State-Trait Anxiety Inventory (Spielberger, 1983) to measure general anxiety.
+- The 3-item Math Motivation scale (from M. M. Chiu and Zeng, 2008) to measure math motivation. 
+- The problem-verification task (Rinne & Mazzocco, 2014) to measure math calculation fluency. Study 2 used only the 24 hardest questions when testing undergraduates; the same selection will probably be chosen for the replication (though this might vary depending on course input)
+
+Study 2 consists of having participants respond to the scales of general anxiety, math anxiety, and math motivation, as well as demonstrate math peformance (measured in accuracy as well as reaction time). Obtaining the performance measures is what might be the most challenging for me in setting up the replication, because it will require Reaction Time coding; I am confident I will be able to figure it out in the process because the paradigm as a whole is not too complex and this specific part seems manageable. The multivariate regression analyses of anxiety, motivation, and performance will also be interesting to explore, but given that a model is provided in the original study, that also seems like an achievable task. 
+
+
+
