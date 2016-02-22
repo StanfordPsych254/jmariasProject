@@ -53,31 +53,6 @@ var atts = ['When I do mathematics, I sometimes get totally absorbed.',
 'Mathematics is important to me personally',
 'Because doing mathematics is fun, I wouldn’t want to give it up.']
 
-// var atts = ['It is very important that children learn to respect adults, such as parents and teachers.',
-// 'It is important for young children to learn to control their impulses (e.g., waiting when told to wait).',
-// 'Children should be taught to be grateful to their parents.',
-// 'It is important to let young children know when they have broken a rule.',
-// 'Children should not be punished for breaking small rules.',
-// 'Parents should follow their children’s lead rather than imposing structure in the form of rules.',
-// 'Young children should be allowed to make their own decisions, such as what to eat for dinner.',
-// 'Parents do not need to worry if their child misbehaves a lot.',
-// 'Children should be given comfort and understanding when they are scared or unhappy.',
-// 'It is important for children to be able to express their emotions.',
-// 'Parents should pay close attention to what their child wants and desires.',
-// 'If children have a good bond with their parents, they are more likely to have good friendships and relationships later on.',
-// 'Children become spoiled if they receive too much attention from parents.',
-// 'Too much affection can make a child weak.',
-// 'It does not matter if young children feel emotionally close to their parents.',
-// 'It is inappropriate for parents to act like friends to their children.',
-// 'Children can learn about things like good and bad behavior from a very early age.',
-// 'Young children can teach themselves things by exploring and playing.',
-// 'Babies’ repetitive behaviors (e.g. banging a cup on the table) are a way for them to learn about the consequences of actions.',
-// 'It is important to give young children new experiences and sensations.',
-// 'It is not helpful for adults to explain the reasons for rules to young children because they won’t understand.',
-// 'Children don’t need to learn about numbers and math until they go to school.',
-// 'Reading books to children is not helpful if they have not yet learned to speak.',
-// 'Babies don’t learn about the world until they learn to speak.'];
-
 atts = shuffle(atts);
 
 var totalTrialsAtt = atts.length;
@@ -161,7 +136,7 @@ var experiment = {
 	    experiment.next();
 	} else {
 	    $("#testMessage_att").html('<font color="red">' +
-				   'Please make a response!' +
+				   'Please make a response' +
 				   '</font>');
 	}
     },
