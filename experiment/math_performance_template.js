@@ -35,10 +35,12 @@ var allKeyBindings = [
       {"p": "correct", "q": "incorrect"},
       {"p": "incorrect", "q": "correct"} ],
     allTrialOrders = [
-      ["13 X 4 = 47", "22 - 6 = 16", "35 / 5 = 7", "54 + 26 = 70", "32 - 16 = 14", "39 / 16 = 3", "3 X 13 = 39",
-			"27 + 323 = 350", "112 - 88 = 24", "5 X 15 = 65", "27 + 234 = 251", "84 / 4 = 21", "44 - 18 = 24", 8],
-			["14 X 5 = 70", "28 / 16 = 2", "18 + 56 = 74", 9],
-    myKeyBindings = randomElement(allKeyBindings), 
+//			[3, 5, 6],
+//		[4, 7, 9]],
+    ["13 X 4 = 47", "22 - 6 = 16", "35 / 5 = 7", "54 + 26 = 70", "32 - 16 = 14", "39 / 16 = 3", "3 X 13 = 39",
+	"27 + 323 = 350", "112 - 88 = 24", "5 X 15 = 65", "27 + 234 = 251", "84 / 4 = 21", "44 - 18 = 24", 8],
+		["14 X 5 = 70", "28 / 16 = 2", "18 + 56 = 74", 9]],
+    myKeyBindings = randomElement(allKeyBindings),
     myTrialOrder = randomElement(allTrialOrders),
     pOcorrect = (myKeyBindings["p"] == "correct");
 
