@@ -73,6 +73,7 @@ for (i = 0; i < totalTrialsAtt; i++) {
 
 
 // Show the instructions slide -- this is what we want subjects to see first.
+var slideNum = 1;
 showSlide("instructions");
 
 
@@ -163,7 +164,17 @@ var experiment = {
 	    //If the current trial is undefined, call the end function.
 
 	    if (typeof trial_info == "undefined") {
-			return experiment.debriefing();
+			if(slideNum == 1){
+				showSlide("math_anx_slide");
+			}
+			if(slideNum == 2){
+				showSlide("general_anxs_slide");
+			}
+			if(slideNum == 3){
+				showSlide("debriefing");
+			}
+			slideNum ++;
+
 	    }
 
 
