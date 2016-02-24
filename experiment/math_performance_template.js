@@ -2,7 +2,7 @@
 
 // ## High-level overview
 // Things happen in this order:
-// 
+//
 // 1. Compute randomization parameters (which keys to press for even/odd and trial order), fill in the template <code>{{}}</code> slots that indicate which keys to press for even/odd, and show the instructions slide.
 // 2. Set up the experiment sequence object.
 // 3. When the subject clicks the start button, it calls <code>experiment.next()</code>
@@ -27,24 +27,26 @@ function randomInteger(n) {
 
 // Get a random element from an array (e.g., <code>random_element([4,8,7])</code> could return 4, 8, or 7). This is useful for condition randomization.
 function randomElement(array) {
-// I need to test this function more.
-  var randomIndex = randomInteger(array.length)
-  var returnString = array[randomIndex];
-  array.splice(randomIndex, 1);
-
-  return returnString;
+  return array[randomInteger(array.length)];
 }
 
 // ## Configuration settings
-var keyBindings = {"p": "left", "q": "right"},
-    allPuppies = ["https://pbs.twimg.com/profile_images/497043545505947648/ESngUXG0.jpeg", "http://cdn.sheknows.com/articles/2013/04/Puppy_2.jpg", "http://media.mydogspace.com.s3.amazonaws.com/wp-content/uploads/2013/08/puppy-500x350.jpg"],
-    allKittens = ["http://cdn.playbuzz.com/cdn/260e39ce-346c-4eb0-a3ef-1aeb3724f7c7/b0a68efc-b312-46af-9487-5afb7be17ce8.jpg", "http://www.welikeviral.com/files/2014/12/8325_8_site.jpeg", "http://sereedmedia.com/srmwp/wp-content/uploads/kitten.jpg"];
-    
+var allKeyBindings = [
+      {"p": "correct", "q": "incorrect"},
+      {"p": "incorrect", "q": "correct"} ],
+    allTrialOrders = [
+      ["13 X 4 = 47", "22 - 6 = 16", "35 / 5 = 7", "54 + 26 = 70", "32 - 16 = 14", "39 / 16 = 3", "3 X 13 = 39",
+			"27 + 323 = 350", "112 - 88 = 24", "5 X 15 = 65", "27 + 234 = 251", "84 / 4 = 21", "44 - 18 = 24", 8],
+			["14 X 5 = 70", "28 / 16 = 2", "18 + 56 = 74", 9],
+    myKeyBindings = randomElement(allKeyBindings), 
+    myTrialOrder = randomElement(allTrialOrders),
+    pOcorrect = (myKeyBindings["p"] == "correct");
+
 // Fill in the instructions template using jQuery's <code>html()</code> method. In particular,
 // let the subject know which keys correspond to even/odd. Here, I'm using the so-called **ternary operator**, which is a shorthand for <code>if (...) { ... } else { ... }</code>
 
-$("#odd-key").text("P");
-$("#even-key").text("Q");
+$("#correct-key").text(pOcorrect ? "P" : "Q");
+$("#incorrect-key").text(pOcorrect ? "Q" : "P");
 
 // Show the instructions slide -- this is what we want subjects to see first.
 showSlide("instructions");
@@ -54,8 +56,9 @@ showSlide("instructions");
 
 var experiment = {
   // Parameters for this sequence.
+  trials: myTrialOrder,
   // Experiment-specific parameters - which keys map to odd/even
-  trials: allPuppies.length,
+  keyBindings: myKeyBindings,
   // An array to store the data that we're collecting.
   data: [],
   // The function that gets called when the sequence is finished.
@@ -67,63 +70,46 @@ var experiment = {
   },
   // The work horse of the sequence - what to do on every trial.
   next: function() {
-
     // If the number of remaining trials is 0, we're done, so call the end function.
-    if (experiment.trials == 0) {
+    if (experiment.trials.length == 0) {
       experiment.end();
       return;
     }
-    
-    experiment.trials--;
-    
+
+    // Get the current trial - <code>shift()</code> removes the first element of the array and returns it.
+    var n = experiment.trials.shift();
+
+    // Compute the correct answer.
+    var realParity = (n % 2 == 0) ? "even" : "odd";
+
     showSlide("stage");
-
-    puppyURL = randomElement(allPuppies);
-    kittenURL = randomElement(allKittens);
-    var keyBindings = {};
-    var stimulus = [];
-    var position = randomInteger(2)
-    if (position == 0){
-      $("#leftAnimal img").attr("src", kittenURL);
-      $("#rightAnimal img").attr("src", puppyURL);
-      stimulus = [kittenURL, puppyURL];
-      keyBindings = {"q": "kitten", "p": "puppy"};
-    }
-    else{
-       $("#leftAnimal img").attr("src", puppyURL);
-       $("#rightAnimal img").attr("src", kittenURL);
-       stimulus = [puppyURL, kittenURL];
-       keyBindings = {"q": "puppy", "p": "kitten"};
-    }
-
     // Display the number stimulus.
-    
-   
-    
+    $("#number").text(n);
+
     // Get the current time so we can compute reaction time later.
     var startTime = (new Date()).getTime();
-    
+
     // Set up a function to react to keyboard input. Functions that are used to react to user input are called *event handlers*. In addition to writing these event handlers, you have to *bind* them to particular events (i.e., tell the browser that you actually want the handler to run when the user performs an action). Note that the handler always takes an <code>event</code> argument, which is an object that provides data about the user input (e.g., where they clicked, which button they pressed).
     var keyPressHandler = function(event) {
       // A slight disadvantage of this code is that you have to test for numeric key values; instead of writing code that expresses "*do X if 'Q' was pressed*", you have to do the more complicated "*do X if the key with code 80 was pressed*". A library like [Keymaster](http://github.com/madrobby/keymaster) lets you write simpler code like <code>key('a', function(){ alert('you pressed a!') })</code>, but I've omitted it here. Here, we get the numeric key code from the event object
       var keyCode = event.which;
-      
+
       if (keyCode != 81 && keyCode != 80) {
         // If a key that we don't care about is pressed, re-attach the handler (see the end of this script for more info)
         $(document).one("keydown", keyPressHandler);
-        
+
       } else {
         // If a valid key is pressed (code 80 is p, 81 is q),
         // record the reaction time (current time minus start time), which key was pressed, and what that means (even or odd).
         var endTime = (new Date()).getTime(),
             key = (keyCode == 80) ? "p" : "q",
-            userParity = keyBindings[key];
+            userParity = experiment.keyBindings[key],
             data = {
-              stimulus: stimulus,
-              selection: userParity
+              stimulus: n,
+              accuracy: realParity == userParity ? 1 : 0,
+              rt: endTime - startTime
             };
-        
-        console.log(data);
+
         experiment.data.push(data);
         // Temporarily clear the number.
         $("#number").text("");
@@ -131,9 +117,9 @@ var experiment = {
         setTimeout(experiment.next, 500);
       }
     };
-    
+
     // Here, we actually bind the handler. We're using jQuery's <code>one()</code> function, which ensures that the handler can only run once. This is very important, because generally you only want the handler to run only once per trial. If you don't bind with <code>one()</code>, the handler might run multiple times per trial, which can be disastrous. For instance, if the user accidentally presses P twice, you'll be recording an extra copy of the data for this trial and (even worse) you will be calling <code>experiment.next</code> twice, which will cause trials to be skipped! That said, there are certainly cases where you do want to run an event handler multiple times per trial. In this case, you want to use the <code>bind()</code> and <code>unbind()</code> functions, but you have to be extra careful about properly unbinding.
     $(document).one("keydown", keyPressHandler);
-    
+
   }
 }

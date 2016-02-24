@@ -8,7 +8,7 @@
 <!-- ## Code -->
 <html>
 <head>
-	<title>math perspectives experiment</title>
+	<title>Math performance component</title>
 	<!-- Include the [jQuery library](http://jquery.com/), which helps you manipulate HTML elements from JS. -->
 	<script src="jquery-1.11.2.min.js"></script>
 
@@ -27,10 +27,22 @@
     <img src="images/stanford.png" height="46" width="360" alt="Stanford University">
   </div>
 		<p id='logo-text'>Stanford Psychology Department</p>
-	<p class="block-text">In this experiment, you will complete three surveys related to your opinions about mathematics and then complete a series of math prompts.
+	<p class="block-text">In the next section, you will be doing some fast math activities. You will be shown a series of math problems, one at a time. You won't need to figure out the answers to the problems, because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong.
 		<!-- Tell the subject which keys to press. We need to set these values dynamically; I use <code>{{}}</code> to indicate template locations in HTML that will be modified by JavaScript. -->
-		Press <span id="even-key">{{}}</span> if you think the given answer is CORRECT and
-		<span id="odd-key">{{}}</span> if the given answer is INCORRECT.
+	<p class="block-text">
+	Press <span id="correct-key">{{}}</span> if you think the given answer is RIGHT and
+	<span id="incorrect-key">{{}}</span> if you think the given answer is WRONG.
+<p  class="block-text">
+1. Please do NOT use pencil and paper or any type of calculator.
+<p  class="block-text">
+2. Remember, it's a FAST math judgement task. So please make your judgement for each problem as quickly and accurately as possible.
+<p  class="block-text">
+3. You will be given a maximum of 10 SECONDS for each problem. The program will automatically proceed to the next problem after 10 seconds, with or without your answer. You will be shown a timer to remind you of the time remaining for each problem.
+<p  class="block-text">
+4. Press the Start button to start your practice trials. You will have 4 practice trials to get you warmed up.
+<p  class="block-text">
+Do NOT use the Back or Refresh buttons on your browser.
+
 	</p>
 	<!-- Button to start the experiment. <code>this.blur()</code> removes the focus from the button, if the user pressed the button by using the keyboard, rather than the mouse. -->
 	<button type="button" onclick="this.blur(); experiment.next()">Start</button>
@@ -39,7 +51,7 @@
 		following questions, you are participating in a study being performed by scientists in the Stanford Department of Psychology. If you have
 		questions about this research, please contact Juan Arias at <a
 		href="mailto://jmarias@stanford.edu">jmarias@stanford.edu</a> or Michael
-		Frank, at mcfrank@stanford.edu. You must be  at least 18 years old to
+		Frank, at <a href="mailto://mcfrank@stanford.edu">mcfrank@stanford.edu</a>. You must be  at least 18 years old to
 		participate. Your participation in this research is voluntary. You may
 		decline to answer any or all of the following questions. You may decline
 		further participation, at any time, without adverse consequences. Your
@@ -48,13 +60,14 @@
 </div>
 <!-- The "stage" slide - where the bulk of the experiment will be displayed. Again, note the use of <code>{{}}</code>. -->
 <div class="slide" id="stage">
-	<table>
-		<tr>
-			<td id="leftAnimal"><img src=""></img></td>
-			<td id="rightAnimal"><img src=""></img></td>
-		</tr>
-	</table>
+
+	<div align="center">
+    <p id ="number">{{}}</p>
+  </div>
+	
 </div>
+
+
 <!-- The finish slide. -->
 <div class="slide" id="finished">
 	You're finished - thanks for participating! Submitting to Mechanical Turk...
@@ -63,7 +76,7 @@
 <!-- Include the <a href="experiment.html">JavaScript file for the experiment</a>. As written, that script immediately executes commands, so we include it here at the end of the HTML file to ensure that resources referenced by the script actually exist. For instance, one of the immediately executed commands is <code>showSlide("instructions")</code>. If we loaded experiment.js, say, in the <code>head</code> section, <code>showSlide("instructions")</code> would fail because the <code>instructions</code> slide doesn't exist yet. It is possible to load the script in <code>head</code> but you have to ensure that any immediately executed commands, if they rely on potentially uninitialized HTML elements, are _delayed_ until the page is ready, using either [window.onload][onload] or jQuery's more robust [$(document).ready()][domReady]  -->
 <!-- [onload]: https://developer.mozilla.org/en/DOM/window.onload -->
 <!-- [domReady]: http://api.jquery.com/ready/ -->
-<script src="experiment.js"></script>
+<script src="math_performance_template.js"></script>
 
 </body>
 </html>
