@@ -49,23 +49,92 @@ function shuffle (a)
 
 //####     Motivation scale ######
 
-var atts = ['When I do mathematics, I sometimes get totally absorbed.',
-'Mathematics is important to me personally',
-'Because doing mathematics is fun, I wouldn’t want to give it up.']
+var atts = {
 
-atts = shuffle(atts);
+"mathMot":  // Math importance
+['When I do mathematics, I sometimes get totally absorbed.',
+// 'Mathematics is important to me personally',
+'Because doing mathematics is fun, I wouldn’t want to give it up.'],
 
-var totalTrialsAtt = atts.length;
+"mathAnx": // Math anxiety
+['Taking a final exam in a mathematics course.',
+// 'Thinking about an upcoming mathematics test one week before.',
+// 'Thinking about an upcoming mathematics test one day before.',
+// 'Thinking about an upcoming mathematics test one hour before.',
+// 'Thinking about an upcoming mathematics test five minutes before.',
+// 'Waiting to get a mathematics test returned in which you expected to do well.',
+// 'Receiving your final mathematics grade in the mail.',
+// 'Realizing that you have to take a number of mathematics classes to fulfill the requirements in your major.',
+// 'Being given a "pop" quiz in a mathematics class.',
+// 'Studying for a mathematics test.',
+// 'Taking the mathematics section of a college entrance examination.',
+// 'Taking an examination (quiz) in a mathematics course.',
+// 'Picking up the mathematics textbook to begin working on a homework assignment.',
+// 'Being given a homework assignment of many difficult problems which is due the next class meeting.',
+// 'Getting ready to study for a mathematics test.',
+// 'Dividing a five digit number by a two digit number in private with pencil and paper.',
+// 'Adding 976 + 777 on paper.',
+// 'Reading a cash register receipt.',
+// 'Figuring the sales tax on a purchase that costs more than $1.00.',
+// 'Figuring out your monthly budget.',
+// 'Being given a set of numerical problems involving addition to solve on paper.',
+// 'Having someone watch you as you total up a column of figures.',
+// 'Totaling up a dinner bill that you think overcharged you.',
+// 'Being responsible for collecting dues for an organization and keeping track of the amount.',
+// 'Studying for a driver’s license test and memorizing the figures involved, such as the distances it takes to stop a car going at different speeds.',
+// 'Totaling up the dues received and the expenses of a club you belong to.',
+// 'Watching someone work with a calculator.',
+// 'Being given a set of division problems to solve.',
+// 'Being given a set of subtraction problems to solve.',
+'Being given a set of multiplication problems to solve.'],
 
-var numTrialsExperiment = totalTrialsAtt
+"genAnx": // General anxiety
+['I feel pleasant.',
+// 'I feel nervous and restless.',
+// 'I feel satisfied with myself.',
+// 'I wish I could be as happy as others seem to be.',
+// 'I feel like a failure.',
+// 'I feel rested.',
+// 'I am "calm, cool, and collected".',
+// 'I feel that difficulties are piling up so that I cannot overcome them.',
+// 'I worry too much over something that really doesn’t matter.',
+// 'I am happy.',
+// 'I have disturbing thoughts.',
+// 'I lack self-confidence.',
+// 'I feel secure.',
+// 'I make decisions easily.',
+// 'I feel inadequate.',
+// 'I am content.',
+// 'Some unimportant thought runs thorugh my mind and bothers me.',
+// 'I take disappointments so keenly that I can’t put them out of my mind.',
+// 'I am a steady person.',
+'I get in a state of tension or turmoil as I think over my recent concerns and interests.']
+}
+
+// Shuffle all of the questions within each array
+atts["mathMot"] = shuffle(atts["mathMot"]);
+atts["mathAnx"] = shuffle(atts["mathAnx"]);
+atts["genAnx"] = shuffle(atts["genAnx"]);
+
+var slideOrder = shuffle(["mathMot","mathAnx","genAnx"])
+slide1 = slideOrder[0]
+slide2 = slideOrder[1]
+slide3 = slideOrder[2]
+
+var slideType= slide1;
+
+var totalTrialsAtt = atts[slideType].length;
+
+var currentTrialExperiment = 0;
+var numTrialsExperiment = atts[slide1].length + atts[slide2].length + atts[slide3].length;
 var trials = [];
 
 // first build motivation question trials
 for (i = 0; i < totalTrialsAtt; i++) {
 	trial = {
-		sentence: atts[i],
+		sentence: atts[slideType][i],
 		trial_number_block: i +1,
-		trial_type: "motivations"
+		trial_type: slideType
 	}
 
 	trials.push(trial);
@@ -73,7 +142,6 @@ for (i = 0; i < totalTrialsAtt; i++) {
 
 
 // Show the instructions slide -- this is what we want subjects to see first.
-var slideNum = 1;
 showSlide("instructions");
 
 
@@ -153,7 +221,8 @@ var experiment = {
 
 		// $("#testMessage_kno").html('');
 		$("#progress").attr("style","width:" +
-			    String(100 * (1 - (trials.length)/numTrialsExperiment)) + "%")
+			    String(100 * (currentTrialExperiment/numTrialsExperiment)) + "%")
+
 
  //style="width:progressTotal%"
 
@@ -163,27 +232,60 @@ var experiment = {
 
 	    //If the current trial is undefined, call the end function.
 
-	    if (typeof trial_info == "undefined") {
-			if(slideNum == 1){
-				showSlide("math_anx_slide");
-			}
-			if(slideNum == 2){
-				showSlide("general_anxs_slide");
-			}
-			if(slideNum == 3){
+	    if (typeof trial_info == "undefined") { // If we're out of trials...
+
+// ...move on to the next slide- there is certainly a more efficient way to do this.
+			if(slideType == slide3){
+				slideType = "debriefing";
 				showSlide("debriefing");
 			}
-			slideNum ++;
+			if(slideType == slide2){
+				slideType = slide3;
+			}
+			if(slideType == slide1){ 
+				slideType = slide2;
+			}
+
+
+	    	if(slideType != "debriefing") {
+		    	// Then do this same loop, set up the right trials, and then deploy same a beginning
+		    	totalTrialsAtt = atts[slideType].length;
+
+		    	trials = [];
+
+		    	// first build motivation question trials
+		    	for (i = 0; i < totalTrialsAtt; i++) {
+		    		trial = {
+		    			sentence: atts[slideType][i],
+		    			trial_number_block: i +1,
+		    			trial_type: slideType
+
+		    		}
+
+		    		trials.push(trial);
+		    	}
+		    }
+	    var trial_info = trials.shift();
 
 	    }
 
 
 	    // check which trial type you're in and display correct slide
-	    if (trial_info.trial_type == "motivations") {
+	    if (trial_info.trial_type == "mathMot") {
 	    	$("#motivations").html(trial_info.sentence);  //add sentence to html
-	    	 showSlide("motivation_slide");              //display slide
+	    	 showSlide("motivation_slide");             //display slide
+	    	 currentTrialExperiment ++;
 	    }
-
+	    if (trial_info.trial_type == "mathAnx") {
+	    	$("#math_anxs").html(trial_info.sentence);  //add sentence to html
+	    	 showSlide("math_anxs_slide");              //display slide
+	    	 currentTrialExperiment ++;
+	    }
+	    if (trial_info.trial_type == "genAnx") {
+	    	$("#general_anxs").html(trial_info.sentence);  //add sentence to html
+	    	 showSlide("general_anxs_slide");              //display slide
+	    	 currentTrialExperiment ++;
+	    }
 
 	    // log the sentence for each trial
 		experiment.data.sentence.push(trial_info.sentence);
