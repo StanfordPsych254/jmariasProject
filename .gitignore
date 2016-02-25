@@ -1,10 +1,10 @@
-experiment/.DS_Store
-        experiment/.nojekyll
-        experiment/.settings.json.swp
-        experiment/compile
-        experiment/kitten-puppy.html
-        experiment/kitten-puppy.js
-        experiment/languages.json
-        experiment/settings.json
-        experiment/watch
+*.DS_Store
+*.nojekyll
+*.settings.json.swp
+compile
+kitten-puppy.html
+kitten-puppy.js
+languages.json
+settings.json
+watch
 *.Rhistory
