@@ -1,0 +1,27 @@
+*******
+Juan Arias, Psych 254 Project (Wang et al., "Math Anxiety/Motivation/Performance")
+To Dos (as of 2-26-16)
+******* 
+
+*Only one of the 3 likert surveys correctly displays "please choose an option" when nothing is selected
+	-Find and change the naming error that leads to this
+
+
+*Fractions for perfromance task not displaying correctly
+	-Find unicode or code to display fractions
+	-OR Turn fractions (and all others) into images and display that way
+
+
+
+*Merge the 3 likert surveys (mathmotivationsurveys) with the performance task (math_performance_template)
+	-Make sure performance task is always after 3 (random-order) surveys
+	-
+	
+
+
+*Re-check original study for the following:
+	-Click interface: how many buttons / which options did they provide? 
+	-What order and randomization were the surveys and task (i.e., double-check that task was always last)
+
+
+

@@ -30,15 +30,59 @@ function randomElement(array) {
   return array[randomInteger(array.length)];
 }
 
+// #################################################################
+// #################################################################
+
+// JUAN CODE: attempting to add a 10 second countdown timer
+
+// From stack overflow:
+
+var count=10;
+
+var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+function timer()
+{
+  count=count-1;
+  if (count <= 0)
+  {
+     clearInterval(counter);
+     //counter ended, do something here
+     return;
+  }
+
+  //Do code for showing the number of seconds here
+}
+// To make the code for the timer appear in a paragraph (or anywhere else on the page), just put the line:
+
+// <span id="timer"></span>
+// where you want the seconds to appear. Then insert the following line in your timer() function, so it looks like this:
+
+function timer()
+{
+  count=count-1;
+  if (count <= 0)
+  {
+     clearInterval(counter);
+     return;
+  }
+
+ document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
+}
+
+// #################################################################
+// #################################################################
+
+
+
 // ## Configuration settings
 var allKeyBindings = [
       {"p": "correct", "q": "incorrect"},
       {"p": "incorrect", "q": "correct"} ],
-    allTrialOrders = [ ["2", '35 / 5 = 7',
+    allTrialOrders = [ ["13 X 4 = 47", "35 / 5 = 7",
 
 // <code><sup>1</sup>&frasl;<sub>10</sub></code>
 // <sup>1</sup>&frasl;<sub>10</sub>
-// "13 X 4 = 47",
 // "22 - 6 = 16",
 // "35 / 5 = 7",
 // "54 + 26 = 70",
@@ -54,14 +98,13 @@ var allKeyBindings = [
 // "5/12 = 2/6",
 // "14 X 5 = 70",
 // "28 / 16 = 2",
-// "18 + 56 = 74",
 // "8/4 = 16/9",
 // "3/4 + 3/2 = 6/6",
 // "12/2 = 6/1",
 // "76/10 = 7/1",
 // "8/2 = 6/1",
 // "4/16 + 3/8 = 1/2",
-"9"]],
+"18 + 56 = 74"]],
     myKeyBindings = randomElement(allKeyBindings),
     myTrialOrder = randomElement(allTrialOrders),
     pOcorrect = (myKeyBindings["p"] == "correct");
