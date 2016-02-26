@@ -4,24 +4,41 @@ To Dos (as of 2-26-16)
 ******* 
 
 *Only one of the 3 likert surveys correctly displays "please choose an option" when nothing is selected
-	-Find and change the naming error that leads to this
-
+	-Find and change the naming error in the javascript that is generating this
+	
 
 *Fractions for perfromance task not displaying correctly
 	-Find unicode or code to display fractions
 	-OR Turn fractions (and all others) into images and display that way
 
 
+*Add 10-second automatic timeout for the performance task, along with countdown timer
+	-Write script for automatic countdown to next task slide (10 seconds)
+	-Create countdown button showing 10 seconds with each new task slide
+
+
+*Add "correct" "incorrect" (and maybe "don't know"?) buttons to performance task, rather than keyboard clicks
+	-add buttons	
+	-remove keyboard "p" "q" click options
+	-make buttons move forward to the next slide, and register response
+	-Make sure code registers response (both selection and reaction time) along with other data
+
+
+
 
 *Merge the 3 likert surveys (mathmotivationsurveys) with the performance task (math_performance_template)
 	-Make sure performance task is always after 3 (random-order) surveys
-	-
-	
+	-**Should I have a "header" slide between each survey? i.e., "This next set of questions relates to your feelings about math. Please respond with...")
+		-Or should I just leave it as it is, with one scale going right into the next (this is easier...b/c it's done, but not ideal)
+	-Make font of question larger for all surveys
 
 
 *Re-check original study for the following:
 	-Click interface: how many buttons / which options did they provide? 
 	-What order and randomization were the surveys and task (i.e., double-check that task was always last)
+	-Find how they "introduced" each likert scale (i.e. "please respond with how often you do the following..."?)
+
+
 
 
 
