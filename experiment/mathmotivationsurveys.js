@@ -284,7 +284,7 @@ var experiment = {
     },
 
     // LOG RESPONSE
-    log_response: function() {
+    log_response: function(trialType) {
 
 	var response_logged = false;
 
@@ -300,9 +300,8 @@ var experiment = {
 	    }
 	}
 
-
 	if (response_logged) {
-	   nextButton_Att.blur();
+	  $('#nextButton_' + trialType).blur();
 
 	    // uncheck radio buttons
 	    for (i = 0; i < radio.length; i++) {
@@ -310,9 +309,9 @@ var experiment = {
 	    }
 	    experiment.next();
 	} else {
-	    $("#testMessage_att").html('<font color="red">' +
-				   'Please make a response' +
-				   '</font>');
+	  $("#testMessage_" + trialType).html('<font color="red">' +
+					      'Please make a response' +
+					      '</font>');
 	}
     },
 
@@ -322,8 +321,6 @@ var experiment = {
 
 	// Allow experiment to start if it's a turk worker OR if it's a test run
 	if (window.self == window.top | turk.workerId.length > 0) {
-
-	    $("#testMessage_att").html(''); 	// clear the test message
 
 		// $("#testMessage_kno").html('');
 		$("#progress").attr("style","width:" +
@@ -379,17 +376,20 @@ var experiment = {
 	    // check which trial type you're in and display correct slide
 	    if (trial_info.trial_type == "mathMot") {
 	    	$("#motivations").html(trial_info.sentence);  //add sentence to html
-	    	 showSlide("motivation_slide");             //display slide
+	      showSlide("motivation_slide");             //display slide
+	      	  $("#testMessage_att").html(''); 	// clear the test message
 	    	 currentTrialExperiment ++;
 	    }
 	    if (trial_info.trial_type == "mathAnx") {
 	    	$("#math_anxs").html(trial_info.sentence);  //add sentence to html
-	    	 showSlide("math_anxs_slide");              //display slide
+	      showSlide("math_anxs_slide");              //display slide
+	      $("#testMessage_math_anx").html(''); 	// clear the test message
 	    	 currentTrialExperiment ++;
 	    }
 	    if (trial_info.trial_type == "genAnx") {
 	    	$("#general_anxs").html(trial_info.sentence);  //add sentence to html
-	    	 showSlide("general_anxs_slide");              //display slide
+	      showSlide("general_anxs_slide");              //display slide
+	      $("#testMessage_general_anx").html(''); 	// clear the test message
 	    	 currentTrialExperiment ++;
 	    }
 
