@@ -1,15 +1,20 @@
 *******
 Juan Arias, Psych 254 Project (Wang et al., "Math Anxiety/Motivation/Performance")
 To Dos (as of 2-26-16)
-******* 
+*******
 
 *Only one of the 3 likert surveys correctly displays "please choose an option" when nothing is selected
-	-Find and change the naming error in the javascript that is generating this
-	
 
-*Fractions for perfromance task not displaying correctly
+	-Find and change the naming error that leads to this
+	-RDH: this ended up being kind of complicated; check out the changes I committed!
+
+*Fractions for performance task not displaying correctly
 	-Find unicode or code to display fractions
+	      * RDH: Looks like you can do this using subscript, superscript, and a unicode fraction slash thing (http://www.willmaster.com/library/web-content-prep/how-to-make-fractions-on-a-web-page.php)
 	-OR Turn fractions (and all others) into images and display that way
+
+*RDH: End trial after 10 seconds
+	-Put the call to "next()" in a "setTimeout()" function (http://www.w3schools.com/jsref/met_win_settimeout.asp)
 
 
 *Add 10-second automatic timeout for the performance task, along with countdown timer
@@ -18,7 +23,7 @@ To Dos (as of 2-26-16)
 
 
 *Add "correct" "incorrect" (and maybe "don't know"?) buttons to performance task, rather than keyboard clicks
-	-add buttons	
+	-add buttons
 	-remove keyboard "p" "q" click options
 	-make buttons move forward to the next slide, and register response
 	-Make sure code registers response (both selection and reaction time) along with other data
@@ -26,19 +31,21 @@ To Dos (as of 2-26-16)
 
 
 
-*Merge the 3 likert surveys (mathmotivationsurveys) with the performance task (math_performance_template)
-	-Make sure performance task is always after 3 (random-order) surveys
+	*Merge the 3 likert surveys (mathmotivationsurveys) with the performance task (math_performance_template)
+		-Make sure performance task is always after 3 (random-order) surveys
 	-**Should I have a "header" slide between each survey? i.e., "This next set of questions relates to your feelings about math. Please respond with...")
 		-Or should I just leave it as it is, with one scale going right into the next (this is easier...b/c it's done, but not ideal)
 	-Make font of question larger for all surveys
 
 
+*RDH: Show timer countdown
+      - Store "startTime" at the beginning of a trial using "var startTime = new Date().getTime();"
+      - Make a little function called "displayTime" that writes 10 minus the difference between the current time and startTime to a <p> </p> element in your html
+        ** See http://www.electrictoolbox.com/get-milliseconds-javascript-measure-time/
+      - Put a call to "displayTime" in the "setInterval()" function to update the time every second... (http://www.w3schools.com/jsref/met_win_setinterval.asp)
+
+
 *Re-check original study for the following:
-	-Click interface: how many buttons / which options did they provide? 
+	-Click interface: how many buttons / which options did they provide?
 	-What order and randomization were the surveys and task (i.e., double-check that task was always last)
 	-Find how they "introduced" each likert scale (i.e. "please respond with how often you do the following..."?)
-
-
-
-
-
