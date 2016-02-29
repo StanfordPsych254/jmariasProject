@@ -61,25 +61,31 @@ Do NOT use the Back or Refresh buttons on your browser.
 <!-- The "stage" slide - where the bulk of the experiment will be displayed. Again, note the use of <code>{{}}</code>. -->
 <div class="slide" id="stage">
 
+	<div id="countdown">
+	    <div id="seconds">00</div>
+	</div>
+
+
+
 	<div align="center">
     <p id ="number">{{}}</p>
   </div>
 
 <!-- Juan attempting to code buttons here -->
+<!-- copied code from motivationsurveys for button:
+button type="button" id="nextButton_general_anx" onClick="experiment.log_response('general_anx')"> next</button>
+ -->
 
-<p></p>
-<BR>
-<BR>
+<!-- I 	NEED TO MAKE IT SO THAT "EXPERIMENT.LOG_RESPONSE" DOES (FOR EACH OF THE 3 POSSIBLE REPSONES), A "THIS BLUR"; EXPERIMENT NEXT; AND CLEAR INTERVAL FOR THE COUNTDOWN COUNTER (and make sure that it also logs the response that was given and preferably if it was a correct reponse or not) -->
 
 	<div align="center">
-		<button id="button"> Correct   </button>
-		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-		<button id="button"> Incorrect   </button>
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-	<button id="button"> Not Sure   </button>
+		<button type="button" id="button_correct" onClick="experiment.log_response()">Correct</button>
+				<div class="divider"/></div>
+				<button type="button" id="button_incorrect" onClick="experiment.log_response()">Incorrect</button>
+			<div class="divider"/></div>
+			<button type="button" id="button_notsure" onClick="experiment.log_response()">Not Sure</button>
 </div>
-<!-- // and end of attempt -->
-
+<!-- // aaaaaand end of attempt -->
 
 </div>
 

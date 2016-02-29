@@ -351,7 +351,7 @@ var experiment = {
 
 
 	    	if(slideType != "debriefing") {
-		    	// Then do this same loop, set up the right trials, and then deploy same a beginning
+	    	// Then do this same loop, set up the right trials, and then deploy same a beginning
 		    	totalTrialsAtt = atts[slideType].length;
 
 		    	trials = [];

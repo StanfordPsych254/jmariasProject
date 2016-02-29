@@ -1,32 +1,57 @@
 *******
 Juan Arias, Psych 254 Project (Wang et al., "Math Anxiety/Motivation/Performance")
-To Dos (as of 2-26-16)
+To Dos (as of 2-28-16)
 *******
 
-*Only one of the 3 likert surveys correctly displays "please choose an option" when nothing is selected
+***CURRENT ISSUES: 
 
-	-Find and change the naming error that leads to this
-	-RDH: this ended up being kind of complicated; check out the changes I committed!
+1. ADVANCING WITH CLICK
+Can't get the "onclick" reponse function to work to advance to next problem and register response -- I think it has something to do with the way it is nested out of (or next to) the "next" function
 
-*Fractions for performance task not displaying correctly
+
+2. REGISTERING DATA
+Still need to figure out how to register the button click response, as well as other data (Also, is the best way to determine "accuracy" just to compare reponse with correct response in R?)
+
+
+3. DISPLAYING FRACTIONS 
+Fractions for performance task not displaying correctly
 	-Find unicode or code to display fractions
 	      * RDH: Looks like you can do this using subscript, superscript, and a unicode fraction slash thing (http://www.willmaster.com/library/web-content-prep/how-to-make-fractions-on-a-web-page.php)
 	-OR Turn fractions (and all others) into images and display that way
+**ASKED ROBERT FOR ADVICE - 2-28-16**
 
-*RDH: End trial after 10 seconds
+4. RANDOMIZING PVT QUESTIONS
+	...they are not randomizing for some reason. Must investigate.
+
+
+5. CHECK ORIGINAL 
+*Re-check original study for the following:
+	-Click interface: how many buttons / which options did they provide?
+	-What order and randomization were the surveys and task (i.e., double-check that task was always last)
+	-Find how they "introduced" each likert scale (i.e. "please respond with how often you do the following..."?)
+	-Double-check Power analysis to see how many participants needed
+
+
+***************************************************************************
+
+(Only one of the 3 likert surveys correctly displays "please choose an option" when nothing is selected
+	-Find and change the naming error that leads to this
+	-RDH: this ended up being kind of complicated; check out the changes I committed!
+**DONE** )
+
+
+(*RDH: End trial after 10 seconds
 	-Put the call to "next()" in a "setTimeout()" function (http://www.w3schools.com/jsref/met_win_settimeout.asp)
-
-
-*Add 10-second automatic timeout for the performance task, along with countdown timer
-	-Write script for automatic countdown to next task slide (10 seconds)
-	-Create countdown button showing 10 seconds with each new task slide
+**DONE** )
 
 
 *Add "correct" "incorrect" (and maybe "don't know"?) buttons to performance task, rather than keyboard clicks
 	-add buttons
+		**DONE**
 	-remove keyboard "p" "q" click options
-	-make buttons move forward to the next slide, and register response
-	-Make sure code registers response (both selection and reaction time) along with other data
+		**DONE**
+-make buttons move forward to the next slide, and register response
+-Make sure code registers response (both selection and reaction time) along with other data  (**IN PROGRESS**)
 
 
 
@@ -35,17 +60,18 @@ To Dos (as of 2-26-16)
 		-Make sure performance task is always after 3 (random-order) surveys
 	-**Should I have a "header" slide between each survey? i.e., "This next set of questions relates to your feelings about math. Please respond with...")
 		-Or should I just leave it as it is, with one scale going right into the next (this is easier...b/c it's done, but not ideal)
-	-Make font of question larger for all surveys
 
 
-*RDH: Show timer countdown
+(Make font of question larger for all surveys
+	**DONE**)
+
+
+(*RDH: Show timer countdown
       - Store "startTime" at the beginning of a trial using "var startTime = new Date().getTime();"
       - Make a little function called "displayTime" that writes 10 minus the difference between the current time and startTime to a <p> </p> element in your html
         ** See http://www.electrictoolbox.com/get-milliseconds-javascript-measure-time/
       - Put a call to "displayTime" in the "setInterval()" function to update the time every second... (http://www.w3schools.com/jsref/met_win_setinterval.asp)
+		**DONE** ) 
 
 
-*Re-check original study for the following:
-	-Click interface: how many buttons / which options did they provide?
-	-What order and randomization were the surveys and task (i.e., double-check that task was always last)
-	-Find how they "introduced" each likert scale (i.e. "please respond with how often you do the following..."?)
+

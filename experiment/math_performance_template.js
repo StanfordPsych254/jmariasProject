@@ -33,63 +33,22 @@ function randomElement(array) {
 // #################################################################
 // #################################################################
 
-// JUAN CODE: attempting to add a 10 second countdown timer
-
-// From stack overflow:
-
-var count=10;
-
-var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
-
-function timer()
-{
-  count=count-1;
-  if (count <= 0)
-  {
-     clearInterval(counter);
-     //counter ended, do something here
-     return;
-  }
-
-  //Do code for showing the number of seconds here
-}
-// To make the code for the timer appear in a paragraph (or anywhere else on the page), just put the line:
-
-// <span id="timer"></span>
-// where you want the seconds to appear. Then insert the following line in your timer() function, so it looks like this:
-
-function timer()
-{
-  count=count-1;
-  if (count <= 0)
-  {
-     clearInterval(counter);
-     return;
-  }
-
- document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
-}
-
-// #################################################################
-// #################################################################
-
-
 
 // ## Configuration settings
 var allKeyBindings = [
       {"p": "correct", "q": "incorrect"},
       {"p": "incorrect", "q": "correct"} ],
-    allTrialOrders = [ ["13 X 4 = 47", "35 / 5 = 7",
-
-// <code><sup>1</sup>&frasl;<sub>10</sub></code>
+    allTrialOrders = [ [$("#PVT_1").html("<sup>1</sup>&frasl;<sub>10</sub>"), // "13 X 4 = 47"
+//
 // <sup>1</sup>&frasl;<sub>10</sub>
-// "22 - 6 = 16",
-// "35 / 5 = 7",
-// "54 + 26 = 70",
-// "32 - 16 = 14",
-// "39 / 16 = 3",
-// "3 X 13 = 39",
-// "27 + 323 = 350",
+["22 - 6 = 16"],
+["35 / 5 = 7"],
+["54 + 26 = 70"],
+["32 - 16 = 14"],
+["39 / 16 = 3"],
+["3 X 13 = 39"],
+["2/6 = 3/9"],
+["27 + 323 = 350"],
 // "112 - 88 = 24",
 // "5 X 15 = 65",
 // "27 + 234 = 251",
@@ -104,7 +63,7 @@ var allKeyBindings = [
 // "76/10 = 7/1",
 // "8/2 = 6/1",
 // "4/16 + 3/8 = 1/2",
-"18 + 56 = 74"]],
+["18 + 56 = 74"]]],
     myKeyBindings = randomElement(allKeyBindings),
     myTrialOrder = randomElement(allTrialOrders),
     pOcorrect = (myKeyBindings["p"] == "correct");
@@ -142,51 +101,109 @@ var experiment = {
       experiment.end();
       return;
     }
-
     // Get the current trial - <code>shift()</code> removes the first element of the array and returns it.
     var n = experiment.trials.shift();
-
     // Compute the correct answer.
     var realParity = (n % 2 == 0) ? "even" : "odd";
-
     showSlide("stage");
     // Display the number stimulus.
     $("#number").text(n);
-
     // Get the current time so we can compute reaction time later.
     var startTime = (new Date()).getTime();
 
-    // Set up a function to react to keyboard input. Functions that are used to react to user input are called *event handlers*. In addition to writing these event handlers, you have to *bind* them to particular events (i.e., tell the browser that you actually want the handler to run when the user performs an action). Note that the handler always takes an <code>event</code> argument, which is an object that provides data about the user input (e.g., where they clicked, which button they pressed).
-    var keyPressHandler = function(event) {
-      // A slight disadvantage of this code is that you have to test for numeric key values; instead of writing code that expresses "*do X if 'Q' was pressed*", you have to do the more complicated "*do X if the key with code 80 was pressed*". A library like [Keymaster](http://github.com/madrobby/keymaster) lets you write simpler code like <code>key('a', function(){ alert('you pressed a!') })</code>, but I've omitted it here. Here, we get the numeric key code from the event object
-      var keyCode = event.which;
+/////// JUAN CODE: attempting to add a 10 second timeout and countdown timer
+// ###INSERTING THE COUNTDOWN TIMER INTO THE experiment.next SCRIPT (FROM AN ASSORTMENT OF ONLINE EXAMPLES). Hopefully this works...it does! Amazing! and it only took me several hours! :D
 
-      if (keyCode != 81 && keyCode != 80) {
-        // If a key that we don't care about is pressed, re-attach the handler (see the end of this script for more info)
-        $(document).one("keydown", keyPressHandler);
+function CountdownTime() {
+		var countDown = 10;
+    var currentTime = new Date().getTime();
+    var diff = currentTime - startTime;
+    var seconds = countDown - Math.floor(diff / 1000);
+    if (seconds >= 0) {
+			var minutes = Math.floor(seconds / 60);
+        seconds -= minutes * 60;
+        $("#minutes").text(minutes < 10 ? "0" + minutes : minutes);
+        $("#seconds").text(seconds < 12 ? "Seconds left: " + seconds : seconds);
+    } else {
+        // $("#countdown").hide();
+        // $("#aftercount").show();
+				experiment.next();
+        clearInterval(countdowncounter);
+    }
+	}
+CountdownTime();
+var countdowncounter = setInterval(CountdownTime, 1000);
+},
 
-      } else {
-        // If a valid key is pressed (code 80 is p, 81 is q),
-        // record the reaction time (current time minus start time), which key was pressed, and what that means (even or odd).
-        var endTime = (new Date()).getTime(),
-            key = (keyCode == 80) ? "p" : "q",
-            userParity = experiment.keyBindings[key],
-            data = {
-              stimulus: n,
-              accuracy: realParity == userParity ? 1 : 0,
-              rt: endTime - startTime
-            };
+	// ###JUAN ATTEMPTING TO ADD THE BUTTON ONCLICKS HERE TO MOVE EXPERIMENT FORWARD
+	/// (don't forget to keep the previous bracket and comma, even if you delete the above code)
 
-        experiment.data.push(data);
-        // Temporarily clear the number.
-        $("#number").text("");
-        // Wait 500 milliseconds before starting the next trial.
-        setTimeout(experiment.next, 500);
-      }
-    };
+	log_response: function(buttontype) {  // IS THIS AN EVENT?? A trialType?? What goes in the parenthesis? How do I generate the "log_response" function?
 
-    // Here, we actually bind the handler. We're using jQuery's <code>one()</code> function, which ensures that the handler can only run once. This is very important, because generally you only want the handler to run only once per trial. If you don't bind with <code>one()</code>, the handler might run multiple times per trial, which can be disastrous. For instance, if the user accidentally presses P twice, you'll be recording an extra copy of the data for this trial and (even worse) you will be calling <code>experiment.next</code> twice, which will cause trials to be skipped! That said, there are certainly cases where you do want to run an event handler multiple times per trial. In this case, you want to use the <code>bind()</code> and <code>unbind()</code> functions, but you have to be extra careful about properly unbinding.
-    $(document).one("keydown", keyPressHandler);
-
-  }
+ $('#button_' + buttontype).blur();
+ var endTime = (new Date()).getTime(),
+		// key = (keyCode == 80) ? "p" : "q",
+	//	userParity = experiment.keyBindings[key],
+	data = {
+//	stimulus: n,
+		//	response: 							// NEED TO FIND HOW TO LOG THE BUTTON CLICKED -- something like console.log(event.target.id)
+//	rt: endTime - startTime
+			// accuracy: realParity == userParity ? 1 : 0,
+		};
+	experiment.data.push(data);
+		// Temporarily clear the number.
+ //$("#number").text("");
+		// Wait 200 milliseconds before starting the next trial. I DONT THINK THIS IS NECESSARY -- COMMENTING IT OUT
+		// setTimeout(experiment.next, 200);
+	experiment.next();
+clearInterval(countdowncounter);      // SOMETHING IS GOING ON WITH THIS AS WELL (not identifying the countdown timer -- how do I set this for each new slide or click event?)
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/// The left-over code from the keyhandler, which I am keeping here in case I need to refer to it for the button press coding I'm attempting now
+		//
+		//
+		//
+    // // Set up a function to react to keyboard input. Functions that are used to react to user input are called *event handlers*. In addition to writing these event handlers, you have to *bind* them to particular events (i.e., tell the browser that you actually want the handler to run when the user performs an action). Note that the handler always takes an <code>event</code> argument, which is an object that provides data about the user input (e.g., where they clicked, which button they pressed).
+    // var keyPressHandler = function(event) {
+    //   // A slight disadvantage of this code is that you have to test for numeric key values; instead of writing code that expresses "*do X if 'Q' was pressed*", you have to do the more complicated "*do X if the key with code 80 was pressed*". A library like [Keymaster](http://github.com/madrobby/keymaster) lets you write simpler code like <code>key('a', function(){ alert('you pressed a!') })</code>, but I've omitted it here. Here, we get the numeric key code from the event object
+    //   var keyCode = event.which;
+		//
+    //   if (keyCode != 81 && keyCode != 80) {
+    //     // If a key that we don't care about is pressed, re-attach the handler (see the end of this script for more info)
+    //     $(document).one("keydown", keyPressHandler);
+		//
+    //   } else {
+    //     // If a valid key is pressed (code 80 is p, 81 is q),
+    //     // record the reaction time (current time minus start time), which key was pressed, and what that means (even or odd).
+    //     var endTime = (new Date()).getTime(),
+    //         key = (keyCode == 80) ? "p" : "q",
+    //         userParity = experiment.keyBindings[key],
+    //         data = {
+    //           stimulus: n,
+    //           accuracy: realParity == userParity ? 1 : 0,
+    //           rt: endTime - startTime
+    //         };
+    //     experiment.data.push(data);
+    //     // Temporarily clear the number.
+    //     $("#number").text("");
+    //     // Wait 200 milliseconds before starting the next trial.
+    //     setTimeout(experiment.next, 200);
+    //   }
+    // };
+		//
+    // // Here, we actually bind the handler. We're using jQuery's <code>one()</code> function, which ensures that the handler can only run once. This is very important, because generally you only want the handler to run only once per trial. If you don't bind with <code>one()</code>, the handler might run multiple times per trial, which can be disastrous. For instance, if the user accidentally presses P twice, you'll be recording an extra copy of the data for this trial and (even worse) you will be calling <code>experiment.next</code> twice, which will cause trials to be skipped! That said, there are certainly cases where you do want to run an event handler multiple times per trial. In this case, you want to use the <code>bind()</code> and <code>unbind()</code> functions, but you have to be extra careful about properly unbinding.
+    // $(document).one("keydown", keyPressHandler);
