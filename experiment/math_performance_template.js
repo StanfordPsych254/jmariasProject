@@ -97,8 +97,8 @@ var experiment = {
   },
   // The work horse of the sequence - what to do on every trial.
 
-	// Note: need to make the "clear interval" command at the beginning of this next function, so that way it doesn't generate as many errors.
-	// Also, Robert was mentioning something about making the countdown interval refer to something outside of the next function, but that might not be necessary if you fix the first part of it (above)
+  // Note: need to make the "clear interval" command at the beginning of this next function, so that way it doesn't generate as many errors.
+  // Also, Robert was mentioning something about making the countdown interval refer to something outside of the next function, but that might not be necessary if you fix the first part of it (above)
   next: function() {
     // If the number of remaining trials is 0, we're done, so call the end function.
     if (experiment.trials.length == 0) {
@@ -111,59 +111,56 @@ var experiment = {
     // Display the number stimulus.
     $("#number").html(n);
     // Get the current time so we can compute reaction time later.
-		clearInterval(countdowncounter);
-		var startTime = (new Date()).getTime();
-		experiment.CountdownTime();
-	//	var countdowncounter = setInterval(experiment.CountdownTime, 1000);
+    clearInterval(countdowncounter);
+    var startTime = (new Date()).getTime();
+    experiment.CountdownTime();
+    //	var countdowncounter = setInterval(experiment.CountdownTime, 1000);
   },
 
-	/////// JUAN CODE: attempting to add a 10 second timeout and countdown timer
-	// ###INSERTING THE COUNTDOWN TIMER INTO THE experiment.next SCRIPT (FROM AN ASSORTMENT OF ONLINE EXAMPLES). Hopefully this works...it does! Amazing! and it only took me several hours! :D
+  /////// JUAN CODE: attempting to add a 10 second timeout and countdown timer
+  // ###INSERTING THE COUNTDOWN TIMER INTO THE experiment.next SCRIPT (FROM AN ASSORTMENT OF ONLINE EXAMPLES). Hopefully this works...it does! Amazing! and it only took me several hours! :D
 
-	CountdownTime: function(startTime, countdowncounter) {
-		var countDown = 10;
-		var currentTime = new Date().getTime();
-		var diff = currentTime - startTime;
-		var seconds = countDown - Math.floor(diff / 1000);
-		if (seconds >= 0) {
-			var minutes = Math.floor(seconds / 60);
-				seconds -= minutes * 60;
-				$("#minutes").text(minutes < 10 ? "0" + minutes : minutes);
-				$("#seconds").text(seconds < 12 ? "Seconds left: " + seconds : seconds);
-		} else {
-				// $("#countdown").hide();
-				// $("#aftercount").show();
-				experiment.next();
-		}
-	}
+  CountdownTime: function() {
+    var countDown = 10;
+    var currentTime = new Date().getTime();
+    var diff = currentTime - startTime;
+    var seconds = countDown - Math.floor(diff / 1000);
+    if (seconds >= 0) {
+      var minutes = Math.floor(seconds / 60);
+      seconds -= minutes * 60;
+      $("#minutes").text(minutes < 10 ? "0" + minutes : minutes);
+      $("#seconds").text(seconds < 12 ? "Seconds left: " + seconds : seconds);
+    } else {
+      // $("#countdown").hide();
+      // $("#aftercount").show();
+      experiment.next();
+    }
+  },
 
+  // ###JUAN ATTEMPTING TO ADD THE BUTTON ONCLICKS HERE TO MOVE EXPERIMENT FORWARD
+  /// (don't forget to correct the closing Experiment bracket if you delete the above code)
+  
+  log_response: function(event) {
+    // IS THIS AN EVENT?? A trialType?? What goes in the parenthesis? How do I generate the "log_response" function?
 
-
-
-	// ###JUAN ATTEMPTING TO ADD THE BUTTON ONCLICKS HERE TO MOVE EXPERIMENT FORWARD
-	/// (don't forget to correct the closing Experiment bracket if you delete the above code)
-
-	log_response: function(event) {
-		 // IS THIS AN EVENT?? A trialType?? What goes in the parenthesis? How do I generate the "log_response" function?
-
- $('#button_').blur();
- var endTime = (new Date()).getTime(),
-		// key = (keyCode == 80) ? "p" : "q",
+    $('#button_').blur();
+    var endTime = (new Date()).getTime(),
+	// key = (keyCode == 80) ? "p" : "q",
 	//	userParity = experiment.keyBindings[key],
 	data = {
-//	stimulus: n,
-		//	response: 							// NEED TO FIND HOW TO LOG THE BUTTON CLICKED -- something like console.log(event.target.id)
-			rt: endTime - startTime
-			// accuracy: realParity == userParity ? 1 : 0,
-		};
-	experiment.data.push(data);
-	experiment.next();
-	// Temporarily clear the number.
-//$("#number").text("");
-	// Wait 200 milliseconds before starting the next trial. I DONT THINK THIS IS NECESSARY -- COMMENTING IT OUT
-	// setTimeout(experiment.next, 200);
-	}
-}
+	  //	stimulus: n,
+	  //	response: 							// NEED TO FIND HOW TO LOG THE BUTTON CLICKED -- something like console.log(event.target.id)
+	  rt: endTime - startTime
+	  // accuracy: realParity == userParity ? 1 : 0,
+	};
+    experiment.data.push(data);
+    experiment.next();
+    // Temporarily clear the number.
+    //$("#number").text("");
+    // Wait 200 milliseconds before starting the next trial. I DONT THINK THIS IS NECESSARY -- COMMENTING IT OUT
+    // setTimeout(experiment.next, 200);
+  }
+};
 
 
 
