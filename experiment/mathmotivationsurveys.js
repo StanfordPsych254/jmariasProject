@@ -111,8 +111,6 @@ var atts = {
 'I get in a state of tension or turmoil as I think over my recent concerns and interests.']
 }
 
-// if each slide was unique, it would be like this, but can't do it
-// atts["mathMot"] = ["motivationintro"].concat(shuffle(atts["mathMot"]))
 
 // Shuffle all of the questions within each array
 atts["mathMot"] = shuffle(atts["mathMot"]);
@@ -120,9 +118,7 @@ atts["mathAnx"] = shuffle(atts["mathAnx"]);
 atts["genAnx"] = shuffle(atts["genAnx"]);
 
 //THIS IS WHAT YOU WILL ADD ONCE YOU GET THE "intro" SLIDES SET:
-// var slideOrder = _.flatten(_.shuffle([["motivationIntro", "mathMot"], ["anxietyIntro", "mathAnx"], ["genanxintro", "genAnx"]]))
-
-var slideOrder = shuffle(["mathMot","mathAnx","genAnx"])
+var slideOrder = _.flatten(_.shuffle([["motivationIntro", "mathMot"], ["anxietyIntro", "mathAnx"], ["genanxIntro", "genAnx"]]))
 slide1 = slideOrder[0]
 slide2 = slideOrder[1]
 slide3 = slideOrder[2]

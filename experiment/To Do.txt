@@ -6,6 +6,9 @@ To Dos (as of 2-28-16)
 ***CURRENT ISSUES: 
 
 0. Adding "instruction" slide and shuffling the surveys correctly
+	-Need to make "next" button on instruction slide appropriately select experiment.next (and not be parameter-dependent) 
+	**NEW ISSUE WTIH THESE SHUFFLED SLIDES: script is no longer working, says "cannot read property 'length' of undefined, in the code following the "underscore"flatten I added earlier. 
+
 
 1. ADVANCING WITH CLICK
 Can't get the "onclick" reponse function to work to advance to next problem and register response -- I think it has something to do with the way it is nested out of (or next to) the "next" function
