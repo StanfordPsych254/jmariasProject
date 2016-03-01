@@ -38,32 +38,31 @@ function randomElement(array) {
 var allKeyBindings = [
       {"p": "correct", "q": "incorrect"},
       {"p": "incorrect", "q": "correct"} ],
-    allTrialOrders = [ [$("#PVT_1").html("<sup>1</sup>&frasl;<sub>10</sub>"), // "13 X 4 = 47"
-//
-// <sup>1</sup>&frasl;<sub>10</sub>
-["22 - 6 = 16"],
-["35 / 5 = 7"],
-["54 + 26 = 70"],
-["32 - 16 = 14"],
-["39 / 16 = 3"],
-["3 X 13 = 39"],
-["2/6 = 3/9"],
-["27 + 323 = 350"],
-// "112 - 88 = 24",
-// "5 X 15 = 65",
-// "27 + 234 = 251",
-// "84 / 4 = 21",
-// "44 - 18 = 24",
-// "5/12 = 2/6",
-// "14 X 5 = 70",
-// "28 / 16 = 2",
-// "8/4 = 16/9",
-// "3/4 + 3/2 = 6/6",
-// "12/2 = 6/1",
-// "76/10 = 7/1",
-// "8/2 = 6/1",
-// "4/16 + 3/8 = 1/2",
-["18 + 56 = 74"]]],
+    allTrialOrders = [[
+				// ["13 X 4 = 47"],
+				// ["22 - 6 = 16"],
+				// ["35 &divide; 5 = 7"],
+				// ["54 + 26 = 70"],
+				// ["32 - 16 = 14"],
+				// ["39 &divide; 16 = 3"],
+				// ["3 X 13 = 39"],
+				["<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>"],
+				// ["27 + 323 = 350"],
+				// ["112 - 88 = 24"],
+				// ["5 X 15 = 65"],
+				// ["27 + 234 = 251"],
+				// ["84 &divide; 4 = 21"],
+				// ["44 - 18 = 24"],
+				// ["<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>"],
+				// ["14 X 5 = 70"],
+				// ["28 &divide; 16 = 2"],
+				// ["<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>"],
+				// ["<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>"],
+				// ["<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
+				// ["<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>"],
+				// ["<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
+				// ["<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>"],
+				["18 + 56 = 74"]]],
     myKeyBindings = randomElement(allKeyBindings),
     myTrialOrder = randomElement(allTrialOrders),
     pOcorrect = (myKeyBindings["p"] == "correct");
@@ -80,6 +79,8 @@ showSlide("instructions");
 // ## The main event
 // I implement the sequence as an object with properties and methods. The benefit of encapsulating everything in an object is that it's conceptually coherent (i.e. the <code>data</code> variable belongs to this particular sequence and not any other) and allows you to **compose** sequences to build more complicated experiments. For instance, if you wanted an experiment with, say, a survey, a reaction time test, and a memory test presented in a number of different orders, you could easily do so by creating three separate sequences and dynamically setting the <code>end()</code> function for each sequence so that it points to the next. **More practically, you should stick everything in an object and submit that whole object so that you don't lose data (e.g. randomization parameters, what condition the subject is in, etc). Don't worry about the fact that some of the object properties are functions -- mmturkey (the Turk submission library) will strip these out.**
 
+
+
 var experiment = {
   // Parameters for this sequence.
   trials: myTrialOrder,
@@ -95,6 +96,9 @@ var experiment = {
     setTimeout(function() { turk.submit(experiment) }, 1500);
   },
   // The work horse of the sequence - what to do on every trial.
+
+	// Note: need to make the "clear interval" command at the beginning of this next function, so that way it doesn't generate as many errors.
+	// Also, Robert was mentioning something about making the countdown interval refer to something outside of the next function, but that might not be necessary if you fix the first part of it (above)
   next: function() {
     // If the number of remaining trials is 0, we're done, so call the end function.
     if (experiment.trials.length == 0) {
@@ -103,60 +107,61 @@ var experiment = {
     }
     // Get the current trial - <code>shift()</code> removes the first element of the array and returns it.
     var n = experiment.trials.shift();
-    // Compute the correct answer.
-    var realParity = (n % 2 == 0) ? "even" : "odd";
     showSlide("stage");
     // Display the number stimulus.
-    $("#number").text(n);
+    $("#number").html(n);
     // Get the current time so we can compute reaction time later.
-    var startTime = (new Date()).getTime();
+		clearInterval(countdowncounter);
+		var startTime = (new Date()).getTime();
+		experiment.CountdownTime();
+	//	var countdowncounter = setInterval(experiment.CountdownTime, 1000);
+  },
 
-/////// JUAN CODE: attempting to add a 10 second timeout and countdown timer
-// ###INSERTING THE COUNTDOWN TIMER INTO THE experiment.next SCRIPT (FROM AN ASSORTMENT OF ONLINE EXAMPLES). Hopefully this works...it does! Amazing! and it only took me several hours! :D
+	/////// JUAN CODE: attempting to add a 10 second timeout and countdown timer
+	// ###INSERTING THE COUNTDOWN TIMER INTO THE experiment.next SCRIPT (FROM AN ASSORTMENT OF ONLINE EXAMPLES). Hopefully this works...it does! Amazing! and it only took me several hours! :D
 
-function CountdownTime() {
+	CountdownTime: function(startTime, countdowncounter) {
 		var countDown = 10;
-    var currentTime = new Date().getTime();
-    var diff = currentTime - startTime;
-    var seconds = countDown - Math.floor(diff / 1000);
-    if (seconds >= 0) {
+		var currentTime = new Date().getTime();
+		var diff = currentTime - startTime;
+		var seconds = countDown - Math.floor(diff / 1000);
+		if (seconds >= 0) {
 			var minutes = Math.floor(seconds / 60);
-        seconds -= minutes * 60;
-        $("#minutes").text(minutes < 10 ? "0" + minutes : minutes);
-        $("#seconds").text(seconds < 12 ? "Seconds left: " + seconds : seconds);
-    } else {
-        // $("#countdown").hide();
-        // $("#aftercount").show();
+				seconds -= minutes * 60;
+				$("#minutes").text(minutes < 10 ? "0" + minutes : minutes);
+				$("#seconds").text(seconds < 12 ? "Seconds left: " + seconds : seconds);
+		} else {
+				// $("#countdown").hide();
+				// $("#aftercount").show();
 				experiment.next();
-        clearInterval(countdowncounter);
-    }
+		}
 	}
-CountdownTime();
-var countdowncounter = setInterval(CountdownTime, 1000);
-},
+
+
+
 
 	// ###JUAN ATTEMPTING TO ADD THE BUTTON ONCLICKS HERE TO MOVE EXPERIMENT FORWARD
-	/// (don't forget to keep the previous bracket and comma, even if you delete the above code)
+	/// (don't forget to correct the closing Experiment bracket if you delete the above code)
 
-	log_response: function(buttontype) {  // IS THIS AN EVENT?? A trialType?? What goes in the parenthesis? How do I generate the "log_response" function?
+	log_response: function(event) {
+		 // IS THIS AN EVENT?? A trialType?? What goes in the parenthesis? How do I generate the "log_response" function?
 
- $('#button_' + buttontype).blur();
+ $('#button_').blur();
  var endTime = (new Date()).getTime(),
 		// key = (keyCode == 80) ? "p" : "q",
 	//	userParity = experiment.keyBindings[key],
 	data = {
 //	stimulus: n,
 		//	response: 							// NEED TO FIND HOW TO LOG THE BUTTON CLICKED -- something like console.log(event.target.id)
-//	rt: endTime - startTime
+			rt: endTime - startTime
 			// accuracy: realParity == userParity ? 1 : 0,
 		};
 	experiment.data.push(data);
-		// Temporarily clear the number.
- //$("#number").text("");
-		// Wait 200 milliseconds before starting the next trial. I DONT THINK THIS IS NECESSARY -- COMMENTING IT OUT
-		// setTimeout(experiment.next, 200);
 	experiment.next();
-clearInterval(countdowncounter);      // SOMETHING IS GOING ON WITH THIS AS WELL (not identifying the countdown timer -- how do I set this for each new slide or click event?)
+	// Temporarily clear the number.
+//$("#number").text("");
+	// Wait 200 milliseconds before starting the next trial. I DONT THINK THIS IS NECESSARY -- COMMENTING IT OUT
+	// setTimeout(experiment.next, 200);
 	}
 }
 

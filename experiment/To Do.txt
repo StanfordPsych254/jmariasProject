@@ -5,9 +5,14 @@ To Dos (as of 2-28-16)
 
 ***CURRENT ISSUES: 
 
+0. Adding "instruction" slide and shuffling the surveys correctly
+
 1. ADVANCING WITH CLICK
 Can't get the "onclick" reponse function to work to advance to next problem and register response -- I think it has something to do with the way it is nested out of (or next to) the "next" function
 
+1.5 COUNTDOWN TIMER ERRORS 
+After clicking and moving to next slide, countdown timer starts making errors
+-Move "clear interval" to the beginning of the next function
 
 2. REGISTERING DATA
 Still need to figure out how to register the button click response, as well as other data (Also, is the best way to determine "accuracy" just to compare reponse with correct response in R?)
