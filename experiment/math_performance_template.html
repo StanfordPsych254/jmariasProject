@@ -30,8 +30,6 @@
 	<p class="block-text">In the next section, you will be doing some fast math activities. You will be shown a series of math problems, one at a time. You won't need to figure out the answers to the problems, because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong.
 		<!-- Tell the subject which keys to press. We need to set these values dynamically; I use <code>{{}}</code> to indicate template locations in HTML that will be modified by JavaScript. -->
 	<p class="block-text">
-	Press <span id="correct-key">{{}}</span> if you think the given answer is RIGHT and
-	<span id="incorrect-key">{{}}</span> if you think the given answer is WRONG.
 <p  class="block-text">
 1. Please do NOT use pencil and paper or any type of calculator.
 <p  class="block-text">
@@ -79,11 +77,11 @@ button type="button" id="nextButton_general_anx" onClick="experiment.log_respons
 <!-- I 	NEED TO MAKE IT SO THAT "EXPERIMENT.LOG_RESPONSE" DOES (FOR EACH OF THE 3 POSSIBLE REPSONES), A "THIS BLUR"; EXPERIMENT NEXT; AND CLEAR INTERVAL FOR THE COUNTDOWN COUNTER (and make sure that it also logs the response that was given and preferably if it was a correct reponse or not) -->
 
 	<div align="center">
-		<button type="button" id="button_correct" onClick="experiment.log_response()">Correct</button>
+		<button type="button" id="correct" onClick="experiment.log_response(this.id)">Correct</button>
 				<div class="divider"/></div>
-				<button type="button" id="button_incorrect" onClick="experiment.log_response()">Incorrect</button>
+				<button type="button" id="incorrect" onClick="experiment.log_response(this.id)">Incorrect</button>
 			<div class="divider"/></div>
-			<button type="button" id="button_notsure" onClick="experiment.log_response()">Not Sure</button>
+			<button type="button" id="notsure" onClick="experiment.log_response(this.id)">Not Sure</button>
 </div>
 <!-- // aaaaaand end of attempt -->
 

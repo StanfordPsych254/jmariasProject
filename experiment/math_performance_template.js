@@ -39,29 +39,29 @@ var allKeyBindings = [
       {"p": "correct", "q": "incorrect"},
       {"p": "incorrect", "q": "correct"} ],
     allTrialOrders = [[
-				// ["13 X 4 = 47"],
-				// ["22 - 6 = 16"],
-				// ["35 &divide; 5 = 7"],
-				// ["54 + 26 = 70"],
-				// ["32 - 16 = 14"],
-				// ["39 &divide; 16 = 3"],
-				// ["3 X 13 = 39"],
+				["13 X 4 = 47"],
+				["22 - 6 = 16"],
+				["35 &divide; 5 = 7"],
+				["54 + 26 = 70"],
+				["32 - 16 = 14"],
+				["39 &divide; 16 = 3"],
+				["3 X 13 = 39"],
 				["<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>"],
-				// ["27 + 323 = 350"],
-				// ["112 - 88 = 24"],
-				// ["5 X 15 = 65"],
-				// ["27 + 234 = 251"],
-				// ["84 &divide; 4 = 21"],
-				// ["44 - 18 = 24"],
-				// ["<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>"],
-				// ["14 X 5 = 70"],
-				// ["28 &divide; 16 = 2"],
-				// ["<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>"],
-				// ["<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>"],
-				// ["<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
-				// ["<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>"],
-				// ["<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
-				// ["<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>"],
+				["27 + 323 = 350"],
+				["112 - 88 = 24"],
+				["5 X 15 = 65"],
+				["27 + 234 = 251"],
+				["84 &divide; 4 = 21"],
+				["44 - 18 = 24"],
+				["<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>"],
+				["14 X 5 = 70"],
+				["28 &divide; 16 = 2"],
+				["<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>"],
+				["<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>"],
+				["<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
+				["<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>"],
+				["<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
+				["<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>"],
 				["18 + 56 = 74"]]],
     myKeyBindings = randomElement(allKeyBindings),
     myTrialOrder = randomElement(allTrialOrders),
@@ -146,19 +146,15 @@ var experiment = {
 
   // ###JUAN ATTEMPTING TO ADD THE BUTTON ONCLICKS HERE TO MOVE EXPERIMENT FORWARD
   /// (don't forget to correct the closing Experiment bracket if you delete the above code)
-  
-  log_response: function(event) {
-    // IS THIS AN EVENT?? A trialType?? What goes in the parenthesis? How do I generate the "log_response" function?
 
+  log_response: function(clicked_id, trials) {
     $('#button_').blur();
+	//	alert (clicked_id);
     var endTime = (new Date()).getTime(),
-	// key = (keyCode == 80) ? "p" : "q",
-	//	userParity = experiment.keyBindings[key],
-	data = {
-	  //	stimulus: n,
-	  //	response: 							// NEED TO FIND HOW TO LOG THE BUTTON CLICKED -- something like console.log(event.target.id)
-	  rt: endTime - experiment.startTime
-	  // accuracy: realParity == userParity ? 1 : 0,
+		data = {
+			stimulus: allTrialOrders,
+	    response: clicked_id,						// NEED TO FIND HOW TO LOG THE BUTTON CLICKED -- something like console.log(event.target.id)
+	  	rt: endTime - experiment.startTime,
 	};
     experiment.data.push(data);
     experiment.next();
