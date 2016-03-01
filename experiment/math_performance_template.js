@@ -88,6 +88,10 @@ var experiment = {
   keyBindings: myKeyBindings,
   // An array to store the data that we're collecting.
   data: [],
+  // the time that the current trial started
+  startTime : null,
+  // the handle to cancel the current countdown
+  countdownCounter : null,
   // The function that gets called when the sequence is finished.
   end: function() {
     // Show the finish slide.
@@ -105,16 +109,19 @@ var experiment = {
       experiment.end();
       return;
     }
+
+    // End the countdown from the previous trial
+    clearInterval(experiment.countdownCounter);
+
     // Get the current trial - <code>shift()</code> removes the first element of the array and returns it.
     var n = experiment.trials.shift();
     showSlide("stage");
     // Display the number stimulus.
     $("#number").html(n);
     // Get the current time so we can compute reaction time later.
-    clearInterval(countdowncounter);
-    var startTime = (new Date()).getTime();
+    experiment.startTime = (new Date()).getTime();
     experiment.CountdownTime();
-    //	var countdowncounter = setInterval(experiment.CountdownTime, 1000);
+    experiment.countdownCounter = setInterval(experiment.CountdownTime, 1000);
   },
 
   /////// JUAN CODE: attempting to add a 10 second timeout and countdown timer
@@ -123,7 +130,7 @@ var experiment = {
   CountdownTime: function() {
     var countDown = 10;
     var currentTime = new Date().getTime();
-    var diff = currentTime - startTime;
+    var diff = currentTime - experiment.startTime;
     var seconds = countDown - Math.floor(diff / 1000);
     if (seconds >= 0) {
       var minutes = Math.floor(seconds / 60);
@@ -150,7 +157,7 @@ var experiment = {
 	data = {
 	  //	stimulus: n,
 	  //	response: 							// NEED TO FIND HOW TO LOG THE BUTTON CLICKED -- something like console.log(event.target.id)
-	  rt: endTime - startTime
+	  rt: endTime - experiment.startTime
 	  // accuracy: realParity == userParity ? 1 : 0,
 	};
     experiment.data.push(data);
