@@ -30,6 +30,39 @@ function randomElement(array) {
   return array[randomInteger(array.length)];
 }
 
+// Get random integers.
+// When called with no arguments, it returns either 0 or 1. When called with one argument, *a*, it returns a number in {*0, 1, ..., a-1*}. When called with two arguments, *a* and *b*, returns a random value in {*a*, *a + 1*, ... , *b*}.
+function random(a,b) {
+	if (typeof b == "undefined") {
+		a = a || 2;
+		return Math.floor(Math.random()*a);
+	} else {
+		return Math.floor(Math.random()*(b-a+1)) + a;
+	}
+}
+
+// Add a random selection function to all arrays (e.g., <code>[4,8,7].random()</code> could return 4, 8, or 7). This is useful for condition randomization.
+Array.prototype.random = function() {
+  return this[random(this.length)];
+}
+
+// shuffle function - from stackoverflow?
+// shuffle ordering of argument array -- are we missing a parenthesis?
+function shuffle (a)
+{
+    var o = [];
+
+    for (var i=0; i < a.length; i++) {
+	o[i] = a[i];
+    }
+
+    for (var j, x, i = o.length;
+	 i;
+	 j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+}
+
+
 // #################################################################
 // #################################################################
 
@@ -38,34 +71,65 @@ function randomElement(array) {
 var allKeyBindings = [
       {"p": "correct", "q": "incorrect"},
       {"p": "incorrect", "q": "correct"} ],
-    allTrialOrders = [[
-				["13 X 4 = 47"],
-				["22 - 6 = 16"],
-				["35 &divide; 5 = 7"],
-				["54 + 26 = 70"],
-				["32 - 16 = 14"],
-				["39 &divide; 16 = 3"],
-				["3 X 13 = 39"],
-				["<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>"],
-				["27 + 323 = 350"],
-				["112 - 88 = 24"],
-				["5 X 15 = 65"],
-				["27 + 234 = 251"],
-				["84 &divide; 4 = 21"],
-				["44 - 18 = 24"],
-				["<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>"],
-				["14 X 5 = 70"],
-				["28 &divide; 16 = 2"],
-				["<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>"],
-				["<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>"],
-				["<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
-				["<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>"],
-				["<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
-				["<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>"],
-				["18 + 56 = 74"]]],
+    // allTrialOrders =[[
+		// 		["13 X 4 = 47"],
+		// 		["22 - 6 = 16"],
+		// 		["35 &divide; 5 = 7"],
+		// 		["54 + 26 = 70"],
+		// 		["32 - 16 = 14"],
+		// 		["39 &divide; 16 = 3"],
+		// 		["3 X 13 = 39"],
+		// 		["<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>"],
+		// 		["27 + 323 = 350"],
+		// 		["112 - 88 = 24"],
+		// 		["5 X 15 = 65"],
+		// 		["27 + 234 = 251"],
+		// 		["84 &divide; 4 = 21"],
+		// 		["44 - 18 = 24"],
+		// 		["<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>"],
+		// 		["14 X 5 = 70"],
+		// 		["28 &divide; 16 = 2"],
+		// 		["<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>"],
+		// 		["<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>"],
+		// 		["<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
+		// 		["<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>"],
+		// 		["<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
+		// 		["<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>"],
+		// 		["18 + 56 = 74"]]],
+		allTrialOrders =[
+						["13 X 4 = 47"],
+						// "22 - 6 = 16",
+						// "35 &divide; 5 = 7",
+						// "54 + 26 = 70",
+						// "32 - 16 = 14",
+						// "39 &divide; 16 = 3",
+						// "3 X 13 = 39",
+						["<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>"],
+						// "27 + 323 = 350",
+						// "112 - 88 = 24",
+						// "5 X 15 = 65",
+						// "27 + 234 = 251",
+						// "84 &divide; 4 = 21",
+						// "44 - 18 = 24",
+						// "<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>",
+						// "14 X 5 = 70",
+						// "28 &divide; 16 = 2",
+						// "<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>",
+						// "<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>",
+						// "<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>",
+						// "<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>",
+						// "<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>",
+						["<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>"],
+						["18 + 56 = 74"]],
     myKeyBindings = randomElement(allKeyBindings),
-    myTrialOrder = randomElement(allTrialOrders),
+    myTrialOrder = shuffle(allTrialOrders),  // if needs 2 brackets, can do _.shuffle(allTrialOrders[0]),
     pOcorrect = (myKeyBindings["p"] == "correct");
+
+		// From other .js file (if needed) -- Shuffle all of the questions within each array:
+		// atts["mathMot"] = shuffle(atts["mathMot"]);
+		// atts["mathAnx"] = shuffle(atts["mathAnx"]);
+		// atts["genAnx"] = shuffle(atts["genAnx"]);
+
 
 // Fill in the instructions template using jQuery's <code>html()</code> method. In particular,
 // let the subject know which keys correspond to even/odd. Here, I'm using the so-called **ternary operator**, which is a shorthand for <code>if (...) { ... } else { ... }</code>

@@ -50,6 +50,9 @@ function shuffle (a)
 //####     Motivation scale ######
 
 var atts = {
+"motivationIntroATTS": [""],
+"mathanxIntroATTS": [""],
+"genanxIntroATTS": [""],
 
 "mathMot":  // Math motivation
 ['When I do mathematics, I sometimes get totally absorbed.',
@@ -118,17 +121,21 @@ atts["mathAnx"] = shuffle(atts["mathAnx"]);
 atts["genAnx"] = shuffle(atts["genAnx"]);
 
 //THIS IS WHAT YOU WILL ADD ONCE YOU GET THE "intro" SLIDES SET:
-var slideOrder = _.flatten(_.shuffle([["motivationIntro", "mathMot"], ["anxietyIntro", "mathAnx"], ["genanxIntro", "genAnx"]]))
+var slideOrder = _.flatten(_.shuffle([["motivationIntroATTS", "mathMot"], ["mathanxIntroATTS", "mathAnx"], ["genanxIntroATTS", "genAnx"]]))
+
 slide1 = slideOrder[0]
 slide2 = slideOrder[1]
 slide3 = slideOrder[2]
+slide4 = slideOrder[3]
+slide5 = slideOrder[4]
+slide6 = slideOrder[5]
 
 var slideType= slide1;
-
-var totalTrialsAtt = atts[slideType].length;
-
+console.log(slideType)
+var totalTrialsAtt = atts[slideType].length
 var currentTrialExperiment = 0;
-var numTrialsExperiment = atts[slide1].length + atts[slide2].length + atts[slide3].length;
+var numTrialsExperiment = (atts[slide1].length + atts[slide2].length + atts[slide3].length
+	                        + atts[slide4].length + atts[slide5].length + atts[slide6].length);
 var trials = [];
 
 // first build motivation question trials
@@ -234,9 +241,18 @@ var experiment = {
 	    if (typeof trial_info == "undefined") { // If we're out of trials...
 
 // ...move on to the next slide- there is certainly a more efficient way to do this.
-			if(slideType == slide3){
+			if(slideType == slide6){
 				slideType = "debriefing";
 				showSlide("debriefing");
+			}
+			if(slideType == slide5){
+				slideType = slide6;
+			}
+			if(slideType == slide4){
+				slideType = slide5;
+			}
+			if(slideType == slide3){
+				slideType = slide4;
 			}
 			if(slideType == slide2){
 				slideType = slide3;
@@ -288,7 +304,24 @@ var experiment = {
 	      $("#testMessage_general_anx").html(''); 	// clear the test message
 	    	 currentTrialExperiment ++;
 	    }
-
+			if (trial_info.trial_type == "motivationIntroATTS") {
+				$("#motivation_Intro_sentence").html(trial_info.sentence);  //add sentence to html
+				showSlide("motivationIntro");              //display slide
+				$("#testMessage_motivationIntro").html(''); 	// clear the test message
+				 currentTrialExperiment ++;
+			}
+			if (trial_info.trial_type == "mathanxIntroATTS") {
+				$("#math_anx_sentence").html(trial_info.sentence);  //add sentence to html
+				showSlide("mathanxIntro");              //display slide
+				$("#testMessage_mathanxIntro").html(''); 	// clear the test message
+				 currentTrialExperiment ++;
+			}
+			if (trial_info.trial_type == "genanxIntroATTS") {
+				$("#gen_anx_sentence").html(trial_info.sentence);  //add sentence to html
+				showSlide("genanxIntro");              //display slide
+				$("#testMessage_genanxIntro").html(''); 	// clear the test message
+				 currentTrialExperiment ++;
+			}
 	    // log the sentence for each trial
 		experiment.data.sentence.push(trial_info.sentence);
 		experiment.data.trial_type.push(trial_info.trial_type)
