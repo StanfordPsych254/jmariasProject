@@ -5,27 +5,29 @@ To Dos (as of 3-4-16)
 
 ***CURRENT ISSUES: 
  
-1. The gap between numbers and buttons changes sides depending on if it is a fraction or not
--Take off height to the divider, and add a specific height to the "number" 
-
-
-2. REGISTERING PROBLEM OR SENTENCE PRESENTED
+1. REGISTERING PROBLEM OR SENTENCE PRESENTED
 Need to find way to document what was the sentence that was shown or which of the 24 PVT problems it was (the stimulus) -- in the most efficient way possible
 
 
-3. CODING RESPONSE AS "accurate" or "inaccurate", "not responsed", or "notsure"
+2. CODING RESPONSE AS "accurate" or "inaccurate", "not responsed", or "notsure"
 	-Once issue #2 (logging sentence) is set, is it possible for me to assign each given sentence an "accurate" answer (e.g., "correct" or "incorrect", depending on problem) and then code their response as accurate or inaccurate depending on the response they clicked? 
 	-That is, if the problem shown is is "2 + 2 = 5" and they clicked "incorrect", I want to be able to code that for that trial they were "accurate" 
 
 
-4. MERGING TWO PROJECTS TOGETHER
+3. MERGING TWO PROJECTS TOGETHER
 	-Sweet Jesus.
+
+	-Add "PVTintro" slide, which will have the same info as the opening slide in the peformance task does right now. 
 
 
 
 
 **********************************************************
 Taken care of:
+
+1. **DONE** The gap between numbers and buttons changes sides depending on if it is a fraction or not
+-Take off height to the divider, and add a specific height to the "number" 
+
 
 Add "show motivation slide"(s) to the next function in the js
 **DONE** -- IT WORKS!
