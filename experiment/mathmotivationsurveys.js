@@ -156,7 +156,8 @@ var trials = _.flatten(blockOrder.map(function(trialType, blockIndex) {
   return blockStimuli.map(function(stimulus, stimulusIndex) {
     return {
       stimulus: stimulus,
-      trial_number_block: stimulusIndex +1,
+      block_number : blockIndex + 1,
+      trial_number: stimulusIndex + 1,
       trial_type: trialType
     };
   });
@@ -178,7 +179,8 @@ var experiment = {
   totalNumTrials : totalNumTrials,
   trials : trials,
   data: {
-    trial_number_block: [],
+    trial_number: [],
+    block_number: [],    
     trial_type: [],
     stimulus: [],
     rating: [],
@@ -251,23 +253,26 @@ var experiment = {
     // Allow experiment to start if it's a turk worker OR if it's a test run
     if (window.self == window.top | turk.workerId.length > 0) {
 
-      // Pop new trial info off list
-      var currTrial = experiment.trials.shift();
-
-      // Update progress bar
-      $("#progress").attr("style","width:" 
-			  + String(100*(experiment.currentTrialNum/
-					experiment.totalNumTrials))
-			  + "%");
-
       // clear the timeout interval, if it's still running
       if (experiment.countdownCounter) {
 	clearInterval(experiment.countdownCounter);
       };
 
       if (experiment.trials.length == 0) {
-	showSlide("debriefing");
+	experiment.debriefing();
+	return;
       } else {
+	// Pop new trial info off list
+	var currTrial = experiment.trials.shift();
+	experiment.currentTrialNum++;
+	
+	// Update progress bar
+	$("#progress").attr("style","width:" 
+			    + String(100*(experiment.currentTrialNum/
+					  experiment.totalNumTrials))
+			    + "%");
+
+
 	// check which trial type you're in and display correct slide
 	switch(currTrial.trial_type) {
 	  case "mathMot" :
@@ -305,12 +310,12 @@ var experiment = {
 	    experiment.countdownCounter = setInterval(experiment.CountdownTime, 1000);
 	    break;
 	}
+	// log the stimulus for each trial
+	experiment.data.stimulus.push(currTrial.stimulus);
+	experiment.data.trial_type.push(currTrial.trial_type);
+	experiment.data.trial_number.push(currTrial.trial_number);
+	experiment.data.block_number.push(currTrial.block_number);	
       }
-      
-      // log the stimulus for each trial
-      experiment.data.stimulus.push(currTrial.stimulus);
-      experiment.data.trial_type.push(currTrial.trial_type);
-      experiment.data.trial_number_block.push(currTrial.trial_number_block);
     }
   },
 
@@ -331,6 +336,7 @@ var experiment = {
 
   //	go to debriefing slide
   debriefing: function() {
+    console.log("showing debriefing slide...");
     showSlide("debriefing");
   },
 
