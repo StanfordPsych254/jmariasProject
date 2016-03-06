@@ -145,13 +145,16 @@
     <div class="slide" id="mathanxIntro">
       <br>
 
-      <div align="center">
-	<p>The items below are about things that may bother you or cause you to be nervous or anxious or tense when you have to do them. Choose the answer which best shows how nervous or anxious or tense you would feel. Please respond to all the items. Choose only one response to each statement. You will NOT be able to return to correct your answers after you click the Next Button. Therefore, please make sure that you provide your answers as accurately as possible.</p><br>
+      <div align="left">
+	<p>The items below are about things that may bother you or
+	cause you to be nervous or anxious or tense when you have to
+	do them. Choose the answer which best shows how nervous or
+	anxious or tense you would feel. Please respond to all the
+	items. Choose only one response to each statement. You will
+	NOT be able to return to correct your answers after you click
+	the Next Button. Therefore, please make sure that you provide
+	your answers as accurately as possible.</p><br>
 	<p>Please click Next to continue.</p><br>
-      </div>
-
-      <div align="center">
-	<p id ="math_anx_sentence">{{}}</p>
       </div>
 
       <br>
@@ -342,6 +345,28 @@
       </p>
       <button type="button" onclick="this.blur(); experiment.next()">Start</button>
     </div>
+
+    <div class="slide" id="performance">
+
+      <div id="countdown">
+	<div id="seconds">00</div>
+      </div>
+
+      <div align="center">
+	<p id ="number">{{}}</p>
+      </div>
+
+      <div align="center">
+	<button type="button" id="correct" onClick="experiment.log_response('performance.correct')">
+	  Correct</button>
+	
+	<div class="divider"></div>
+	<button type="button" id="incorrect" onClick="experiment.log_response('performance.incorrect')">
+	  Incorrect</button>
+	<div class="divider"/></div>
+      <button type="button" id="notsure" onClick="experiment.log_response('performance.notSure')">
+	Not Sure</button>
+    </div>    
     
     <!-- The debriefing slide. -->
     <div class="slide" id="debriefing">
