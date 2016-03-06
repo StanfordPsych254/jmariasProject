@@ -3,45 +3,26 @@
 // Shows slides. We're using jQuery here - the **$** is the jQuery selector function, which takes as input either a DOM element or a CSS selector string.
 function showSlide(id) {
   // Hide all slides
-	$(".slide").hide();
-	// Show just the slide we want to show
-	$("#"+id).show();
+  $(".slide").hide();
+  // Show just the slide we want to show
+  $("#"+id).show();
 }
 
 // Get random integers.
 // When called with no arguments, it returns either 0 or 1. When called with one argument, *a*, it returns a number in {*0, 1, ..., a-1*}. When called with two arguments, *a* and *b*, returns a random value in {*a*, *a + 1*, ... , *b*}.
 function random(a,b) {
-	if (typeof b == "undefined") {
-		a = a || 2;
-		return Math.floor(Math.random()*a);
-	} else {
-		return Math.floor(Math.random()*(b-a+1)) + a;
-	}
+  if (typeof b == "undefined") {
+    a = a || 2;
+    return Math.floor(Math.random()*a);
+  } else {
+    return Math.floor(Math.random()*(b-a+1)) + a;
+  }
 }
 
 // Add a random selection function to all arrays (e.g., <code>[4,8,7].random()</code> could return 4, 8, or 7). This is useful for condition randomization.
 Array.prototype.random = function() {
   return this[random(this.length)];
-}
-
-// shuffle function - from stackoverflow?
-// shuffle ordering of argument array -- are we missing a parenthesis?
-function shuffle (a)
-{
-    var o = [];
-
-    for (var i=0; i < a.length; i++) {
-	o[i] = a[i];
-    }
-
-    for (var j, x, i = o.length;
-	 i;
-	 j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-}
-
-
-
+};
 
 
 // ############################## Configuration settings ##############################
@@ -118,8 +99,9 @@ var trialInfo = {
     // ["54 + 26 = 70"],
     // ["32 - 16 = 14"],
     // ["39 &divide; 16 = 3"],
-    "3 X 13 = 39",
-    "<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>",
+    {problem: "3 X 13 = 39", trueAnswer: "correct"},
+    {problem: "<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>",
+     trueAnswer: "correct"},
     // ["27 + 323 = 350"],
     // ["112 - 88 = 24"],
     // ["5 X 15 = 65"],
@@ -134,8 +116,8 @@ var trialInfo = {
     // ["<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
     // ["<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>"],
     // ["<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
-    "<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>",
-    "18 + 56 = 74"
+    {problem: "<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>", trueAnswer: "incorrect"},
+    {problem: "18 + 56 = 74", trueAnswer: "correct"}
   ]
 };
 
@@ -152,7 +134,7 @@ var totalNumTrials = blockOrder.reduce(function(memo, blockName) {
 
 // Build trials, randomizing order within each block
 var trials = _.flatten(blockOrder.map(function(trialType, blockIndex) {
-  var blockStimuli = shuffle(trialInfo[trialType]);
+  var blockStimuli = _.shuffle(trialInfo[trialType]);
   return blockStimuli.map(function(stimulus, stimulusIndex) {
     return {
       stimulus: stimulus,
@@ -207,12 +189,27 @@ var experiment = {
     }, 1500);
   },
 
+  log_stimulus : function(trial) {
+    // log the stimulus for real trials
+    var stim = (typeof trial.stimulus === "string" ?
+		trial.stimulus : trial.stimulus.problem);
+    experiment.data.stimulus.push(stim);
+    experiment.data.trial_type.push(trial.trial_type);
+    experiment.data.trial_number.push(trial.trial_number);
+    experiment.data.block_number.push(trial.block_number);	
+  },
+  
   // LOG RESPONSE
   log_response: function(trialType) {
-    
     if (trialType.split('.')[0] === "performance") {
       var endTime = new Date().getTime();
-      experiment.data.rating.push(trialType.split('.')[1]);
+      var buttonPress = trialType.split('.')[1];
+      console.log(buttonPress);
+      console.log(experiment.currTrial.stimulus.trueAnswer);
+      var accuracy = (buttonPress === "notSure" ? "notSure" :
+		      buttonPress === experiment.currTrial.stimulus.trueAnswer ?
+		      'accurate' : 'inaccurate');
+      experiment.data.rating.push(accuracy);
       experiment.data.rt.push(endTime - experiment.startTime);
       experiment.next();
     } else {
@@ -263,7 +260,7 @@ var experiment = {
 	return;
       } else {
 	// Pop new trial info off list
-	var currTrial = experiment.trials.shift();
+	experiment.currTrial = experiment.trials.shift();
 	experiment.currentTrialNum++;
 	
 	// Update progress bar
@@ -274,21 +271,24 @@ var experiment = {
 
 
 	// check which trial type you're in and display correct slide
-	switch(currTrial.trial_type) {
+	switch(experiment.currTrial.trial_type) {
 	  case "mathMot" :
-	    $("#motivations").html(currTrial.stimulus);  //add stimulus to html
+	    $("#motivations").html(experiment.currTrial.stimulus);  //add stimulus to html
 	    showSlide("motivation_slide");             //display slide
 	    $("#testMessage_att").html(''); 	// clear the test message
+	    experiment.log_stimulus(experiment.currTrial);
 	    break;
 	  case "mathAnx" :
-  	    $("#math_anxs").html(currTrial.stimulus);  //add stimulus to html
+  	    $("#math_anxs").html(experiment.currTrial.stimulus);  //add stimulus to html
 	    showSlide("math_anxs_slide");              //display slide
 	    $("#testMessage_math_anx").html(''); 	// clear the test message
+	    experiment.log_stimulus(experiment.currTrial);
 	    break;
 	  case "genAnx" :
-	    $("#general_anxs").html(currTrial.stimulus);  //add stimulus to html
+	    $("#general_anxs").html(experiment.currTrial.stimulus);  //add stimulus to html
 	    showSlide("general_anxs_slide");              //display slide
 	    $("#testMessage_general_anx").html(''); 	// clear the test message
+	    experiment.log_stimulus(experiment.currTrial);
 	    break;
 	  case "motivationIntroATTS" :
 	    showSlide("motivationIntro");              //display slide
@@ -304,17 +304,13 @@ var experiment = {
 	    break;
 	  case "performance" :
 	    showSlide("performance");
-  	    $("#number").html(currTrial.stimulus);
+  	    $("#number").html(experiment.currTrial.stimulus.problem);
 	    experiment.startTime = (new Date()).getTime();
 	    experiment.CountdownTime();
 	    experiment.countdownCounter = setInterval(experiment.CountdownTime, 1000);
+	    experiment.log_stimulus(experiment.currTrial);
 	    break;
 	}
-	// log the stimulus for each trial
-	experiment.data.stimulus.push(currTrial.stimulus);
-	experiment.data.trial_type.push(currTrial.trial_type);
-	experiment.data.trial_number.push(currTrial.trial_number);
-	experiment.data.block_number.push(currTrial.block_number);	
       }
     }
   },
@@ -330,6 +326,8 @@ var experiment = {
       $("#minutes").text(minutes < 10 ? "0" + minutes : minutes);
       $("#seconds").text(seconds < 12 ? "Seconds left: " + seconds : seconds);
     } else {
+      experiment.data.rating.push("not responded");
+      experiment.data.rt.push("not responded");
       experiment.next();
     }
   },
