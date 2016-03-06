@@ -345,7 +345,7 @@
       </p>
       <button type="button" onclick="this.blur(); experiment.next()">Start</button>
     </div>
-
+    
     <div class="slide" id="performance">
 
       <div id="countdown">
@@ -363,10 +363,11 @@
 	<div class="divider"></div>
 	<button type="button" id="incorrect" onClick="experiment.log_response('performance.incorrect')">
 	  Incorrect</button>
-	<div class="divider"/></div>
-      <button type="button" id="notsure" onClick="experiment.log_response('performance.notSure')">
-	Not Sure</button>
-    </div>    
+	<div class="divider"></div>
+	<button type="button" id="notsure" onClick="experiment.log_response('performance.notSure')">
+	  Not Sure</button>
+      </div>    
+    </div>
     
     <!-- The debriefing slide. -->
     <div class="slide" id="debriefing">
