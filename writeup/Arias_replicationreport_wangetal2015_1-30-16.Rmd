@@ -1,7 +1,7 @@
 ---
-title: "Wang et al. 2015 Replication Report, Arias"
+title: "Wang et al. 2015 Replication Report"
 author: "Juan Miguel Arias"
-date: "January 30, 2016"
+date: "March 6, 2016"
 output: html_document
 ---
 
@@ -9,10 +9,22 @@ Replication of Study 2 in "Is Math Anxiety Always Bad for Math Learning? The Rol
 
 Replication Author: Juan Miguel Arias
 
-Course Instructors: Michael Frank, PhD, Robert Hawkins, & Eric Smith
+Course Instructors: Dr. Michael Frank, Robert Hawkins, & Eric Smith
 
-Contact information: email: jmarias (at) stanford (dot) edu 
+Contact information: email: stanfordpsych254 (at) gmail (dot) com
 
+Testable Experiment Webpage: 
+
+```{r packages, echo=F, results='hide', warning=FALSE, message=FALSE}
+
+library(tidyr)
+library(plyr)
+library(dplyr)
+library(psych)
+library(ggplot2)
+library(Hmisc)
+library(xtable)
+```
 
 **Introduction**
 
@@ -23,7 +35,8 @@ The current study attempts to replicate the findings of Study 2 in Wang et al. (
 **Methods**
 
 Power Analysis -- *TO BE CONDUCTED SOON*
-	*Note: from results presented in Table 9 (Wang et al., 2015), R-squared for finding of interest appears to be .16*
+	*Note: from results presented in Table 9 (Wang et al., 2015), R-squared for finding of interest appears to be .16, but the delta r-squared is only like .02*
+	
 	Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
 
 Planned Sample
@@ -54,9 +67,11 @@ In order to directly replicate Study 2 of the article, I would give the MTurk pa
   Hierarchical regression analysis was used to examine whether the quadratic relation between math anxiety and math cognition was further moderated by math motivation. Specifically, performance on the problem- verification task was predicted in four steps. In Step 1, covariates including age, sex, and linear and quadratic terms of general anxiety were entered. The linear term of math motivation and math anxiety was entered in Step 2. In Step 3, we entered the quadratic term of math anxiety and the interaction between math anxiety and math motivation. Finally, we entered the moderated quadratic interaction term between math anxiety and math motivation in Step 4. Math anxiety, math motivation, and general anxiety were standardized and centered prior to analyses in order to compute the interaction and higher-order terms. The outcome variable was also standardized to maintain consistency across the two studies.
  
 >  Results of the hierarchical regression analyses are shown in Table 9. Overall, age and sex both negatively predicted task performance, which indicates that younger and male participants performed better on average than older and female participants, with a larger effect size for sex than for age. General anxiety did not predict math performance. Math anxiety negatively predicted math performance after we controlled for the effects of the covariates. Finally, after controlling for all the linear and two-way interaction effects, we found that the moderated quadratic interaction between math anxiety and math motivation was statistically significant and added incremental predictive effects on math performance.
-  To further examine the moderated quadratic effects, we conducted post hoc analyses on the predictive effects of math anxiety at different levels of math anxiety and math motivation using the same procedures as in Study 1. Results are shown in Table 10 and Figure 3. The findings were consistent with the results from Study 1. At low levels of math motivation, math anxiety was modestly negatively associated with task performance across all levels of math anxiety. At high levels of math motivation, there was an inverted-U curvilinear relation between math anxiety and math performance.
+  To further examine the moderated quadratic effects, we conducted post hoc analyses on the predictive effects of math anxiety at different levels of math anxiety and math motivation using the same procedures as in Study 1*. Results are shown in Table 10 and Figure 3. The findings were consistent with the results from Study 1. At low levels of math motivation, math anxiety was modestly negatively associated with task performance across all levels of math anxiety. At high levels of math motivation, there was an inverted-U curvilinear relation between math anxiety and math performance.
 	
-	
+> *From Study 1: To further examine the four significant moderated
+quadratic effects, we recentered math motivation at low (i.e., 1 SD below the mean) and high (i.e., 1 SD above the mean) levels to examine the relations between math anx- iety and math performance across a wide range of math anxiety (3 SD, 2 SD, and 1 SD above and below the mean as well as at the mean) at these two different levels of math motivation (Aiken & West, 1991).
+
 Differences from Original Study
 
 (Post Data Collection) Methods Addendum
@@ -72,9 +87,167 @@ Results
 
 Data preparation
 	Data preparation following the analysis plan.
+	
+	
+```{r data gathering and preparation}
+
+############ Prepping Survey Responses for Analyses ####################################
+
+### Math Motivation (3-item; see Chiu & Zeng, 2008) ######
+
+
+
+### Math Anxiety (30-item MARS-B; see Suinn & Winston, 2003) ###
+
+
+
+
+### General Anxiety (20-item (Trait Anxiety); see State-Trait Anxiety Inventory, Spielberger, 1983)
+
+#Use "psych" package to make reverse-score key for the anxiety scale, taking the 20 items as either raw score (x1) or reverse score (x -1) 
+
+#genanxkey <- make.keys(d$genanx, list(general.anx=c("-ga1","ga2","-ga3","ga4","ga5","-ga6","-ga7","ga8","ga9","-ga10", "ga11","ga12","-ga13", "-ga14","ga15","-ga16","ga17","ga18","-ga19","ga20")))
+
+#Then I assume I need to multiply one matrix by another? Might try the subtraction method first (below)
+
+
+########
+#Or, if data is still in wide format, to reverse score: 
+
+# select columns to reverse score
+revscore.cols <- c("ga1", "ga3", "ga6", "ga7", "ga10", "ga13", "ga14", "ga16", "ga19")
+
+# Generating dataset with subraction to those scores to generate reverses (assuming d is dataset)
+# (check if can name new dataset dnew, or if it also has to be named d)
+# Using 5 - columns, b/c it is a 1-4 scale
+dnew[ ,revscore.cols] <-  5 - d[ ,revscore.cols]
+
+#confirm new dataset reflects correct reverse scoring, then convert:
+d <- dnew
+
+#Once this reverse-scoring is set, this general anxiety scale, as well as the math anxiety and math motivation scales (which do not need modification) are ready for finding mean index. 
+
+##########
+
+#### PROBABLY AFTER THIS STAGE, NEED TO GATHER DATA INTO TIDY FORM ######
+
+##**Double check how to do this** -- where do the reaction times go? 
+d.tidy <- d %>%
+  gather(question, response, mathmot, mathanx, genanx, pvt)
+
+
+## Problem Verification Task (PVT) Performance  (see Rinne & Mazzocco, 2014) ####################
+
+
+#The following analyses assume dataframe is called "d", reaction time of PVT problems (in ms) is called "RT", accuracy (0 or 1) of each PVT problem is called "pvt.accuracy"
+
+
+#Change reaction time (in ms) to reaction time in SECONDS
+#Following method in Wang et al. (2015; see pg. 1866) 
+d <- d %>% 
+  mutate(sec.RT = RT/1000)
+
+####################################################################################
+
+
+#### Mean Index and Standardized Scores for all measures #######
+
+#Calculate mean 
+subjectmeans <- d %>% 
+  group_by(subjectid) %>% 
+  summarise(mean.acc = mean(pvt.acc, na.rm=T), 
+            mean.RT = mean(sec.RT, na.rm=T), 
+            mean.mathmot = mean(mathmot, na.rm=T), 
+            mean.mathanx = mean(mathanx, na.rm=T), 
+            mean.genanx = mean(genanx, na.rm=T)) %>% 
+  mutate(pvt = (mean.acc*100) / mean.RT)
+
+
+ #Generate z-scores for variables (using "scale" function) 
+subjectmeans$z.pvt <- scale(subjectmeans$pvt, center = TRUE, scale = TRUE)
+subjectmeans$z.mathmot <- scale(subjectmeans$mean.mathmot, center = TRUE, scale = TRUE)
+subjectmeans$z.mathanx <- scale(subjectmeans$mean.mathanx, center = TRUE, scale = TRUE)
+subjectmeans$z.genanx <- scale(subjectmeans$mean.genanx, center = TRUE, scale = TRUE)
+
+
+```
 
 Confirmatory analysis
 	The analyses as specified in the analysis plan
+	
+	
+```{r Correlations between variables of interest}
+
+#Script for generating clean correlation table (bottom triangle only) with significance stars
+corstarsl <- function(x){ 
+require(Hmisc) 
+x <- as.matrix(x) 
+R <- rcorr(x)$r 
+p <- rcorr(x)$P 
+
+## define notions for significance levels; spacing is important.
+mystars <- ifelse(p < .001, "***", ifelse(p < .01, "** ", ifelse(p < .05, "* ", " ")))
+
+## trunctuate the matrix that holds the correlations to two decimal
+R <- format(round(cbind(rep(-1.11, ncol(x)), R), 2))[,-1] 
+
+## build a new matrix that includes the correlations with their apropriate stars 
+Rnew <- matrix(paste(R, mystars, sep=""), ncol=ncol(x)) 
+diag(Rnew) <- paste(diag(R), " ", sep="") 
+rownames(Rnew) <- colnames(x) 
+colnames(Rnew) <- paste(colnames(x), "", sep="") 
+
+## remove upper triangle
+Rnew <- as.matrix(Rnew)
+Rnew[upper.tri(Rnew, diag = TRUE)] <- ""
+Rnew <- as.data.frame(Rnew) 
+
+## remove last column and return the matrix (which is now a data frame)
+Rnew <- cbind(Rnew[1:length(Rnew)-1])
+return(Rnew) 
+} 
+
+##Create table from dataframe: 
+cor_table <- corstarsl(subjectmeans) 
+
+##To remove unwanted columns from dataframe before adding to correlation table (in order to replicate table from original study)
+
+cor.means <- subjectmeans %>% 
+  select()
+
+## exporting tables to either html or .tex (I prefer .tex but you will have to install TeX)
+print.xtable(cor_table, type="html", file="filename.html")
+
+
+
+```
+
+```{r Hierarchical Regression Models }
+
+#General Linear Models for Hierarchical Regression of Anxiety and Motivation on Performance 
+
+mathperfglm1 <- glm(pvt ~ age + sex + genanx + I(genanx^2), data = subjectmeans)
+
+mathperfglm2 <- glm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot, data = subjectmeans)
+
+mathperfglm3 <- glm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot + I(mathanx^2) 
+                              + mathanx * mathmot, data = subjectmeans)
+
+mathperfglm4 <- glm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot + I(mathanx^2) 
+                              + (mathanx * mathmot) + (I(mathanx^2) * mathmot), data = subjectmeans)
+
+##Alternatively, if the interaction terms already include those variables in the model (and don't need additional main effect coefficients):
+
+mathperfglm4.alt <- glm(pvt ~ age + sex + genanx + I(genanx^2) + I(mathanx^2) 
+                              + mathanx * mathmot + (I(mathanx^2) * mathmot), data = subjectmeans)
+##Would this be the correct way to set up this model? 
+
+```
+
+
+
+
+
 
 Exploratory analyses
 Any follow-up analyses desired (not required).

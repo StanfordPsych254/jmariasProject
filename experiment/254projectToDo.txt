@@ -3,7 +3,28 @@ Juan Arias, Psych 254 Project (Wang et al., "Math Anxiety/Motivation/Performance
 To Dos (as of 3-4-16)
 *******
 
-***CURRENT ISSUES: 
+CURRENT ISSUES: 
+
+**Additional thing: Add PRACTICE TRIALS (4) to the PVT -- add it as a "practice" slide? Oh man....
+
+**Print and check the Reverse Scored State-Trait anxiety scores** 
+
+
+1. Remove the “DO ONLY ONE…” line from the instructions slide  **DONE**
+2. Add text to each block's intro slide (preferably using the original author’s wording)
+3. Modify the CSS for those intro slides such that there are margins on the text (it’s currently stretching across the whole screen and hard to read).
+4. Fix the alignment of the “stanford psychology department” header and the Start button on the performance test intro screen. **DONE**
+5. Fill in the “true answer” (e.g. “correct” or “incorrect”) for the rest of the math problems (following the 4 examples I pushed to the repo) **DONE**
+6. Add a few debriefing sentences on the debriefing slide (e.g. after the “what do you think this experiment was about?” question?)
+
+Additionally, before running pilot A, it’d be good to have at least a very preliminary data analysis pipeline (e.g. importing data, computing the various measures of interest, running the anova) incorporated into your replication report Rmd. 
+
+One final methodological note that I was worried about when clicking through… I couldn’t tell from the original paper whether the authors ran the performance trials before or after the survey questions, or if they randomized. I could see possible confounds with either ordering — if you’ve asked a bunch of questions about anxiety and motivation first, then you could trigger performance anxiety whether or not the person is generally anxious about math. If you do the performance trials first, then that’s evidence that a person could use when reporting their anxiety or motivations (e.g. if you made the problems extra hard or extra easy, you could probably make people respond higher or lower on the survey questions…)
+
+
+
+*************************************************************************************************************
+
  
 1. **DONE** REGISTERING PROBLEM OR SENTENCE PRESENTED
 Need to find way to document what was the sentence that was shown or which of the 24 PVT problems it was (the stimulus) -- in the most efficient way possible

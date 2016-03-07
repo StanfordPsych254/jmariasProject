@@ -18,10 +18,8 @@
     <div class="slide" id="instructions">
       <br>
       <img src="images/stanfordu.png" alt="Stanford University">
-      <p id='logo-text'>Stanford University</p>
+      <p id='logo-text'>Stanford Psychology Department</p>
       <p class="block-text">In this experiment, you will read statements related to math. We would like you to tell us how much you agree with each statement.</p>
-
-      <p class="block-text">DO ONLY ONE "MATH PERSPECTIVES SURVEY" HIT. IF YOU DO MULTIPLE HITS OF THIS TYPE, YOU WILL NOT BE PAID!</p>
       <button type="button" onclick="this.blur(); experiment.next()">Start</button>
 
       <p class="block-text" id="legal">By answering the following
@@ -44,7 +42,7 @@
     </div>
 
     <!-- Progress Bar -->
-    
+
     <div class="progress">
       <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
       </div>
@@ -55,19 +53,18 @@
     <div class="slide" id="motivationIntro">
       <br>
 
-      <div align="center">
+      <div align="center" text-align="center" class="block-text">
 	<p>FILLER FOR MATH MOTIVATION INTRO</p><br>
 	<p>Please click Next to continue.</p><br>
       </div>
 
       <div align="center">
-	<p id ="motivation_Intro_sentence">{{}}</p>
+	<p id ="motivation_Intro_sentence"></p>
       </div>
 
       <br>
 
       <!-- Next button  -->
-      <!-- THIS NEEDS TO REFLECT CORRECT BUTTON ID and so that the onclick does the correct thing (just experiment.next I think) -->
       <table align="center"><tr>
 	  <td align="center">
             <button type="button" id="nextButton_intros" onClick="this.blur(); experiment.next()">Next</button>
@@ -76,7 +73,7 @@
 	</td></tr>
       </table>
     </div>
-    
+
 
     <!-- Questionnaire slide 1 - MOTIVATION -->
 
@@ -145,12 +142,13 @@
     <div class="slide" id="mathanxIntro">
       <br>
 
-      <div align="left">
+      <div align="center" text-align= "center" class="block-text">
 	<p>The items below are about things that may bother you or
 	cause you to be nervous or anxious or tense when you have to
-	do them. Choose the answer which best shows how nervous or
-	anxious or tense you would feel. Please respond to all the
-	items. Choose only one response to each statement. You will
+	do them.</p>
+  <p>Choose the answer which best shows how nervous or
+	anxious or tense you would feel.</p>
+  <p>Please respond to all the	items. Choose only one response to each statement. You will
 	NOT be able to return to correct your answers after you click
 	the Next Button. Therefore, please make sure that you provide
 	your answers as accurately as possible.</p><br>
@@ -159,7 +157,6 @@
 
       <br>
       <!-- Next button  -->
-      <!-- THIS NEEDS TO REFLECT CORRECT BUTTON ID and so that the onclick does the correct thing (just experiment.next I think) -->
       <table align="center"><tr>
 	  <td align="center">
             <button type="button" id="nextButton_intros" onClick="this.blur(); experiment.next()">Next</button>
@@ -240,19 +237,18 @@
     <div class="slide" id="genanxIntro">
       <br>
 
-      <div align="center">
-	<p>FILLER FOR GENERAL ANXIETY INTRO</p><br>
+      <div align="center" text-align="center" class="block-text">
+	<p>A number of statements which people have used to describe themselves are given below. Read each statement and then circle the appropriate number to the rigth of the statement to indicate how you <strong>generally</strong> feel. There are no right or wrong answers. Do not spend too much time on any one statment but give the answer which seems to describe how you generally feel.</p><br>
 	<p>Please click Next to continue.</p><br>
       </div>
 
       <!-- Show sentence from  scale -->
       <div align="center">
-	<p id ="gen_anx_sentence">{{}}</p>
+	<p id ="gen_anx_sentence"></p>
       </div>
 
       <br>
       <!-- Next button  -->
-      <!-- THIS NEEDS TO REFLECT CORRECT BUTTON ID and so that the onclick does the correct thing (just experiment.next I think) -->
       <table align="center"><tr>
 	  <td align="center">
             <button type="button" id="nextButton_intros" onClick="this.blur(); experiment.next()">Next</button>
@@ -269,7 +265,7 @@
       <br>
 
       <div align="center">
-        <p>How often would you say the following statement applies to you IN GENERAL?</p><br>
+        <p>How often would you say the following statement applies to how you GENERALLY feel?</p><br>
       </div>
 
       <!-- Show sentence from  scale -->
@@ -326,28 +322,25 @@
 
     <div class="slide" id="PVTintro">
       <div style="width: 500px; margin: 0 auto; text-align: center; background-color: #8C1516; padding: 20px 15px 10px 10px">
-	<img src="images/stanford.png" height="46" width="360" alt="Stanford University">
       </div>
-      <p id='logo-text'>Stanford Psychology Department</p>
       <p class="block-text">In the next section, you will be doing some fast math activities. You will be shown a series of math problems, one at a time. You won't need to figure out the answers to the problems, because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong.
-      <p class="block-text">
       <p  class="block-text">
-	1. Please do NOT use pencil and paper or any type of calculator.
+	1. Please do <strong>NOT</strong> use pencil and paper or any type of calculator.
       <p  class="block-text">
-	2. Remember, it's a FAST math judgement task. So please make your judgement for each problem as quickly and accurately as possible.
+	2. Remember, it's a <strong>FAST</strong> math judgement task. So please make your judgement for each problem as <strong>quickly and accurately</strong> as possible.
       <p  class="block-text">
-	3. You will be given a maximum of 10 SECONDS for each problem. The program will automatically proceed to the next problem after 10 seconds, with or without your answer. You will be shown a timer to remind you of the time remaining for each problem.
+	3. You will be given a maximum of <strong>10 seconds</strong> for each problem. The program will automatically proceed to the next problem after 10 seconds, with or without your answer. You will be shown a timer to remind you of the time remaining for each problem.
       <p  class="block-text">
 	4. Press the Start button to start your practice trials. You will have 4 practice trials to get you warmed up.
       <p  class="block-text">
 	Do NOT use the Back or Refresh buttons on your browser.
-
       </p>
-      <button type="button" onclick="this.blur(); experiment.next()">Start</button>
+  <button type="button" onclick="this.blur(); experiment.next()">Start</button>
     </div>
-    
-    <div class="slide" id="performance">
 
+
+
+    <div class="slide" id="performance">
       <div id="countdown">
 	<div id="seconds">00</div>
       </div>
@@ -359,16 +352,16 @@
       <div align="center">
 	<button type="button" id="correct" onClick="experiment.log_response('performance.correct')">
 	  Correct</button>
-	
+
 	<div class="divider"></div>
 	<button type="button" id="incorrect" onClick="experiment.log_response('performance.incorrect')">
 	  Incorrect</button>
 	<div class="divider"></div>
 	<button type="button" id="notsure" onClick="experiment.log_response('performance.notSure')">
 	  Not Sure</button>
-      </div>    
+      </div>
     </div>
-    
+
     <!-- The debriefing slide. -->
     <div class="slide" id="debriefing">
       <form id="demographics" onsubmit="experiment.submitcomments()">
@@ -435,7 +428,7 @@
 	    <option value="Grad">Graduate degree</option>
 	  </select>
 	</p>
-	
+
 	<p><b>What is your native/first language (i.e., the language that was primarily spoken at home when you were a child)?</b></p>
 	<p>
 	  <textarea type="text" id="homelang" name="lg" style="width:40%" value=""></textarea>
@@ -443,7 +436,7 @@
 
 	<p><b>What is your ethnicity?</b></p>
 	<p>
-	  
+
 	  <select name="ethnicity" id="ethnicity" form="demographics">
 	    <option value="">Choose an ethnicity</option>
 	    <option value="Hispanic">Hispanic or Latino</option>
@@ -451,7 +444,7 @@
 	    <option value="NA">Prefer not to state</option>
 	  </select>
 	</p>
-	
+
 	<p><b>What is your race? Please check all that apply.</b></p>
 	<p>
 	  <form>
@@ -469,7 +462,7 @@
 	    <br>
 	    <input type="checkbox" name="race" value="other"> Other
 	  </form>
-	  
+
 	<p><b>How many children do you have?</b></p>
 	<p>
 	  <select name="children" id="children" form="demographics">
@@ -483,7 +476,7 @@
 	    <option value="morethan5">More than 5</option>
 	  </select>
 	</p>
-	
+
 	<p><b>If you have children, how old is your <em>oldest</em> child?</b></p>
 	<p>
 	  <select name="oldest" id="oldestAge" form="demographics">
@@ -540,7 +533,8 @@
 
     <!-- The finish slide. -->
     <div class="slide" id="finished">
-      You're finished - thanks for participating! Submitting to Mechanical Turk...
+      <p>You're finished - thanks for participating! Submitting to Mechanical Turk...</p>
+      <p>This study was about...FILL IN DEBRIEFING SENTENCES HERE</p>
     </div>
 
     <script src="mathmotivationsurveys.js"></script>

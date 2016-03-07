@@ -76,6 +76,22 @@ button[disabled] {
   text-align: center;
 }
 
+#PVTintro {
+	text-align: center;
+}
+
+#mathanxIntro {
+	text-align: center;
+}
+
+#genanxIntro {
+	text-align: center;
+}
+
+#motivationIntro {
+	text-align: center;
+}
+
 #odd-key, #even-key {
   background-color: #e3e3e3;
   padding: 2px;

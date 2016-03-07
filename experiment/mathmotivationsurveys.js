@@ -40,7 +40,7 @@ var trialInfo = {
     'Mathematics is important to me personally',
     'Because doing mathematics is fun, I wouldn’t want to give it up.'],
   mathAnx : [// Math anxiety
-    'Taking a final exam in a mathematics course.',
+    // 'Taking a final exam in a mathematics course.',
     // 'Thinking about an upcoming mathematics test one week before.',
     // 'Thinking about an upcoming mathematics test one day before.',
     // 'Thinking about an upcoming mathematics test one hour before.',
@@ -62,17 +62,17 @@ var trialInfo = {
     // 'Figuring out your monthly budget.',
     // 'Being given a set of numerical problems involving addition to solve on paper.',
     // 'Having someone watch you as you total up a column of figures.',
-    // 'Totaling up a dinner bill that you think overcharged you.',
-    // 'Being responsible for collecting dues for an organization and keeping track of the amount.',
-    // 'Studying for a driver’s license test and memorizing the figures involved, such as the distances it takes to stop a car going at different speeds.',
-    // 'Totaling up the dues received and the expenses of a club you belong to.',
-    // 'Watching someone work with a calculator.',
-    // 'Being given a set of division problems to solve.',
-    // 'Being given a set of subtraction problems to solve.',
+    'Totaling up a dinner bill that you think overcharged you.',
+    'Being responsible for collecting dues for an organization and keeping track of the amount.',
+    'Studying for a driver’s license test and memorizing the figures involved, such as the distances it takes to stop a car going at different speeds.',
+    'Totaling up the dues received and the expenses of a club you belong to.',
+    'Watching someone work with a calculator.',
+    'Being given a set of division problems to solve.',
+    'Being given a set of subtraction problems to solve.',
     'Being given a set of multiplication problems to solve.'],
-  
+
   genAnx : [// General anxiety
-    'I feel pleasant.',
+    // 'I feel pleasant.',
     // 'I feel nervous and restless.',
     // 'I feel satisfied with myself.',
     // 'I wish I could be as happy as others seem to be.',
@@ -87,35 +87,43 @@ var trialInfo = {
     // 'I feel secure.',
     // 'I make decisions easily.',
     // 'I feel inadequate.',
-    // 'I am content.',
-    // 'Some unimportant thought runs thorugh my mind and bothers me.',
-    // 'I take disappointments so keenly that I can’t put them out of my mind.',
-    // 'I am a steady person.',
+    'I am content.',
+    'Some unimportant thought runs thorugh my mind and bothers me.',
+    'I take disappointments so keenly that I can’t put them out of my mind.',
+    'I am a steady person.',
     'I get in a state of tension or turmoil as I think over my recent concerns and interests.'],
   performance : [
-    // ["13 X 4 = 47"],
-    // ["22 - 6 = 16"],
-    // ["35 &divide; 5 = 7"],
-    // ["54 + 26 = 70"],
-    // ["32 - 16 = 14"],
-    // ["39 &divide; 16 = 3"],
-    {problem: "3 X 13 = 39", trueAnswer: "correct"},
-    {problem: "<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>",
-     trueAnswer: "correct"},
-    // ["27 + 323 = 350"],
-    // ["112 - 88 = 24"],
-    // ["5 X 15 = 65"],
-    // ["27 + 234 = 251"],
-    // ["84 &divide; 4 = 21"],
-    // ["44 - 18 = 24"],
-    // ["<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>"],
-    // ["14 X 5 = 70"],
-    // ["28 &divide; 16 = 2"],
-    // ["<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>"],
-    // ["<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>"],
-    // ["<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
-    // ["<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>"],
-    // ["<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>"],
+
+// PRACTICE PROBLEMS - Don't know where to put these yet - prob new practice slide
+// {problem:"2 + 2 = 4", trueAnswer: "correct"},
+// {problem: "2 X 2 = 100", trueAnswer: "incorrect"},
+// {problem: "253 X 42 = 10,826", trueAnswer: "incorrect"},
+// {problem: "<sup>1</sup>&frasl;<sub>2</sub> = <sup>2</sup>&frasl;<sub>1</sub>", trueAnswer: "incorrect"},
+
+
+     {problem: "13 X 4 = 47", trueAnswer: "incorrect"},
+    {problem:"22 - 6 = 16", trueAnswer: "correct"},
+    // {problem:"35 &divide; 5 = 7", trueAnswer: "correct"},
+    // {problem:"54 + 26 = 70", trueAnswer: "incorrect"},
+    // {problem: "32 - 16 = 14", trueAnswer: "incorrect"} ,
+    // {problem: "39 &divide; 16 = 3", trueAnswer: "incorrect"},
+    // {problem: "3 X 13 = 39", trueAnswer: "correct"},
+    // {problem: "<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>",
+    //  trueAnswer: "correct"},
+    // {problem: "27 + 323 = 350", trueAnswer: "correct"},
+    // {problem: "112 - 88 = 24", trueAnswer: "correct"},
+    // {problem: "5 X 15 = 65", trueAnswer: "incorrect"},
+    // {problem: "27 + 234 = 251", trueAnswer: "incorrect"},
+    // {problem: "84 &divide; 4 = 21", trueAnswer: "correct"},
+    // {problem: "44 - 18 = 24", trueAnswer: "incorrect"},
+    // {problem: "<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>", trueAnswer: "incorrect"},
+    // {problem: "14 X 5 = 70", trueAnswer: "correct"},
+    // {problem: "28 &divide; 16 = 2", trueAnswer: "incorrect"},
+    // {problem: "<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>", trueAnswer: "incorrect"},
+    // {problem: "<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>", trueAnswer: "incorrect"},
+    // {problem: "<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>", trueAnswer: "correct"},
+    // {problem: "<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>", trueAnswer: "incorrect"} ,
+    {problem: "<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>", trueAnswer: "incorrect"} ,
     {problem: "<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>", trueAnswer: "incorrect"},
     {problem: "18 + 56 = 74", trueAnswer: "correct"}
   ]
@@ -151,7 +159,7 @@ console.log(trials);
 showSlide("instructions");
 
 // ############################## The main event ##############################
-var experiment = {  
+var experiment = {
   // the time that the current trial started
   startTime : null,
   // the handle to cancel the current countdown
@@ -162,7 +170,7 @@ var experiment = {
   trials : trials,
   data: {
     trial_number: [],
-    block_number: [],    
+    block_number: [],
     trial_type: [],
     stimulus: [],
     rating: [],
@@ -196,9 +204,9 @@ var experiment = {
     experiment.data.stimulus.push(stim);
     experiment.data.trial_type.push(trial.trial_type);
     experiment.data.trial_number.push(trial.trial_number);
-    experiment.data.block_number.push(trial.block_number);	
+    experiment.data.block_number.push(trial.block_number);
   },
-  
+
   // LOG RESPONSE
   log_response: function(trialType) {
     if (trialType.split('.')[0] === "performance") {
@@ -214,7 +222,7 @@ var experiment = {
       experiment.next();
     } else {
       var response_logged = false;
-      
+
       //Array of radio buttons
       var radio = document.getElementsByName("judgment");
 
@@ -262,9 +270,9 @@ var experiment = {
 	// Pop new trial info off list
 	experiment.currTrial = experiment.trials.shift();
 	experiment.currentTrialNum++;
-	
+
 	// Update progress bar
-	$("#progress").attr("style","width:" 
+	$("#progress").attr("style","width:"
 			    + String(100*(experiment.currentTrialNum/
 					  experiment.totalNumTrials))
 			    + "%");
