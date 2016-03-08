@@ -27,6 +27,7 @@ library(psych)
 library(ggplot2)
 library(Hmisc)
 library(xtable)
+library(knitr)
 ```
 
 **Introduction**
@@ -253,6 +254,12 @@ mathperflm4 <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot + I
 
 mathperfglm4.alt <- glm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx * mathmot + (I(mathanx^2) * mathmot), data = subjectmeans)
 ##Would this be the correct way to set up this model? 
+
+
+##Look into using kable (in knitr package) to make nice table of model outputs 
+
+kable(summary(modle1)$coef)
+
 
 ```
 
