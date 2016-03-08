@@ -9,13 +9,18 @@ CURRENT ISSUES:
 
 **Print and check the Reverse Scored State-Trait anxiety scores** 
 
+2. Add text to each block's intro slide (preferably using the original author’s wording)
+
+3. Modify the CSS for those intro slides such that there are margins on the text (it’s currently stretching across the whole screen and hard to read).
+
+6. Add a few debriefing sentences on the debriefing slide (e.g. after the “what do you think this experiment was about?” question?)
+
+***********************************************************************
 
 1. Remove the “DO ONLY ONE…” line from the instructions slide  **DONE**
-2. Add text to each block's intro slide (preferably using the original author’s wording)
-3. Modify the CSS for those intro slides such that there are margins on the text (it’s currently stretching across the whole screen and hard to read).
 4. Fix the alignment of the “stanford psychology department” header and the Start button on the performance test intro screen. **DONE**
 5. Fill in the “true answer” (e.g. “correct” or “incorrect”) for the rest of the math problems (following the 4 examples I pushed to the repo) **DONE**
-6. Add a few debriefing sentences on the debriefing slide (e.g. after the “what do you think this experiment was about?” question?)
+
 
 Additionally, before running pilot A, it’d be good to have at least a very preliminary data analysis pipeline (e.g. importing data, computing the various measures of interest, running the anova) incorporated into your replication report Rmd. 
 

@@ -13,9 +13,13 @@ Course Instructors: Dr. Michael Frank, Robert Hawkins, & Eric Smith
 
 Contact information: email: stanfordpsych254 (at) gmail (dot) com
 
-Testable Experiment Webpage: 
+Testable Experiment Webpage:
 
-```{r packages, echo=F, results='hide', warning=FALSE, message=FALSE}
+http://web.stanford.edu/~jmarias/jmariasProject/experiment/mathmotivationsurveys.html
+
+
+
+```{r load packages, echo=F, results='hide', warning=FALSE, message=FALSE}
 
 library(tidyr)
 library(plyr)
@@ -34,9 +38,16 @@ The current study attempts to replicate the findings of Study 2 in Wang et al. (
 
 **Methods**
 
-Power Analysis -- *TO BE CONDUCTED SOON*
-	*Note: from results presented in Table 9 (Wang et al., 2015), R-squared for finding of interest appears to be .16, but the delta r-squared is only like .02*
+Power Analysis -- 
+	*Note: from results presented in Table 9 (Wang et al., 2015), R-squared for finding of interest appears to be .16, but the delta r-squared is only .02*
 	
+Original effect size: total R-squared: .16 ; change in R-squared for variable of interest: .02
+
+Power analysis: For effect size of .02, with 219 participants, 9 total predictors in model, and alpha of .05, estimated power achieved is:  54% 
+
+Sample Size needed to achieve 80% power (assuming same effect size): 
+Sample Size needed to achieve 90% power:
+Sample Size needed to achieve 95% power:
 	Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
 
 Planned Sample
@@ -95,11 +106,11 @@ Data preparation
 
 ### Math Motivation (3-item; see Chiu & Zeng, 2008) ######
 
-
+  #No data prep needed aside from re-naming and calculating mean value for each participant
 
 ### Math Anxiety (30-item MARS-B; see Suinn & Winston, 2003) ###
 
-
+  #No data prep needed aside from re-naming and calculating mean value for each participant
 
 
 ### General Anxiety (20-item (Trait Anxiety); see State-Trait Anxiety Inventory, Spielberger, 1983)
@@ -226,29 +237,37 @@ print.xtable(cor_table, type="html", file="filename.html")
 
 #General Linear Models for Hierarchical Regression of Anxiety and Motivation on Performance 
 
-mathperfglm1 <- glm(pvt ~ age + sex + genanx + I(genanx^2), data = subjectmeans)
+###MAKE THESE THE STANDARDIZED VALUES (z.genanx)
+##CHANGE TO LM not GLM
 
-mathperfglm2 <- glm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot, data = subjectmeans)
+mathperflm1 <- lm(pvt ~ age + sex + genanx + I(genanx^2), data = subjectmeans)
 
-mathperfglm3 <- glm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot + I(mathanx^2) 
+mathperflm2 <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot, data = subjectmeans)
+
+mathperflm3 <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot + I(mathanx^2) 
                               + mathanx * mathmot, data = subjectmeans)
 
-mathperfglm4 <- glm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot + I(mathanx^2) 
+mathperflm4 <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot + I(mathanx^2) 
                               + (mathanx * mathmot) + (I(mathanx^2) * mathmot), data = subjectmeans)
 
 ##Alternatively, if the interaction terms already include those variables in the model (and don't need additional main effect coefficients):
 
-mathperfglm4.alt <- glm(pvt ~ age + sex + genanx + I(genanx^2) + I(mathanx^2) 
-                              + mathanx * mathmot + (I(mathanx^2) * mathmot), data = subjectmeans)
+mathperfglm4.alt <- glm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx * mathmot + (I(mathanx^2) * mathmot), data = subjectmeans)
 ##Would this be the correct way to set up this model? 
 
 ```
 
+```{r model at different SDs }
+
+mathperflm2 <- lm(pvt ~ age + sex + genanx + I(genanx^2) + I(mathanx - 1) + mathmot, data = subjectmeans)
+
+##Minus- 1 actually gives you 1 SD ABOVE b/c you areshifting the x axis "to the right" (mean becomes -1)
 
 
+mathperflm4.alt <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx * I(mathmot - 1) + (I(mathanx^2) * I(mathmot - 1)), data = subjectmeans)
 
 
-
+```
 Exploratory analyses
 Any follow-up analyses desired (not required).
 
