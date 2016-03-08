@@ -80,6 +80,10 @@ button[disabled] {
 	text-align: center;
 }
 
+#performanceintro{
+	text-align: center;
+}
+
 #mathanxIntro {
 	text-align: center;
 }
@@ -108,11 +112,40 @@ button[disabled] {
   margin-bottom: 1em;
 }
 
+.center-text {
+  width: 500px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+
 #legal {
   margin: 0 auto;
   margin-top: 1.5em;
   font-size: 0.8em;
 }
+
+#headerwords {
+  font-size: 38px;
+	line-height: 50px;
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  text-align: center;
+  width: 400px;
+  margin-top: 100px;
+}
+
+#pracnumber {
+  font-size: 42px;
+	line-height: 50px;
+	height: 80px;
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  text-align: center;
+  width: 400px;
+  margin-top: 50px;
+}
+
 
 #number {
   font-size: 42px;
@@ -124,6 +157,7 @@ button[disabled] {
   width: 400px;
   margin-top: 100px;
 }
+
 
 td {
   text-align: center;

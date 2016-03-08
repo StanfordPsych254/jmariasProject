@@ -53,8 +53,10 @@
     <div class="slide" id="motivationIntro">
       <br>
 
-      <div align="center" text-align="center" class="block-text">
-	<p>FILLER FOR MATH MOTIVATION INTRO</p><br>
+      <div class="block-text">
+	<p>For each of the following items, indicate how much you agree or disagree with what the item says. Please respond to all the items. Choose only one response to each statement.</p>
+  <p>Note that you will NOT be able to return to any question to correct your answers after you move on to the next question. Therefore, please make sure that you provide your answers as accurately as possible.</p><br></div>
+  <div class="center-text">
 	<p>Please click Next to continue.</p><br>
       </div>
 
@@ -142,7 +144,7 @@
     <div class="slide" id="mathanxIntro">
       <br>
 
-      <div align="center" text-align= "center" class="block-text">
+      <div align="center" class="block-text">
 	<p>The items below are about things that may bother you or
 	cause you to be nervous or anxious or tense when you have to
 	do them.</p>
@@ -151,8 +153,8 @@
   <p>Please respond to all the	items. Choose only one response to each statement. You will
 	NOT be able to return to correct your answers after you click
 	the Next Button. Therefore, please make sure that you provide
-	your answers as accurately as possible.</p><br>
-	<p>Please click Next to continue.</p><br>
+	your answers as accurately as possible.</p><br></div>
+  <div class="center-text"><p>Please click Next to continue.</p><br>
       </div>
 
       <br>
@@ -222,7 +224,7 @@
       <!-- Next button and "please make a response" message -->
       <table align="center"><tr>
 	  <td align="center">
-            <button type="button" id="nextButton_math_anx" onClick="experiment.log_response('math_anx')"> next</button>
+            <button type="button" id="nextButton_math_anx" onClick="experiment.log_response('math_anx')">Next</button>
 	  </td>
 	<tr><td align="center">
             <div id="testMessage_math_anx"> </div>
@@ -238,8 +240,8 @@
       <br>
 
       <div align="center" text-align="center" class="block-text">
-	<p>A number of statements which people have used to describe themselves are given below. Read each statement and then circle the appropriate number to the rigth of the statement to indicate how you <strong>generally</strong> feel. There are no right or wrong answers. Do not spend too much time on any one statment but give the answer which seems to describe how you generally feel.</p><br>
-	<p>Please click Next to continue.</p><br>
+	<p>A number of statements which people have used to describe themselves are given below. Read each statement and then circle the appropriate number to the rigth of the statement to indicate how you <strong>generally</strong> feel. There are no right or wrong answers. Do not spend too much time on any one statment but give the answer which seems to describe how you generally feel.</p><br></div>
+  <div class="center-text"><p>Please click Next to continue.</p><br>
       </div>
 
       <!-- Show sentence from  scale -->
@@ -311,7 +313,7 @@
       <!-- Next button and "please make a response" message -->
       <table align="center"><tr>
           <td align="center">
-            <button type="button" id="nextButton_general_anx" onClick="experiment.log_response('general_anx')"> next</button>
+            <button type="button" id="nextButton_general_anx" onClick="experiment.log_response('general_anx')">Next</button>
           </td>
         <tr><td align="center">
             <div id="testMessage_general_anx"> </div>
@@ -320,7 +322,7 @@
     </div>
 
 
-    <div class="slide" id="PVTintro">
+  <div class="slide" id="PVTintro">
       <div style="width: 500px; margin: 0 auto; text-align: center; background-color: #8C1516; padding: 20px 15px 10px 10px">
       </div>
       <p class="block-text">In the next section, you will be doing some fast math activities. You will be shown a series of math problems, one at a time. You won't need to figure out the answers to the problems, because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong.
@@ -340,6 +342,40 @@
 
 
 
+<!-- New addition 4 PVT practice trials slide -->
+    <div class="slide" id="PVTpractice">
+      <div id="countdown">
+  <div id="seconds">00</div>
+      </div>
+
+      <div id="headerwords">PRACTICE TRIAL</div>
+
+      <div align="center">
+  <p id ="pracnumber">{{}}</p>
+      </div>
+
+      <div align="center">
+  <button type="button" id="correct" onClick="experiment.log_response('performance.correct')">
+    Right</button>
+
+  <div class="divider"></div>
+  <button type="button" id="incorrect" onClick="experiment.log_response('performance.incorrect')">
+    Wrong</button>
+  <div class="divider"></div>
+  <button type="button" id="notsure" onClick="experiment.log_response('performance.notSure')">
+    Don't Know</button>
+      </div>
+    </div>
+
+    <div class="slide" id="performanceintro">
+        <div style="width: 500px; margin: 0 auto; text-align: center; background-color: #8C1516; padding: 20px 15px 10px 10px">
+        </div>
+        <p class="block-text">That concludes the four practice trials. Following are a set of additional problems just like the ones you saw.
+        <p  class="block-text">Remember, you won't need to figure out the answers to the problems, because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong.</p><p class="block-text">You will have 10 seconds before the timer automatically moves to the next problem.</p>
+    <button type="button" onclick="this.blur(); experiment.next()">Start</button>
+      </div>
+
+
     <div class="slide" id="performance">
       <div id="countdown">
 	<div id="seconds">00</div>
@@ -351,14 +387,14 @@
 
       <div align="center">
 	<button type="button" id="correct" onClick="experiment.log_response('performance.correct')">
-	  Correct</button>
+	  Right</button>
 
 	<div class="divider"></div>
 	<button type="button" id="incorrect" onClick="experiment.log_response('performance.incorrect')">
-	  Incorrect</button>
+	  Wrong</button>
 	<div class="divider"></div>
 	<button type="button" id="notsure" onClick="experiment.log_response('performance.notSure')">
-	  Not Sure</button>
+	  Don't Know</button>
       </div>
     </div>
 

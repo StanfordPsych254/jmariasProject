@@ -1,21 +1,38 @@
 *******
 Juan Arias, Psych 254 Project (Wang et al., "Math Anxiety/Motivation/Performance")
-To Dos (as of 3-4-16)
+To Dos (as of 3-8-16)
 *******
 
 CURRENT ISSUES: 
 
-**Additional thing: Add PRACTICE TRIALS (4) to the PVT -- add it as a "practice" slide? Oh man....
+**Additional thing:
+-Check how Practice Trials were added
+- Add "practice trials" to the "log_response" function; fix the fact that it is probably no longer logging the performance trials correctly
+- Correct the missing countdown timer in the peformance trials
 
-**Print and check the Reverse Scored State-Trait anxiety scores** 
 
-2. Add text to each block's intro slide (preferably using the original author’s wording)
+**Randomize order of PVT (practice and performance) and (as a unit) the 3 surveys
 
-3. Modify the CSS for those intro slides such that there are margins on the text (it’s currently stretching across the whole screen and hard to read).
+**If it doesn't already log the order, make sure to log whether PVT or Surveys were first. 
+
 
 6. Add a few debriefing sentences on the debriefing slide (e.g. after the “what do you think this experiment was about?” question?)
 
+
+
+*****Dont forget to pull the git repository to the server webspace after you push the final edits to git (otherwise the link will still be to the old html)*****
+
+
+
+
 ***********************************************************************
+
+
+
+
+2. Add text to each block's intro slide (preferably using the original author’s wording) **DONE**
+
+3. Modify the CSS for those intro slides such that there are margins on the text (it’s currently stretching across the whole screen and hard to read). **DONE**
 
 1. Remove the “DO ONLY ONE…” line from the instructions slide  **DONE**
 4. Fix the alignment of the “stanford psychology department” header and the Start button on the performance test intro screen. **DONE**

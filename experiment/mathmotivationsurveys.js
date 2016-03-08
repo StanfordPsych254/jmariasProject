@@ -35,6 +35,7 @@ var trialInfo = {
   mathanxIntroATTS : [""],
   genanxIntroATTS : [""],
   PVTintro : [""],
+  performanceintro: [""],
   mathMot : [ // Math motivation
     'When I do mathematics, I sometimes get totally absorbed.',
     'Mathematics is important to me personally',
@@ -62,12 +63,12 @@ var trialInfo = {
     // 'Figuring out your monthly budget.',
     // 'Being given a set of numerical problems involving addition to solve on paper.',
     // 'Having someone watch you as you total up a column of figures.',
-    'Totaling up a dinner bill that you think overcharged you.',
-    'Being responsible for collecting dues for an organization and keeping track of the amount.',
-    'Studying for a driver’s license test and memorizing the figures involved, such as the distances it takes to stop a car going at different speeds.',
-    'Totaling up the dues received and the expenses of a club you belong to.',
-    'Watching someone work with a calculator.',
-    'Being given a set of division problems to solve.',
+    // 'Totaling up a dinner bill that you think overcharged you.',
+    // 'Being responsible for collecting dues for an organization and keeping track of the amount.',
+    // 'Studying for a driver’s license test and memorizing the figures involved, such as the distances it takes to stop a car going at different speeds.',
+    // 'Totaling up the dues received and the expenses of a club you belong to.',
+    // 'Watching someone work with a calculator.',
+    // 'Being given a set of division problems to solve.',
     'Being given a set of subtraction problems to solve.',
     'Being given a set of multiplication problems to solve.'],
 
@@ -87,21 +88,23 @@ var trialInfo = {
     // 'I feel secure.',
     // 'I make decisions easily.',
     // 'I feel inadequate.',
-    'I am content.',
-    'Some unimportant thought runs thorugh my mind and bothers me.',
-    'I take disappointments so keenly that I can’t put them out of my mind.',
+    // 'I am content.',
+    // 'Some unimportant thought runs thorugh my mind and bothers me.',
+    // 'I take disappointments so keenly that I can’t put them out of my mind.',
     'I am a steady person.',
     'I get in a state of tension or turmoil as I think over my recent concerns and interests.'],
+
+PVTpractice: [
+  {problem:"2 + 2 = 4", trueAnswer: "correct"},
+  {problem: "2 X 2 = 100", trueAnswer: "incorrect"},
+  {problem: "253 X 42 = 10,826", trueAnswer: "incorrect"},
+  {problem: "<sup>1</sup>&frasl;<sub>2</sub> = <sup>2</sup>&frasl;<sub>1</sub>", trueAnswer: "incorrect"}
+  ],
+
+
+
   performance : [
-
-// PRACTICE PROBLEMS - Don't know where to put these yet - prob new practice slide
-// {problem:"2 + 2 = 4", trueAnswer: "correct"},
-// {problem: "2 X 2 = 100", trueAnswer: "incorrect"},
-// {problem: "253 X 42 = 10,826", trueAnswer: "incorrect"},
-// {problem: "<sup>1</sup>&frasl;<sub>2</sub> = <sup>2</sup>&frasl;<sub>1</sub>", trueAnswer: "incorrect"},
-
-
-     {problem: "13 X 4 = 47", trueAnswer: "incorrect"},
+    {problem: "13 X 4 = 47", trueAnswer: "incorrect"},
     {problem:"22 - 6 = 16", trueAnswer: "correct"},
     // {problem:"35 &divide; 5 = 7", trueAnswer: "correct"},
     // {problem:"54 + 26 = 70", trueAnswer: "incorrect"},
@@ -124,8 +127,8 @@ var trialInfo = {
     // {problem: "<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>", trueAnswer: "correct"},
     // {problem: "<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>", trueAnswer: "incorrect"} ,
     {problem: "<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>", trueAnswer: "incorrect"} ,
-    {problem: "<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>", trueAnswer: "incorrect"},
-    {problem: "18 + 56 = 74", trueAnswer: "correct"}
+    // {problem: "<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>", trueAnswer: "incorrect"},
+    // {problem: "18 + 56 = 74", trueAnswer: "correct"}
   ]
 };
 
@@ -133,7 +136,7 @@ var trialInfo = {
 var blockOrder = _.flatten(_.shuffle([["motivationIntroATTS", "mathMot"],
 				      ["mathanxIntroATTS", "mathAnx"],
 				      ["genanxIntroATTS", "genAnx"]]))
-      .concat(["PVTintro", "performance"]);
+      .concat(["PVTintro", "PVTpractice","performanceintro", "performance"]);
 
 // Calculate total number of trials, for progress bar
 var totalNumTrials = blockOrder.reduce(function(memo, blockName) {
@@ -310,6 +313,17 @@ var experiment = {
 	  case "PVTintro" :
 	    showSlide("PVTintro");
 	    break;
+    case "performanceintro" :
+	    showSlide("performanceintro");
+	    break;
+    case "PVTpractice" :
+	    showSlide("PVTpractice");
+  	    $("#pracnumber").html(experiment.currTrial.stimulus.problem);
+	    experiment.startTime = (new Date()).getTime();
+	    experiment.CountdownTime();
+	    experiment.countdownCounter = setInterval(experiment.CountdownTime, 1000);
+	    experiment.log_stimulus(experiment.currTrial);
+	    break;
 	  case "performance" :
 	    showSlide("performance");
   	    $("#number").html(experiment.currTrial.stimulus.problem);
@@ -460,24 +474,4 @@ var experiment = {
 // 'I get in a state of tension or turmoil as I think over my recent concerns and interests.']
 //
 //
-//
-//
-// ganxs = shuffle(ganxs);
-//
-// var totalTrialsGanx = ganxs.length;
-//
-// var numTrialsExperiment = totalTrialsGanx
-// var trials = [];
-//
-// // first build general anxiety question trials
-// for (i = 0; i < totalTrialsGanx; i++) {
-// 	trial = {
-// 		stimulus: ganxs[i],
-// 		trial_number_block: i +1,
-// 		trial_type: "general_anxs"
-// 	}
-//
-// 	trials.push(trial);
-// }
-
 // ##################################################################

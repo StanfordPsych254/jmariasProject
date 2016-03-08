@@ -17,7 +17,6 @@ Testable Experiment Webpage:
 
 http://web.stanford.edu/~jmarias/jmariasProject/experiment/mathmotivationsurveys.html
 
-**Checking if this sentence addition is reflected in github remote** this should be in the "test push" 
 
 ```{r load packages, echo=F, results='hide', warning=FALSE, message=FALSE}
 
