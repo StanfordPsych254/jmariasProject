@@ -1,0 +1,170 @@
+*******
+Juan Arias, Psych 254 Project (Wang et al., "Math Anxiety/Motivation/Performance")
+To Dos (as of 3-8-16)
+*******
+
+CURRENT ISSUES: 
+
+-How much to 'occlude" that it is a math survey and task? Title? title of HIT? each survey intro? 
+
+-Ask about children demographic questions: do I want to include this? 
+
+-Ask about 4th PVT practice question (keep exactly the same? probably - same methods, even if I don't agree with them) 
+
+-
+
+*UNrandomize the 4 practice problems - want them always in the same order
+
+- Correct the missing countdown timer in the peformance trials
+
+**Randomize order of PVT (practice and performance) and (as a unit) the 3 surveys
+
+- Ask about exclusion principles (only want students? certain age range? Do this after participants are gathered, as exploratory analyses? Also with "do you have children?")
+
+*****Dont forget to pull the git repository to the server webspace after you push the final edits to git (otherwise the link will still be to the old html)*****
+
+
+***********************************************************************
+
+-Add a few debriefing sentences on the debriefing slide (e.g. after the “what do you think this experiment was about?” question?) **DONE**
+
+**If it doesn't already log the order, make sure to log whether PVT or Surveys were first. **DONE**
+
+- Add "practice trials" to the "log_response" function; fix the fact that it is probably no longer logging the performance trials correctly. **DONE**
+
+Demographic changes: **DONE**
+--Change AGE to a number (rather than a category)
+**Make sure demographic variables are in line with rest of class: age (number), gender, race/ethnicity, gender should be male, female, other, decline to state
+
+
+2. Add text to each block's intro slide (preferably using the original author’s wording) **DONE**
+
+3. Modify the CSS for those intro slides such that there are margins on the text (it’s currently stretching across the whole screen and hard to read). **DONE**
+
+1. Remove the “DO ONLY ONE…” line from the instructions slide  **DONE**
+4. Fix the alignment of the “stanford psychology department” header and the Start button on the performance test intro screen. **DONE**
+5. Fill in the “true answer” (e.g. “correct” or “incorrect”) for the rest of the math problems (following the 4 examples I pushed to the repo) **DONE**
+
+
+Additionally, before running pilot A, it’d be good to have at least a very preliminary data analysis pipeline (e.g. importing data, computing the various measures of interest, running the anova) incorporated into your replication report Rmd. 
+
+One final methodological note that I was worried about when clicking through… I couldn’t tell from the original paper whether the authors ran the performance trials before or after the survey questions, or if they randomized. I could see possible confounds with either ordering — if you’ve asked a bunch of questions about anxiety and motivation first, then you could trigger performance anxiety whether or not the person is generally anxious about math. If you do the performance trials first, then that’s evidence that a person could use when reporting their anxiety or motivations (e.g. if you made the problems extra hard or extra easy, you could probably make people respond higher or lower on the survey questions…)
+
+
+
+*************************************************************************************************************
+
+ 
+1. **DONE** REGISTERING PROBLEM OR SENTENCE PRESENTED
+Need to find way to document what was the sentence that was shown or which of the 24 PVT problems it was (the stimulus) -- in the most efficient way possible
+  -- This is now pushed to data.stimulus
+
+
+2. **DONE** CODING RESPONSE AS "accurate" or "inaccurate", "not responded", or "notsure"
+	-Once issue #2 (logging sentence) is set, is it possible for me to assign each given sentence an "accurate" answer (e.g., "correct" or "incorrect", depending on problem) and then code their response as accurate or inaccurate depending on the response they clicked? 
+	-That is, if the problem shown is is "2 + 2 = 5" and they clicked "incorrect", I want to be able to code that for that trial they were "accurate" 
+	- RDH: This is now what's being pushed to data.rating on these trials
+
+3. **DONE** MERGING TWO PROJECTS TOGETHER
+	-Sweet Jesus.
+	-Add "PVTintro" slide, which will have the same info as the opening slide in the peformance task does right now.
+
+
+
+
+**********************************************************
+Taken care of:
+
+1. **DONE** The gap between numbers and buttons changes sides depending on if it is a fraction or not
+-Take off height to the divider, and add a specific height to the "number" 
+
+
+Add "show motivation slide"(s) to the next function in the js
+**DONE** -- IT WORKS!
+
+Add if slidetype == slide3. ...all the way through 6, and then do debriefing 
+**DONE**
+
+0. **DONE** ADD "instruction" slide and shuffling the surveys correctly
+-Need to make "next" button on instruction slide appropriately select experiment.next (and not be parameter-dependent) 
+**script is no longer working, says "cannot read property 'length' of undefined, in the code following the "underscore"flatten I added earlier. 
+
+
+4. RANDOMIZING PVT QUESTIONS  **DONE
+	...they are not randomizing for some reason. Must investigate.
+	-Same with the survey questions (though you can't see it now)
+	-Tried to fix this with brackets but the code only works if they are in lots of brackets and don't randomize.
+
+
+5. CHECK ORIGINAL 
+*Re-check original study for the following:
+	-Click interface: how many buttons / which options did they provide?
+	-What order and randomization were the surveys and task (i.e., double-check that task was always last)
+	-Find how they "introduced" each likert scale (i.e. "please respond with how often you do the following..."?)
+	-Double-check Power analysis to see how many participants needed
+
+
+***************************************************************************
+
+1. ADVANCING WITH CLICK
+Can't get the "onclick" reponse function to work to advance to next problem and register response -- I think it has something to do with the way it is nested out of (or next to) the "next" function
+*DONE*
+
+1.5 COUNTDOWN TIMER ERRORS 
+After clicking and moving to next slide, countdown timer starts making errors
+-Move "clear interval" to the beginning of the next function
+*DONE*
+
+2. REGISTERING DATA
+Still need to figure out how to register the button click response, as well as other data (Also, is the best way to determine "accuracy" just to compare reponse with correct response in R?)
+*DONE*
+
+3. DISPLAYING FRACTIONS 
+Fractions for performance task not displaying correctly
+	-Find unicode or code to display fractions
+	      * RDH: Looks like you can do this using subscript, superscript, and a unicode fraction slash thing (http://www.willmaster.com/library/web-content-prep/how-to-make-fractions-on-a-web-page.php)
+	-OR Turn fractions (and all others) into images and display that way
+**ASKED ROBERT FOR ADVICE - 2-28-16**  **DONE**
+
+
+(Only one of the 3 likert surveys correctly displays "please choose an option" when nothing is selected
+	-Find and change the naming error that leads to this
+	-RDH: this ended up being kind of complicated; check out the changes I committed!
+**DONE** )
+
+
+(*RDH: End trial after 10 seconds
+	-Put the call to "next()" in a "setTimeout()" function (http://www.w3schools.com/jsref/met_win_settimeout.asp)
+**DONE** )
+
+
+*Add "correct" "incorrect" (and maybe "don't know"?) buttons to performance task, rather than keyboard clicks
+	-add buttons
+		**DONE**
+	-remove keyboard "p" "q" click options
+		**DONE**
+-make buttons move forward to the next slide, and register response
+-Make sure code registers response (both selection and reaction time) along with other data  (**IN PROGRESS**)
+
+
+
+
+	*Merge the 3 likert surveys (mathmotivationsurveys) with the performance task (math_performance_template)
+		-Make sure performance task is always after 3 (random-order) surveys
+	-**Should I have a "header" slide between each survey? i.e., "This next set of questions relates to your feelings about math. Please respond with...")
+		-Or should I just leave it as it is, with one scale going right into the next (this is easier...b/c it's done, but not ideal)
+
+
+(Make font of question larger for all surveys
+	**DONE**)
+
+
+(*RDH: Show timer countdown
+      - Store "startTime" at the beginning of a trial using "var startTime = new Date().getTime();"
+      - Make a little function called "displayTime" that writes 10 minus the difference between the current time and startTime to a <p> </p> element in your html
+        ** See http://www.electrictoolbox.com/get-milliseconds-javascript-measure-time/
+      - Put a call to "displayTime" in the "setInterval()" function to update the time every second... (http://www.w3schools.com/jsref/met_win_setinterval.asp)
+		**DONE** ) 
+
+
+

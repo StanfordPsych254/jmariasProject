@@ -1,7 +1,7 @@
 ---
-title: "Wang et al. 2015 Replication Report, Arias"
+title: "Wang et al. 2015 Replication Report"
 author: "Juan Miguel Arias"
-date: "January 30, 2016"
+date: "March 6, 2016"
 output: html_document
 ---
 
@@ -9,81 +9,278 @@ Replication of Study 2 in "Is Math Anxiety Always Bad for Math Learning? The Rol
 
 Replication Author: Juan Miguel Arias
 
-Course Instructors: Michael Frank, PhD, Robert Hawkins, & Eric Smith
+Course Instructors: Dr. Michael Frank, Robert Hawkins, & Eric Smith
 
-Contact information: email: jmarias (at) stanford (dot) edu 
+Contact information: email: stanfordpsych254 (at) gmail (dot) com
 
+Testable Experiment Webpage:
 
-**Introduction**
-
-The current study attempts to replicate the findings of Study 2 in Wang et al. (2015), which demonstrated that there is an inverted-U relationship between math anxiety and math peformance in college undergraduate students with higher intrinsic math motivation, whereas there exists a negative linear realtionship between math anxiety and math performance in students with lower intrinsic math motivation. The current study attempts to replicate and expand this finding using a broader participant pool obtained using Amazon's Mechanical Turk platform.
-
+http://web.stanford.edu/~jmarias/jmariasProject/experiment/mathmotivationsurveys.html
 
 
-**Methods**
 
-Power Analysis -- *TO BE CONDUCTED SOON*
-	*Note: from results presented in Table 9 (Wang et al., 2015), R-squared for finding of interest appears to be .16*
-	Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
+#####Introduction
+
+The study presented here attempts to replicate the findings of Study 2 in Wang et al. (2015), which demonstrated that the relationship between math anxiety and math performance follows an inverted-U pattern among college undergraduate students with higher intrinsic math motivation, whereas this same relationship is linearly negative among students with lower intrinsic math motivation. The current study attempts to replicate and expand this finding using a broader participant pool obtained using Amazon's Mechanical Turk platform. 
+
+
+```{r load packages, echo=F, results='hide', warning=FALSE, message=FALSE}
+
+library(tidyr)
+library(plyr)
+library(dplyr)
+library(psych)
+library(ggplot2)
+library(Hmisc)
+library(xtable)
+library(knitr)
+```
+
+
+#####Method
+
+######Power Analysis
+
+Original effect size: total R-squared: .16 ; change in R-squared for variable of interest: .02
+
+Power analysis: For an effect size of .02 with 219 participants, from a multiple regression with 9 total predictors in model, and an alpha of .05, the estimated power achieved is:  55% 
+
+Sample Size needed to achieve 80% power (assuming same effect size): 395
+Sample Size needed to achieve 90% power: 528
+Sample Size needed to achieve 95% power: 652
+Considerations of feasibility for selecting planned sample size.
 
 Planned Sample
-	The planned sample will be (n= XX) adult participants recruited from Amazon's Mechanical Turk platform. Study 2 of Wang et al. (2015) used 237 undergraduate students, 56% female, mean age = 19.53 years old (*SD* = 2.01, range = 18 - 39), for their participant sample.
+	The planned sample will be 395 adult participants recruited from Amazon's Mechanical Turk platform. Study 2 of Wang et al. (2015) used 237 undergraduate students, 56% female, mean age = 19.53 years old (*SD* = 2.01, range = 18 - 39), for their participant sample.
 	
 
-**Materials**
-
+#####Materials
 >  Participants self-reported math anxiety using the brief version of the Mathematics Anxiety Rating Scale (MARS-B; Suinn & Winston, 2003). The 30-item MARS-B is widely used to measure math anxiety in adults. Items are rated on a 5-point Likert-type scale (1 = not at all nervous, 5 = very very nervous). The MARS-B has excellent internal consistency (Cronbach's ?? = .94). The trait subscale from the State-Trait Anxiety
 Inventory (Spielberger, 1983) was used to measure participants' general anxiety. This subscale consists of 20 items that are rated on a 4-point Likert-type scale (1 = almost never, 4 = almost always). This scale has excellent internal consistency (Cronbach's ?? = .94). Participants self-reported their math motivation using the same three items from the scale used in Study 1 (M. M. Chiu and Zeng, 2008). The Cronbach's ?? for this scale is .82, which indicates good internal consistency. As in Study 1, the problem-verification task (Rinne & Mazzocco, 2014) was used to measure participants' math calculation fluency. Because the 64 easy items were far too easy for undergraduate students (mean accuracy = .93, SD = .06), we chose to focus on the 24 hard items. The hard items had wider performance variability (mean accuracy = .85, SD = .13) and were therefore a more proper measure of individual differences in calculation fluency in college students. An efficiency score was obtained by dividing the percentage of total correct responses by the mean reaction time across all items.
 
 *Replication differences of note - Materials:*
 The key differences between the original study and the current replication is that the surveys and the measure of math performance (the Problem-Verification Task), were presented to participants as a webpage, direct from the MTurk interface, rather than as a Qualtrics survey.
 
-###QUESTION FOR INSTRUCTORS
-In order to directly replicate Study 2 of the article, I would give the MTurk participants all 88 questions of the Problem-Verification Task, but then would only analyse the 24 most difficult ones. Will this be a valid replication (or an approach we would want to do) in the sense that our replication participants are not college undergrads and as such might have different math anxiety, math motivation, or less recent experiences with these kinds of problems? My thought is to either only do the same 24 questions as Study 2, or do those 24 and then a subset of maybe 24 "easier" questions and then analyse both, but wanted to get the question on the table. 
+Another difference: the PVT questions do not include the additional selection choices of "How sure are you of this answer? ('positively sure', 'kind of sure', or 'not sure')", as these selections were not used in the PVT efficiency calculation or later analyses in this particular study. 
 
-**Procedure**
+
+#####Procedure
 	(Note: Block quote is from Study 1 of same article, replicated in Study 2 and used to describe math performance task procedure)
 	
 >  The problem-verification task was developed as a measure of calculation fluency and metacognition (Rinne & Mazzocco, 2014). We relied on the calculation-fluency component of this measure in the present study. On a laptop, participants were shown a series of two-operand arithmetic problems involving addition, subtraction, multiplication, division, and equivalency of fractions. For each arithmetic problem, a solution was shown that was correct or incorrect, and participants were asked to answer "right," "wrong," or "don't know" as quickly as possible without calculating. Participants were also asked to indicate whether they were "positively sure," "kind of sure," or "not sure" of their answer after each item. Each item was presented for a maximum of 10 s. If no response was given within that time, the program proceeded to the next item.
 	In total, participants were given 4 practice items followed by 88 test items. Among all test items, 64 were easy (e.g., single-digit arithmetic, common-denominator fraction, and solutions far from the correct answer), and 24 were hard (e.g., double-digit arithmetic, uncommon- denominator fraction, and solutions close to the correct answer). Reaction time (in seconds) was defined as the time between stimulus onset and response. For the current analyses, an efficiency score was calculated by dividing the percentage of total correct responses by the mean reaction time across all items.
 	
 	
-**Analysis Plan**
+#####Analysis Plan
 
 >	 All analyses were conducted using SPSS (Version 22.0). Descriptive statistics are shown in Table 7. All main study variables were distributed widely and normally across their respective scales. Correlations between main study variables are shown in Table 8. None of these variables varied as a function of age. Sex (0 = female, 1 = male) was positively associated with performance on the problem-verification task and negatively correlated with math anxiety. Additionally, general anxiety was not related to math performance. Finally, math anxiety was negatively associated with math performance, whereas math motivation was positively associated with math performance.
   Hierarchical regression analysis was used to examine whether the quadratic relation between math anxiety and math cognition was further moderated by math motivation. Specifically, performance on the problem- verification task was predicted in four steps. In Step 1, covariates including age, sex, and linear and quadratic terms of general anxiety were entered. The linear term of math motivation and math anxiety was entered in Step 2. In Step 3, we entered the quadratic term of math anxiety and the interaction between math anxiety and math motivation. Finally, we entered the moderated quadratic interaction term between math anxiety and math motivation in Step 4. Math anxiety, math motivation, and general anxiety were standardized and centered prior to analyses in order to compute the interaction and higher-order terms. The outcome variable was also standardized to maintain consistency across the two studies.
  
 >  Results of the hierarchical regression analyses are shown in Table 9. Overall, age and sex both negatively predicted task performance, which indicates that younger and male participants performed better on average than older and female participants, with a larger effect size for sex than for age. General anxiety did not predict math performance. Math anxiety negatively predicted math performance after we controlled for the effects of the covariates. Finally, after controlling for all the linear and two-way interaction effects, we found that the moderated quadratic interaction between math anxiety and math motivation was statistically significant and added incremental predictive effects on math performance.
-  To further examine the moderated quadratic effects, we conducted post hoc analyses on the predictive effects of math anxiety at different levels of math anxiety and math motivation using the same procedures as in Study 1. Results are shown in Table 10 and Figure 3. The findings were consistent with the results from Study 1. At low levels of math motivation, math anxiety was modestly negatively associated with task performance across all levels of math anxiety. At high levels of math motivation, there was an inverted-U curvilinear relation between math anxiety and math performance.
+  To further examine the moderated quadratic effects, we conducted post hoc analyses on the predictive effects of math anxiety at different levels of math anxiety and math motivation using the same procedures as in Study 1*. Results are shown in Table 10 and Figure 3. The findings were consistent with the results from Study 1. At low levels of math motivation, math anxiety was modestly negatively associated with task performance across all levels of math anxiety. At high levels of math motivation, there was an inverted-U curvilinear relation between math anxiety and math performance.
 	
-	
-Differences from Original Study
+> *From Study 1: To further examine the four significant moderated
+quadratic effects, we recentered math motivation at low (i.e., 1 SD below the mean) and high (i.e., 1 SD above the mean) levels to examine the relations between math anx- iety and math performance across a wide range of math anxiety (3 SD, 2 SD, and 1 SD above and below the mean as well as at the mean) at these two different levels of math motivation (Aiken & West, 1991).
+
+#####Differences from Original Study
 
 (Post Data Collection) Methods Addendum
 
-Actual Sample
+######Actual Sample
 	sample size, demographics, data exclusions based on rules spelled out in analysis plan
 
-Differences from pre-data collection methods plan
+######Differences from pre-data collection methods plan
 	Any differences from what was described as the original plan, or "none".
 
 
-Results
+#####Results
 
-Data preparation
+######Data preparation
 	Data preparation following the analysis plan.
+	
+	
+```{r data gathering and preparation}
 
-Confirmatory analysis
+############ Prepping Survey Responses for Analyses ####################################
+
+### Math Motivation (3-item; see Chiu & Zeng, 2008) ######
+
+  #No data prep needed aside from re-naming and calculating mean value for each participant
+
+### Math Anxiety (30-item MARS-B; see Suinn & Winston, 2003) ###
+
+  #No data prep needed aside from re-naming and calculating mean value for each participant
+
+
+### General Anxiety (20-item (Trait Anxiety); see State-Trait Anxiety Inventory, Spielberger, 1983)
+
+#Use "psych" package to make reverse-score key for the anxiety scale, taking the 20 items as either raw score (x1) or reverse score (x -1) 
+
+#genanxkey <- make.keys(d$genanx, list(general.anx=c("-ga1","ga2","-ga3","ga4","ga5","-ga6","-ga7","ga8","ga9","-ga10", "ga11","ga12","-ga13", "-ga14","ga15","-ga16","ga17","ga18","-ga19","ga20")))
+
+#Then I assume I need to multiply one matrix by another? Might try the subtraction method first (below)
+
+
+########
+#Or, if data is still in wide format, to reverse score: 
+
+# select columns to reverse score
+revscore.cols <- c("ga1", "ga3", "ga6", "ga7", "ga10", "ga13", "ga14", "ga16", "ga19")
+
+# Generating dataset with subraction to those scores to generate reverses (assuming d is dataset)
+# (check if can name new dataset dnew, or if it also has to be named d)
+# Using 5 - columns, b/c it is a 1-4 scale
+dnew[ ,revscore.cols] <-  5 - d[ ,revscore.cols]
+
+#confirm new dataset reflects correct reverse scoring, then convert:
+d <- dnew
+
+#Once this reverse-scoring is set, this general anxiety scale, as well as the math anxiety and math motivation scales (which do not need modification) are ready for finding mean index. 
+
+##########
+
+#### PROBABLY AFTER THIS STAGE, NEED TO GATHER DATA INTO TIDY FORM ######
+
+##**Double check how to do this** -- where do the reaction times go? 
+d.tidy <- d %>%
+  gather(question, response, mathmot, mathanx, genanx, pvt)
+
+
+## Problem Verification Task (PVT) Performance  (see Rinne & Mazzocco, 2014) ####################
+
+
+#The following analyses assume dataframe is called "d", reaction time of PVT problems (in ms) is called "RT", accuracy (0 or 1) of each PVT problem is called "pvt.accuracy"
+
+
+#Change reaction time (in ms) to reaction time in SECONDS
+#Following method in Wang et al. (2015; see pg. 1866) 
+d <- d %>% 
+  mutate(sec.RT = RT/1000)
+
+####################################################################################
+
+
+#### Mean Index and Standardized Scores for all measures #######
+
+#Calculate mean 
+subjectmeans <- d %>% 
+  group_by(subjectid) %>% 
+  summarise(mean.acc = mean(pvt.acc, na.rm=T), 
+            mean.RT = mean(sec.RT, na.rm=T), 
+            mean.mathmot = mean(mathmot, na.rm=T), 
+            mean.mathanx = mean(mathanx, na.rm=T), 
+            mean.genanx = mean(genanx, na.rm=T)) %>% 
+  mutate(pvt = (mean.acc*100) / mean.RT)
+
+
+ #Generate z-scores for variables (using "scale" function) 
+subjectmeans$z.pvt <- scale(subjectmeans$pvt, center = TRUE, scale = TRUE)
+subjectmeans$z.mathmot <- scale(subjectmeans$mean.mathmot, center = TRUE, scale = TRUE)
+subjectmeans$z.mathanx <- scale(subjectmeans$mean.mathanx, center = TRUE, scale = TRUE)
+subjectmeans$z.genanx <- scale(subjectmeans$mean.genanx, center = TRUE, scale = TRUE)
+
+
+```
+
+#####Confirmatory analysis
 	The analyses as specified in the analysis plan
+	
+	
+```{r Correlations between variables of interest}
 
-Exploratory analyses
-Any follow-up analyses desired (not required).
+#Script for generating clean correlation table (bottom triangle only) with significance stars
+corstarsl <- function(x){ 
+require(Hmisc) 
+x <- as.matrix(x) 
+R <- rcorr(x)$r 
+p <- rcorr(x)$P 
 
-Discussion
+## define notions for significance levels; spacing is important.
+mystars <- ifelse(p < .001, "***", ifelse(p < .01, "** ", ifelse(p < .05, "* ", " ")))
 
-Summary of Replication Attempt
+## trunctuate the matrix that holds the correlations to two decimal
+R <- format(round(cbind(rep(-1.11, ncol(x)), R), 2))[,-1] 
+
+## build a new matrix that includes the correlations with their apropriate stars 
+Rnew <- matrix(paste(R, mystars, sep=""), ncol=ncol(x)) 
+diag(Rnew) <- paste(diag(R), " ", sep="") 
+rownames(Rnew) <- colnames(x) 
+colnames(Rnew) <- paste(colnames(x), "", sep="") 
+
+## remove upper triangle
+Rnew <- as.matrix(Rnew)
+Rnew[upper.tri(Rnew, diag = TRUE)] <- ""
+Rnew <- as.data.frame(Rnew) 
+
+## remove last column and return the matrix (which is now a data frame)
+Rnew <- cbind(Rnew[1:length(Rnew)-1])
+return(Rnew) 
+} 
+
+##Create table from dataframe: 
+cor_table <- corstarsl(subjectmeans) 
+
+##To remove unwanted columns from dataframe before adding to correlation table (in order to replicate table from original study)
+
+cor.means <- subjectmeans %>% 
+  select()
+
+## exporting tables to either html or .tex (I prefer .tex but you will have to install TeX)
+print.xtable(cor_table, type="html", file="filename.html")
+
+
+
+```
+
+```{r Hierarchical Regression Models }
+
+#General Linear Models for Hierarchical Regression of Anxiety and Motivation on Performance 
+
+###MAKE THESE THE STANDARDIZED VALUES (z.genanx)
+##CHANGE TO LM not GLM
+
+mathperflm1 <- lm(pvt ~ age + sex + genanx + I(genanx^2), data = subjectmeans)
+
+mathperflm2 <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot, data = subjectmeans)
+
+mathperflm3 <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot + I(mathanx^2) 
+                              + mathanx * mathmot, data = subjectmeans)
+
+mathperflm4.alt <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx * mathmot + (I(mathanx^2) * mathmot),
+                      data = subjectmeans)
+
+##Alternatively, if the interaction terms don't already include those variables in the model
+mathperflm4 <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot + I(mathanx^2) 
+                              + (mathanx * mathmot) + (I(mathanx^2) * mathmot), data = subjectmeans)
+
+
+
+##Look into using kable (in knitr package) to make nice table of model outputs 
+
+kable(summary(modle1)$coef)
+
+
+```
+
+```{r model at different SDs }
+
+##Minus- 1 actually gives you 1 SD ABOVE b/c you areshifting the x axis "to the right" (mean becomes -1)
+
+mathperflm4.alt <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx * I(mathmot - 1) + (I(mathanx^2) * I(mathmot - 1)), data = subjectmeans)
+
+mathperflm4.alt <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx * I(mathmot + 1) + (I(mathanx^2) * I(mathmot + 1)), data = subjectmeans)
+
+
+```
+######Exploratory analyses
+
+Will be conducting exploratory analyses on effect of education level, current student status, and whether or not participant has school-aged children on math performance, both independent of an in conjunction with math anxiety and math motivation. 
+
+#####Discussion
+
+######Summary of Replication Attempt
 Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
 
-Commentary
+######Commentary
 Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
 

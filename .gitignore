@@ -1,0 +1,10 @@
+*.DS_Store
+*.nojekyll
+*.settings.json.swp
+compile
+kitten-puppy.html
+kitten-puppy.js
+languages.json
+settings.json
+watch
+*.Rhistory

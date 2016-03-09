@@ -2,13 +2,6 @@
 /* This stuff can be ported from experiment to experiment.*/
 
 /* We want the page to sit flush inside the browser window - that means no margins or padding. Also, use a nice-looking serif font. */
-#leftanimal img{
-	max-width: 400px;
-}
-#rightanimal img{
-	max-width: 400px;
-}
-
 
 body {
 	padding: 0;
@@ -83,6 +76,26 @@ button[disabled] {
   text-align: center;
 }
 
+#PVTintro {
+	text-align: center;
+}
+
+#performanceintro{
+	text-align: center;
+}
+
+#mathanxIntro {
+	text-align: center;
+}
+
+#genanxIntro {
+	text-align: center;
+}
+
+#motivationIntro {
+	text-align: center;
+}
+
 #odd-key, #even-key {
   background-color: #e3e3e3;
   padding: 2px;
@@ -99,20 +112,52 @@ button[disabled] {
   margin-bottom: 1em;
 }
 
+.center-text {
+  width: 500px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+
 #legal {
   margin: 0 auto;
   margin-top: 1.5em;
   font-size: 0.8em;
 }
 
-#number {
-  font-size: 42px;
+#headerwords {
+  font-size: 38px;
+	line-height: 50px;
   font-family: Arial, sans-serif;
   margin: 0 auto;
   text-align: center;
-  width: 100px;
+  width: 400px;
   margin-top: 100px;
 }
+
+#pracnumber {
+  font-size: 42px;
+	line-height: 50px;
+	height: 80px;
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  text-align: center;
+  width: 400px;
+  margin-top: 50px;
+}
+
+
+#number {
+  font-size: 42px;
+	line-height: 50px;
+	height: 100px;
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  text-align: center;
+  width: 400px;
+  margin-top: 100px;
+}
+
 
 td {
   text-align: center;
@@ -121,4 +166,27 @@ td {
 
 #sent_question {
 	font-size: 16px;
+}
+
+#seconds{
+	float: left;
+	font-family: Arial, sans-serif;
+	font-size: 25px;
+	margin: 20px;
+}
+
+#countdown {
+	float: left;
+	font-family: Arial, sans-serif;
+	font-size: 25px;
+	margin: 20px;
+}
+
+
+.divider{
+    width:40px;
+    display:inline-block;
+		padding-top: 5px;
+		padding-left: 5px;
+		padding-right: 5px;
 }

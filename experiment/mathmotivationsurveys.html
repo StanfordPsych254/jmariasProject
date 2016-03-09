@@ -1,171 +1,263 @@
 
 <!-- ## Code -->
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Math Perspectives Survey</title>
-  <script src="jquery-1.11.2.min.js"></script>
-  <script src="mmturkey-0.6.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Opinions Survey and Fast Task</title>
+    <script src="jquery-1.11.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"> </script>
+    <script src="mmturkey-0.6.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  </head>
 
-<!-- The instructions slide. -->
-<div class="slide" id="instructions">
-  <br>
-  <img src="images/stanfordu.png" alt="Stanford University">
-  <p id='logo-text'>Stanford University</p>
-  <p class="block-text">In this experiment, you will read statements related to math. We would like you to tell us how much you agree with each statement.</p>
+  <body>
+    <!-- The instructions slide. -->
+    <div class="slide" id="instructions">
+      <br>
+      <img src="images/stanfordu.png" alt="Stanford University">
+      <p id='logo-text'>Stanford Psychology Department</p>
+      <p class="block-text">In this study, you will complete three short surveys on your opinions on a variety of items, as well as complete a number of trials of a fast, problem-solving task.</p>
+      <button type="button" onclick="this.blur(); experiment.next()">Start</button>
 
-  <p class="block-text">DO ONLY ONE "MATH PERSPECTIVES SURVEY" HIT. IF YOU DO MULTIPLE HITS OF THIS TYPE, YOU WILL NOT BE PAID!</p>
-  <button type="button" onclick="this.blur(); experiment.next()">Start</button>
+      <p class="block-text" id="legal">By answering the following
+      questions, you are participating in a study being performed by
+      cognitive scientists in the Stanford Department of
+      Psychology. If you have questions about this research, please
+      contact us
+      at <a href="mailto://stanfordpsych254@gmail.com">stanfordpsych254@gmail.com</a>.
+      You must be at least 18 years old to participate. Your
+      participation in this research is voluntary. You may decline to
+      answer any or all of the following questions. You may decline
+      further participation, at any time, without adverse
+      consequences. Your anonymity is assured; the researchers who
+      have requested your participation will not receive any personal
+      information about you. We have recently been made aware that
+      your public Amazon.com profile can be accessed via your worker
+      ID if you do not choose to opt out. If you would like to opt out
+      of this feature, you may follow instructions available
+	<a href="http://www.amazon.com/gp/help/customer/display.html?nodeId=16465241">here</a>.</p>
+    </div>
 
-  <p class="block-text"><br> <b> Note: you won't be able to preview this HIT before accepting it because it's so short. </b></p>
+    <!-- Progress Bar -->
 
-  <p class="block-text" id="legal">By answering the following questions, you are participating in a study being performed by the Stanford Department of Psychology. If you have questions about this research, please contact Juan Arias at <a href="mailto://jmarias@stanford.edu.">jmarias@stanford.edu</a>. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you. Note however that we have recently been made aware that your public Amazon.com profile can be accessed via your worker ID if you do not choose to opt out. If you would like to opt out of this feature, you may follow instructions available <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=16465241">here</a>.</p>
-</div>
+    <div class="progress">
+      <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+      </div>
+    </div>
 
-<!-- Progress Bar -->
+    <!-- Questionnaire slide 1 INTRODUCTION , motivationIntro -->
 
-<div class="progress">
-  <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-  </div>
-</div>
+    <div class="slide" id="motivationIntro">
+      <br>
+
+      <div class="block-text">
+	<p>For each of the following items, indicate how much you agree or disagree with what the item says. Please respond to all the items.</p>
+  <p>Note that you will NOT be able to return to any question to correct your answers after you move on to the next question. Therefore, please make sure that you provide your answers as accurately as possible.</p><br></div>
+  <div class="center-text">
+	<p>Please click Next to continue.</p><br>
+      </div>
+
+      <div align="center">
+	<p id ="motivation_Intro_sentence"></p>
+      </div>
+
+      <br>
+
+      <!-- Next button  -->
+      <table align="center"><tr>
+	  <td align="center">
+            <button type="button" id="nextButton_intros" onClick="this.blur(); experiment.next()">Next</button>
+	  </td>
+	<tr><td align="center">
+	</td></tr>
+      </table>
+    </div>
 
 
-<!-- Questionnaire slide 1 - MOTIVATION -->
+    <!-- Questionnaire slide 1 - MOTIVATION -->
 
-<div class="slide" id="motivation_slide">
-  <br>
+    <div class="slide" id="motivation_slide">
+      <br>
 
-  <div align="center">
-    <h5>How much do you agree with the following statement regarding math?</h5><br>
-  </div>
+      <div align="center">
+	<p>How much do you agree with the following statement?</p><br>
+      </div>
 
-  <!-- Show sentence from motivation scale -->
-  <div align="center">
-    <p id ="motivations">{{}}</p>
-  </div>
+      <!-- Show sentence from motivation scale -->
+      <div align="center">
+	<p id ="motivations">{{}}</p>
+      </div>
 
-  <br>
+      <br>
 
-  <!-- Likert radio buttons -->
-  <table align = "center"><tr>
-    <td align="center">
-      <tr>
-        <td></td>
-        <td></td>
-        <td>Strongly Disagree</td>
-        <td></td>
-        <td>Disagree</td>
-        <td></td>
-        <td>Agree</td>
-        <td></td>
-        <td>Strongly Agree</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td><input id ="likert1" type="radio" name="judgment" value = "1">
-          <label for="likert1">1</label></td>
-            <td></td>
-        <td><input id ="likert2" type="radio" name="judgment" value = "2">
-            <label for="likert2">2</label></td>
+      <!-- Likert radio buttons -->
+      <table align = "center"><tr>
+	  <td align="center">
+	    <tr>
               <td></td>
-        <td><input id ="likert3" type="radio" name="judgment" value = "3">
-              <label for="likert3">3</label></td>
-                <td></td>
-        <td><input id ="likert4" type="radio" name="judgment" value = "4">
-                <label for="likert4">4</label></td>
-        <td>&nbsp;&nbsp;&nbsp;</td>
-        <td></td>
-      </tr>
-    </table>
-
-    <!-- Next button and "please make a response" message -->
-    <table align="center"><tr>
-      <td align="center">
-        <button type="button" id="nextButton_Att" onClick="experiment.log_response()"> next</button>
-      </td>
-      <tr><td align="center">
-        <div id="testMessage_att"> </div>
-      </td></tr>
-    </table>
-</div>
-
-
-
-<!-- Questionnaire slide 2 (?) - MATH ANXIETY -->
-
-<div class="slide" id="math_anxs_slide">
-  <br>
-
-  <div align="center">
-    <h5>How nervous would you be in the scenario described below?</h5><br>
-  </div>
-
-  <!-- Show sentence from MATH ANXIETY scale -->
-  <div align="center">
-    <p id ="math_anxs">{{}}</p>
-  </div>
-
-  <br>
-
-  <!-- Likert radio buttons -->
-  <table align = "center"><tr>
-    <td align="center">
-      <tr>
-        <td></td>
-        <td></td>
-        <td>Not at all nervous</td>
-        <td></td>
-        <td>Not very nervous</td>
-        <td></td>
-        <td>fairly nervous</td>
-        <td></td>
-        <td>Nervous</td>
-        <td></td>
-        <td>Very very nervous</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td><input id ="likert1" type="radio" name="judgment" value = "1">
-          <label for="likert1">1</label></td>
-            <td></td>
-        <td><input id ="likert2" type="radio" name="judgment" value = "2">
-            <label for="likert2">2</label></td>
               <td></td>
-        <td><input id ="likert3" type="radio" name="judgment" value = "3">
-              <label for="likert3">3</label></td>
-                <td></td>
-        <td><input id ="likert4" type="radio" name="judgment" value = "4">
+              <td>Strongly Disagree</td>
+              <td></td>
+              <td>Disagree</td>
+              <td></td>
+              <td>Agree</td>
+              <td></td>
+              <td>Strongly Agree</td>
+	    </tr>
+	    <tr>
+              <td></td>
+              <td></td>
+              <td><input id ="likert1" type="radio" name="judgment" value = "1">
+		<label for="likert1">1</label></td>
+              <td></td>
+              <td><input id ="likert2" type="radio" name="judgment" value = "2">
+		<label for="likert2">2</label></td>
+              <td></td>
+              <td><input id ="likert3" type="radio" name="judgment" value = "3">
+		<label for="likert3">3</label></td>
+              <td></td>
+              <td><input id ="likert4" type="radio" name="judgment" value = "4">
                 <label for="likert4">4</label></td>
-                <td></td>
-        <td><input id ="likert5" type="radio" name="judgment" value = "5">
+              <td>&nbsp;&nbsp;&nbsp;</td>
+              <td></td>
+	    </tr>
+      </table>
+
+      <!-- Next button and "please make a response" message -->
+      <table align="center"><tr>
+	  <td align="center">
+            <button type="button" id="nextButton_Att" onClick="experiment.log_response('att')">Next</button>
+	  </td>
+	<tr><td align="center">
+            <div id="testMessage_att"> </div>
+	</td></tr>
+      </table>
+    </div>
+
+
+
+    <!-- Questionnaire slide 2 INTRODUCTION , anxietyIntro -->
+
+    <div class="slide" id="mathanxIntro">
+      <br>
+
+      <div align="center" class="block-text">
+	<p>The items below are about things that may bother you or
+	cause you to be nervous, anxious, or tense when you have to
+	do them.</p>
+  <p>Choose the answer which best shows how nervous, anxious, or tense you would feel.</p>
+  <p>Please respond to all the	items. Note you will NOT be able to return to correct your answers after you click
+	the Next Button. Therefore, please make sure that you provide
+	your answers as accurately as possible.</p><br></div>
+  <div class="center-text"><p>Please click Next to continue.</p><br>
+      </div>
+
+      <br>
+      <!-- Next button  -->
+      <table align="center"><tr>
+	  <td align="center">
+            <button type="button" id="nextButton_intros" onClick="this.blur(); experiment.next()">Next</button>
+	  </td>
+	<tr><td align="center">
+	</td></tr>
+      </table>
+    </div>
+
+    <!-- Questionnaire slide 2  - MATH ANXIETY -->
+
+    <div class="slide" id="math_anxs_slide">
+      <br>
+
+      <div align="center">
+	<p>How nervous would you be in the situation described below?</p><br>
+      </div>
+
+      <!-- Show sentence from MATH ANXIETY scale -->
+      <div align="center">
+	<p id ="math_anxs">{{}}</p>
+      </div>
+
+      <br>
+
+      <!-- Likert radio buttons -->
+      <table align = "center"><tr>
+	  <td align="center">
+	    <tr>
+              <td></td>
+              <td></td>
+              <td>Not at all nervous</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Fairly nervous</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Very very nervous</td>
+	    </tr>
+	    <tr>
+              <td></td>
+              <td></td>
+              <td><input id ="likert1" type="radio" name="judgment" value = "1">
+		<label for="likert1">1</label></td>
+              <td></td>
+              <td><input id ="likert2" type="radio" name="judgment" value = "2">
+		<label for="likert2">2</label></td>
+              <td></td>
+              <td><input id ="likert3" type="radio" name="judgment" value = "3">
+		<label for="likert3">3</label></td>
+              <td></td>
+              <td><input id ="likert4" type="radio" name="judgment" value = "4">
+                <label for="likert4">4</label></td>
+              <td></td>
+              <td><input id ="likert5" type="radio" name="judgment" value = "5">
                 <label for="likert5">5</label></td>
-        <td>&nbsp;&nbsp;&nbsp;</td>
-        <td></td>
-      </tr>
-    </table>
-    <!-- Next button and "please make a response" message -->
-    <table align="center"><tr>
-      <td align="center">
-        <button type="button" id="nextButton_math_anx" onClick="experiment.log_response()"> next</button>
-      </td>
-      <tr><td align="center">
-        <div id="testMessage_att"> </div>
-      </td></tr>
-    </table>
-</div>
+              <td>&nbsp;&nbsp;&nbsp;</td>
+              <td></td>
+	    </tr>
+      </table>
+      <!-- Next button and "please make a response" message -->
+      <table align="center"><tr>
+	  <td align="center">
+            <button type="button" id="nextButton_math_anx" onClick="experiment.log_response('math_anx')">Next</button>
+	  </td>
+	<tr><td align="center">
+            <div id="testMessage_math_anx"> </div>
+	</td></tr>
+      </table>
+    </div>
 
 
 
+    <!-- Questionnaire slide 3 INTRODUCTION , genanxIntro -->
 
+    <div class="slide" id="genanxIntro">
+      <br>
 
+      <div align="center" text-align="center" class="block-text">
+	<p>A number of statements which people have used to describe themselves are given on the following pages. Read each statement and select the appropriate number to indicate how you <strong>generally</strong> feel.</p>
+  <p>There are no right or wrong answers. Do not spend too much time on any one statement, but rather give the answer which seems to describe how you generally feel.</p><br></div>
+  <div class="center-text"><p>Please click Next to continue.</p><br>
+      </div>
+
+      <!-- Show sentence from  scale -->
+      <div align="center">
+	<p id ="gen_anx_sentence"></p>
+      </div>
+
+      <br>
+      <!-- Next button  -->
+      <table align="center"><tr>
+	  <td align="center">
+            <button type="button" id="nextButton_intros" onClick="this.blur(); experiment.next()">Next</button>
+	  </td>
+	<tr><td align="center">
+	</td></tr>
+      </table>
+    </div>
 
 
     <!-- Questionnaire slide 3 (?)- General Trait Anxiety -->
@@ -174,10 +266,10 @@
       <br>
 
       <div align="center">
-        <h5>How much do you agree with the following statement regarding math?</h5><br>
+        <p>How often does the following statement apply to how you feel IN GENERAL?</p><br>
       </div>
 
-      <!-- Show sentence from motivation scale -->
+      <!-- Show sentence from  scale -->
       <div align="center">
         <p id ="general_anxs">{{}}</p>
       </div>
@@ -186,243 +278,299 @@
 
       <!-- Likert radio buttons -->
       <table align = "center"><tr>
-        <td align="center">
-          <tr>
-            <td></td>
-            <td></td>
-            <td>Almost Never</td>
-            <td></td>
-            <td>Sometimes</td>
-            <td></td>
-            <td>Often</td>
-            <td></td>
-            <td>Almost Always</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td><input id ="likert1" type="radio" name="judgment" value = "1">
-              <label for="likert1">1</label></td>
-                <td></td>
-            <td><input id ="likert2" type="radio" name="judgment" value = "2">
-                <label for="likert2">2</label></td>
-                  <td></td>
-            <td><input id ="likert3" type="radio" name="judgment" value = "3">
-                  <label for="likert3">3</label></td>
-                    <td></td>
-            <td><input id ="likert4" type="radio" name="judgment" value = "4">
-                    <label for="likert4">4</label></td>
-            <td>&nbsp;&nbsp;&nbsp;</td>
-            <td></td>
-          </tr>
-        </table>
-
-        <!-- Next button and "please make a response" message -->
-        <table align="center"><tr>
           <td align="center">
-            <button type="button" id="nextButton_general_anx" onClick="experiment.log_response()"> next</button>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Almost Never</td>
+              <td></td>
+              <td>Sometimes</td>
+              <td></td>
+              <td>Often</td>
+              <td></td>
+              <td>Almost Always</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input id ="likert1" type="radio" name="judgment" value = "1">
+		<label for="likert1">1</label></td>
+              <td></td>
+              <td><input id ="likert2" type="radio" name="judgment" value = "2">
+                <label for="likert2">2</label></td>
+              <td></td>
+              <td><input id ="likert3" type="radio" name="judgment" value = "3">
+                <label for="likert3">3</label></td>
+              <td></td>
+              <td><input id ="likert4" type="radio" name="judgment" value = "4">
+                <label for="likert4">4</label></td>
+              <td>&nbsp;&nbsp;&nbsp;</td>
+              <td></td>
+            </tr>
+      </table>
+
+      <!-- Next button and "please make a response" message -->
+      <table align="center"><tr>
+          <td align="center">
+            <button type="button" id="nextButton_general_anx" onClick="experiment.log_response('general_anx')">Next</button>
           </td>
-          <tr><td align="center">
-            <div id="testMessage_att"> </div>
-          </td></tr>
-        </table>
+        <tr><td align="center">
+            <div id="testMessage_general_anx"> </div>
+        </td></tr>
+      </table>
     </div>
 
-<!-- The two-choice instructions slide. -->
-<!-- <div class="slide" id="two_choice_slide">
 
-  <br>
+  <div class="slide" id="PVTintro">
+      <div style="width: 500px; margin: 0 auto; text-align: center; background-color: #8C1516; padding: 20px 15px 10px 10px">
+      </div>
+      <p class="block-text">In the next section, you will be doing some fast math activities. You will be shown a series of math problems, one at a time. You won't need to figure out the answers to the problems because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong.
+      <p class="block-text"> You will choose by clicking <strong>Right</strong> if you think the given answer is right, <strong>Wrong</strong> if you think the given answer is wrong, and <strong>Don't Know</strong> if you do not know.
+      <p  class="block-text">
+	1. Please do <strong>NOT</strong> use pencil and paper or any type of calculator.
+      <p  class="block-text">
+	2. Remember, it is a <strong>FAST</strong> math judgement task. So please make your judgement for each problem as <strong>quickly and accurately</strong> as possible.
+      <p  class="block-text">
+	3. You will be given a maximum of <strong>10 seconds</strong> for each problem. The program will automatically proceed to the next problem after 10 seconds, with or without your answer. You will be shown a timer to remind you of the time remaining for each problem.
+      <p  class="block-text">
+	4. Press the Start button to start your practice trials. You will have 4 practice trials to get you warmed up.
+      <p  class="block-text">
+	Do NOT use the Back or Refresh buttons on your browser.
+      </p>
+  <button type="button" onclick="this.blur(); experiment.next()">Start</button>
+    </div>
 
-  <p class="block-text">For the remaining questions, please mark whether you <b>agree</b> or <b>disagree</b> with the statement.</p>
 
-  <table align="center"><tr>
-    <td align="center">
-      <button type="button" id="nextButton_choice" onClick="this.blur(); experiment.next()"> Continue</button>
-    </td>
-    <tr><td align="center">
 
-    </td></tr>
+<!-- New addition 4 PVT practice trials slide -->
+    <div class="slide" id="PVTpractice">
+      <div id="countdown">
+  <div id="seconds">00</div>
+      </div>
 
-  </table>
+      <div id="headerwords">PRACTICE TRIAL</div>
 
-</div> -->
+      <div align="center">
+  <p id ="pracnumber">{{}}</p>
+      </div>
+
+      <div align="center">
+  <button type="button" id="right" onClick="experiment.log_response('performance.right')">
+    Right</button>
+
+  <div class="divider"></div>
+  <button type="button" id="wrong" onClick="experiment.log_response('performance.wrong')">
+    Wrong</button>
+  <div class="divider"></div>
+  <button type="button" id="dontknow" onClick="experiment.log_response('performance.dontknow')">
+    Don't Know</button>
+      </div>
+    </div>
+
+    <div class="slide" id="performanceintro">
+        <div style="width: 500px; margin: 0 auto; text-align: center; background-color: #8C1516; padding: 20px 15px 10px 10px">
+        </div>
+        <p class="block-text">That concludes the four practice trials. Following are a set of additional problems similar to the ones you just completed.
+        <p  class="block-text">Remember, you won't need to figure out the answers to the problems, because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong. You will have 10 seconds before the timer automatically moves to the next problem.</p><p class="block-text">Please click the Start button to begin the trial.</p>
+    <button type="button" onclick="this.blur(); experiment.next()">Start</button>
+      </div>
+
+
+    <div class="slide" id="performance">
+      <div id="countdown">
+	<div id="seconds">00</div>
+      </div>
+
+      <div align="center">
+	<p id ="number">{{}}</p>
+      </div>
+
+      <div align="center">
+	<button type="button" id="right" onClick="experiment.log_response('performance.right')">
+	  Right</button>
+
+	<div class="divider"></div>
+	<button type="button" id="wrong" onClick="experiment.log_response('performance.wrong')">
+	  Wrong</button>
+	<div class="divider"></div>
+	<button type="button" id="dontknow" onClick="experiment.log_response('performance.dontknow')">
+	  Don't Know</button>
+      </div>
+    </div>
 
     <!-- The debriefing slide. -->
     <div class="slide" id="debriefing">
-     <form id="demographics" onsubmit="experiment.submitcomments()">
+      <form id="demographics" onsubmit="experiment.submitcomments()">
 
-      <table width="100%">
-        <col style="width:30%">
-        <col style="width:70%">
-        <tr>
-          <td><img src="images/ladder.png"></td>
-          <td>
-            <p><b>Think of this ladder as representing where people stand in the United states.</b></p>
-            <p>At the top of the ladder are the people who are the best off - those who have the most money, the most education, and the most respected jobs. At the bottom are the people who are the worst off - who have the least money, least education, and the least respected jobs or no job. The higher up you are on this ladder, the closer you are to the people at the very top; the lower you are, the closer you are to the people at the very bottom.
-            </p>
-            <p><b>Where would you place yourself on this ladder?</b></p>
-            <p>
-              <select name="ladder" id="ladder" form="demographics">
-                <option value="">Choose a rung</option>
-                <option value="10">10 - Top</option>
-                <option value="9">9</option>
-                <option value="8">8</option>
-                <option value="7">7</option>
-                <option value="6">6</option>
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
-                <option value="2">2</option>
-                <option value="1">1 - Bottom</option>
-              </select>
-            </p>
-          </td>
-        </tr>
-      </table>
-      <br>
+	<table width="100%">
+          <col style="width:30%">
+          <col style="width:70%">
+          <tr>
+            <td><img src="images/ladder.png"></td>
+            <td>
+              <p><b>Think of this ladder as representing where people stand in the United states.</b></p>
+              <p>At the top of the ladder are the people who are the best off - those who have the most money, the most education, and the most respected jobs. At the bottom are the people who are the worst off - who have the least money, least education, and the least respected jobs or no job. The higher up you are on this ladder, the closer you are to the people at the very top; the lower you are, the closer you are to the people at the very bottom.
+              </p>
+              <p><b>Where would you place yourself on this ladder?</b></p>
+              <p>
+		<select name="ladder" id="ladder" form="demographics">
+                  <option value="">Choose a rung</option>
+                  <option value="10">10 - Top</option>
+                  <option value="9">9</option>
+                  <option value="8">8</option>
+                  <option value="7">7</option>
+                  <option value="6">6</option>
+                  <option value="5">5</option>
+                  <option value="4">4</option>
+                  <option value="3">3</option>
+                  <option value="2">2</option>
+                  <option value="1">1 - Bottom</option>
+		</select>
+              </p>
+            </td>
+          </tr>
+	</table>
+	<br>
 
-          <p><b>What is your age?</b></p>
-                  <p>
-                    <select name="age" id="age" form="demographics">
-                      <option value="">Choose an age</option>
-                      <option value="0-19">&nbsp;0-19</option>
-                      <option value="20-29">20-29</option>
-                      <option value="30-39">30-39</option>
-                      <option value="40-49">40-49</option>
-                      <option value="50-59">50-59</option>
-                      <option value="60-69">60-69</option>
-                      <option value="70-79">70-79</option>
-                      <option value="80-89">80-89</option>
-                      <option value="&gt;90">90+</option>
-                    </select>
-                  </p>
+  <p><b>What is your age (in years)?</b></p>
+  <p>
+    <textarea type="text" id="age" name="age" style="width: 5%; line-height: 1em;" value=""></textarea>
+  </p>
 
-          <p><b>What is your gender?</b></p>
-            <p>
-             <input type="text" id="gender" name="gender" style="width:40%" value=""></textarea>
-           </p>
 
-          <p><b>What is your highest level of education completed?</b></p>
-                  <p>
-                    <select name="education" id="education" form="demographics">
-                      <option value="">Choose a level</option>
-                      <option value="gradeSchool">Grade school</option>
-                      <option value="highSchool">High school</option>
-                      <option value="someCollege">Some college</option>
-                      <option value="4year">4-year college</option>
-                      <option value="someGrad">Some graduate school</option>
-                      <option value="Grad">Graduate degree</option>
-                    </select>
-                  </p>
 
-          <p><b>What is your native/first language (i.e., the language that was primarily spoken at home when you were a child)?</b></p>
-            <p>
-             <input type="text" id="homelang" name="lg" style="width:40%" value=""></textarea>
-           </p>
+<p><b>What is your gender?</b></p>
+<p>
+  <select name="gender" id="gender" form="demographics">
+    <option value="">Please choose an option</option>
+    <option value="female">Female</option>
+    <option value="male">Male</option>
+    <option value="other">Other</option>
+    <option value="declinestate">Prefer not to state</option>
+  </select>
 
-          <p><b>What is your ethnicity?</b></p>
-           <p>
 
-             <select name="ethnicity" id="ethnicity" form="demographics">
-                      <option value="">Choose an ethnicity</option>
-                      <option value="Hispanic">Hispanic or Latino</option>
-                      <option value="NonHispanic">Non-Hispanic or Latino</option>
-                      <option value="NA">Prefer not to state</option>
-            </select>
-          </p>
+	<p><b>What is your highest level of education completed?</b></p>
+	<p>
+	  <select name="education" id="education" form="demographics">
+	    <option value="">Choose a level</option>
+	    <option value="gradeSchool">Grade school</option>
+	    <option value="highSchool">High school</option>
+	    <option value="someCollege">Some college</option>
+	    <option value="4year">4-year college degree</option>
+	    <option value="someGrad">Some graduate school</option>
+	    <option value="Grad">Graduate degree</option>
+	  </select>
+	</p>
 
-          <p><b>What is your race? Please check all that apply.</b></p>
-           <p>
-            <form>
-            <input type="checkbox" name="race" value="amInd"> American Indian or
-            Alaskan Native
-          <br>
-            <input type="checkbox" name="race" value="asian"> Asian
-          <br>
-            <input type="checkbox" name="race" value="natHaw"> Native Hawaiian or US
-            Pacific Islander
-          <br>
-            <input type="checkbox" name="race" value="black"> Black/African American
-          <br>
-            <input type="checkbox" name="race" value="white"> White
-          <br>
-            <input type="checkbox" name="race" value="other"> Other
-          </form>
+  <p><b>Are you <em>currently</em> a student?</b></p>
+	<p>
+	  <select name="student" id="student" form="demographics">
+	    <option value="">Please choose an option</option>
+	    <option value="yes">Yes</option>
+	    <option value="no">No</option>
+	    <option value="decline">Prefer not to state</option>
+	  </select>
+  </p>
 
-           <p><b>How many children do you have?</b></p>
-           <p>
-             <select name="children" id="children" form="demographics">
-                      <option value="">Choose a number</option>
-                      <option value="0">0</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="morethan5">More than 5</option>
-                    </select>
-          </p>
 
-          <p><b>If you have children, how old is your <em>oldest</em> child?</b></p>
-           <p>
-            <select name="oldest" id="oldestAge" form="demographics">
-                      <option value="">Choose an age</option>
-                      <option value="0to6mo">0-6 months old</option>
-                      <option value="7to12mo">7-12 months old</option>
-                      <option value="1y">1 year old</option>
-                      <option value="2y">2 years old</option>
-                      <option value="3y">3 years old</option>
-                      <option value="4y">4 years old</option>
-                      <option value="5y">5 years old</option>
-                      <option value="6y">6 years old</option>
-                      <option value="7y">7 years old</option>
-                      <option value="8y">8 years old</option>
-                      <option value="9y">9 years old</option>
-                      <option value="10y">10 years old</option>
-                      <option value="olderthan10">More than 10 years old</option>
-                    </select>
+	<p><b>What is your native/first language (i.e., the language that was primarily spoken at home when you were a child)?</b></p>
+	<p>
+	  <textarea type="text" id="homelang" name="lg" style="width:40%" value=""></textarea>
+	</p>
 
-          <p><b>If you have children, how old is your <em>youngest</em> child?</b></p>
-           <p>
-             <select name="youngest" id="youngestAge" form="demographics">
-                      <option value="">Choose an age</option>
-                      <option value="0to6mo">0-6 months old</option>
-                      <option value="7to12mo">7-12 months old</option>
-                      <option value="1y">1 year old</option>
-                      <option value="2y">2 years old</option>
-                      <option value="3y">3 years old</option>
-                      <option value="4y">4 years old</option>
-                      <option value="5y">5 years old</option>
-                      <option value="6y">6 years old</option>
-                      <option value="7y">7 years old</option>
-                      <option value="8y">8 years old</option>
-                      <option value="9y">9 years old</option>
-                      <option value="10y">10 years old</option>
-                      <option value="olderthan10">More than 10 years old</option>
-                    </select>
+	<p><b>What is your ethnicity?</b></p>
+	<p>
 
-          <p><b>What do you think this experiment was about?</b></p>
-          <p>
-           <textarea type="text" id="expthoughts" style="width:100%" name="expaim"></textarea>
-          </p>
+	  <select name="ethnicity" id="ethnicity" form="demographics">
+	    <option value="">Choose an ethnicity</option>
+	    <option value="Hispanic">Hispanic or Latino</option>
+	    <option value="NonHispanic">Non-Hispanic or Latino</option>
+	    <option value="NA">Prefer not to state</option>
+	  </select>
+	</p>
 
-         <p><b>Any general comments about the experiment?</b></p>
-         <p>
-           <textarea type="textarea" id="expcomments" style="width:100%" name="expgen"></textarea>
-         </p>
-       </form>
+	<p><b>What is your race? Please check all that apply.</b></p>
+	<p>
+	  <form>
+	    <input type="checkbox" name="race" value="amInd"> American Indian or
+	    Alaskan Native
+	    <br>
+	    <input type="checkbox" name="race" value="asian"> Asian
+	    <br>
+	    <input type="checkbox" name="race" value="natHaw"> Native Hawaiian or US
+	    Pacific Islander
+	    <br>
+	    <input type="checkbox" name="race" value="black"> Black/African American
+	    <br>
+	    <input type="checkbox" name="race" value="white"> White
+	    <br>
+	    <input type="checkbox" name="race" value="other"> Other
+	  </form>
 
-       <div align="center">
-         <button type="button" id="debriefsubmit" onClick="experiment.submit_comments()">Submit</button>
-       </div>
+	<p><b>How many <em>school-aged</em> children (5-18 yrs old) do you have?</b></p>
+	<p>
+	  <select name="children" id="children" form="demographics">
+	    <option value="">Choose a number</option>
+	    <option value="0">0</option>
+	    <option value="1">1</option>
+	    <option value="2">2</option>
+	    <option value="3">3</option>
+	    <option value="4">4</option>
+	    <option value="5">5</option>
+	    <option value="morethan5">More than 5</option>
+	  </select>
+	</p>
+
+	<p><b>If you have children, how old is your <em>oldest</em> child?</b></p>
+	<p>
+	  <select name="oldest" id="oldestAge" form="demographics">
+	    <option value="">Choose an age</option>
+	    <option value="0to1y">Less than 1 year old</option>
+	    <option value="1y">1 year old</option>
+	    <option value="2y">2 years old</option>
+	    <option value="3y">3 years old</option>
+	    <option value="4y">4 years old</option>
+	    <option value="5y">5 years old</option>
+	    <option value="6y">6 years old</option>
+	    <option value="7y">7 years old</option>
+	    <option value="8y">8 years old</option>
+	    <option value="9y">9 years old</option>
+	    <option value="10y">10 years old</option>
+      <option value="11y">11 years old</option>
+	    <option value="12y">12 years old</option>
+	    <option value="13y">13 years old</option>
+	    <option value="14y">14 years old</option>
+	    <option value="15y">15 years old</option>
+	    <option value="16y">16 years old</option>
+	    <option value="17y">17 years old</option>
+	    <option value="18y">18 years old</option>
+	    <option value="olderthan18">More than 18 years old</option>
+	  </select>
+
+	<p><b>What do you think this experiment was about?</b></p>
+	<p>
+	  <textarea type="text" id="expthoughts" style="width:100%" name="expaim"></textarea>
+	</p>
+
+	<p><b>Any general comments about the experiment?</b></p>
+	<p>
+	  <textarea type="textarea" id="expcomments" style="width:100%" name="expgen"></textarea>
+	</p>
+      </form>
+
+      <div align="center">
+	<button type="button" id="debriefsubmit" onClick="experiment.submit_comments()">Submit</button>
       </div>
+    </div>
 
-<!-- The finish slide. -->
-<div class="slide" id="finished">
- You're finished - thanks for participating! Submitting to Mechanical Turk...
-</div>
+    <!-- The finish slide. -->
+    <div class="slide" id="finished">
+      <p>You're finished - thanks for participating! Submitting to Mechanical Turk...</p>
+      <p>This study was about measuring math motivation and math anxiety in a wide range of individuals, in order to see if these factors influence math performance on a difficult, fast-paced mathematics task. Thank you again for participating and making this research possible!</p>
+    </div>
 
-<script src="mathmotivationsurveys.js"></script>
+    <script src="mathmotivationsurveys.js"></script>
 
-</body>
+  </body>
 </html>
