@@ -11,13 +11,14 @@ CURRENT ISSUES:
 
 **Randomize order of PVT (practice and performance) and (as a unit) the 3 surveys
 
--Add a few debriefing sentences on the debriefing slide (e.g. after the “what do you think this experiment was about?” question?)
-
+- Ask about exclusion principles (only want students? certain age range? Do this after participants are gathered, as exploratory analyses? Also with "do you have children?")
 
 *****Dont forget to pull the git repository to the server webspace after you push the final edits to git (otherwise the link will still be to the old html)*****
 
 
 ***********************************************************************
+
+-Add a few debriefing sentences on the debriefing slide (e.g. after the “what do you think this experiment was about?” question?) **DONE**
 
 **If it doesn't already log the order, make sure to log whether PVT or Surveys were first. **DONE**
 
