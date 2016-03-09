@@ -5,24 +5,13 @@ To Dos (as of 3-8-16)
 
 CURRENT ISSUES: 
 
-**Additional thing:
--Check how Practice Trials were added
-	-How to UNrandomize the 4 practice problems - want them always in the same order
-
-- Add "practice trials" to the "log_response" function; fix the fact that it is probably no longer logging the performance trials correctly
+*UNrandomize the 4 practice problems - want them always in the same order
 
 - Correct the missing countdown timer in the peformance trials
 
-
 **Randomize order of PVT (practice and performance) and (as a unit) the 3 surveys
 
-**If it doesn't already log the order, make sure to log whether PVT or Surveys were first. 
-
-Demographic changes:
---Change AGE to a number (rather than a category)
-**Make sure demographic variables are in line with rest of class: age (number), gender, race/ethnicity, gender should be male, female, other, decline to state
-
-6. Add a few debriefing sentences on the debriefing slide (e.g. after the “what do you think this experiment was about?” question?)
+-Add a few debriefing sentences on the debriefing slide (e.g. after the “what do you think this experiment was about?” question?)
 
 
 *****Dont forget to pull the git repository to the server webspace after you push the final edits to git (otherwise the link will still be to the old html)*****
@@ -30,7 +19,13 @@ Demographic changes:
 
 ***********************************************************************
 
+**If it doesn't already log the order, make sure to log whether PVT or Surveys were first. **DONE**
 
+- Add "practice trials" to the "log_response" function; fix the fact that it is probably no longer logging the performance trials correctly. **DONE**
+
+Demographic changes: **DONE**
+--Change AGE to a number (rather than a category)
+**Make sure demographic variables are in line with rest of class: age (number), gender, race/ethnicity, gender should be male, female, other, decline to state
 
 
 2. Add text to each block's intro slide (preferably using the original author’s wording) **DONE**

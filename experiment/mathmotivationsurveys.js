@@ -37,7 +37,7 @@ var trialInfo = {
   PVTintro : [""],
   performanceintro: [""],
   mathMot : [ // Math motivation
-    'When I do mathematics, I sometimes get totally absorbed.',
+    // 'When I do mathematics, I sometimes get totally absorbed.',
     'Mathematics is important to me personally',
     'Because doing mathematics is fun, I wouldn’t want to give it up.'],
   mathAnx : [// Math anxiety
@@ -145,7 +145,13 @@ var totalNumTrials = blockOrder.reduce(function(memo, blockName) {
 
 // Build trials, randomizing order within each block
 var trials = _.flatten(blockOrder.map(function(trialType, blockIndex) {
-  var blockStimuli = _.shuffle(trialInfo[trialType]);
+
+  //////////// NEW CODE TO NOT RANDOMIZE PVT practice trials /////////
+  var blockStimuli = (trialInfo === "PVTpractice" ?
+    trialInfo[trialType] : _.shuffle(trialInfo[trialType]));
+    //  CANT GET IT TO WORK //
+  //////////////////////////
+
   return blockStimuli.map(function(stimulus, stimulusIndex) {
     return {
       stimulus: stimulus,
@@ -182,11 +188,11 @@ var experiment = {
     age: [],
     gender: [],
     education: [],
+    student: [],
     homelang: [],
     ethnicity:[],
     race: [],
     children:[],
-    childAgeYoung:[],
     childAgeOld:[],
     expt_aim: [],
     expt_gen: []
@@ -376,10 +382,10 @@ var experiment = {
     experiment.data.age.push(document.getElementById("age").value);
     experiment.data.gender.push(document.getElementById("gender").value);
     experiment.data.education.push(document.getElementById("education").value);
+    experiment.data.student.push(document.getElementById("student").value);
     experiment.data.homelang.push(document.getElementById("homelang").value);
     experiment.data.ethnicity.push(document.getElementById("ethnicity").value);
     experiment.data.children.push(document.getElementById("children").value);
-    experiment.data.childAgeYoung.push(document.getElementById("youngestAge").value);
     experiment.data.childAgeOld.push(document.getElementById("oldestAge").value);
     experiment.data.expt_aim.push(document.getElementById("expthoughts").value);
     experiment.data.expt_gen.push(document.getElementById("expcomments").value);
