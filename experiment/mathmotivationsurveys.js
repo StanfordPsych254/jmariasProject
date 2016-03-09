@@ -95,40 +95,40 @@ var trialInfo = {
     'I get in a state of tension or turmoil as I think over my recent concerns and interests.'],
 
 PVTpractice: [
-  {problem:"2 + 2 = 4", trueAnswer: "correct"},
-  {problem: "2 X 2 = 100", trueAnswer: "incorrect"},
-  {problem: "253 X 42 = 10,826", trueAnswer: "incorrect"},
-  {problem: "<sup>1</sup>&frasl;<sub>2</sub> = <sup>2</sup>&frasl;<sub>1</sub>", trueAnswer: "incorrect"}
+  {problem:"2 + 2 = 4", trueAnswer: "right"},
+  {problem: "2 X 2 = 100", trueAnswer: "wrong"},
+  {problem: "253 X 42 = 10,826", trueAnswer: "wrong"},
+  {problem: "<sup>1</sup>&frasl;<sub>2</sub> = <sup>2</sup>&frasl;<sub>1</sub>", trueAnswer: "wrong"}
   ],
 
 
 
   performance : [
-    {problem: "13 X 4 = 47", trueAnswer: "incorrect"},
-    {problem:"22 - 6 = 16", trueAnswer: "correct"},
-    // {problem:"35 &divide; 5 = 7", trueAnswer: "correct"},
-    // {problem:"54 + 26 = 70", trueAnswer: "incorrect"},
-    // {problem: "32 - 16 = 14", trueAnswer: "incorrect"} ,
-    // {problem: "39 &divide; 16 = 3", trueAnswer: "incorrect"},
-    // {problem: "3 X 13 = 39", trueAnswer: "correct"},
+    {problem: "13 X 4 = 47", trueAnswer: "wrong"},
+    {problem:"22 - 6 = 16", trueAnswer: "right"},
+    // {problem:"35 &divide; 5 = 7", trueAnswer: "right"},
+    // {problem:"54 + 26 = 70", trueAnswer: "wrong"},
+    // {problem: "32 - 16 = 14", trueAnswer: "wrong"} ,
+    // {problem: "39 &divide; 16 = 3", trueAnswer: "wrong"},
+    // {problem: "3 X 13 = 39", trueAnswer: "right"},
     // {problem: "<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>",
-    //  trueAnswer: "correct"},
-    // {problem: "27 + 323 = 350", trueAnswer: "correct"},
-    // {problem: "112 - 88 = 24", trueAnswer: "correct"},
-    // {problem: "5 X 15 = 65", trueAnswer: "incorrect"},
-    // {problem: "27 + 234 = 251", trueAnswer: "incorrect"},
-    // {problem: "84 &divide; 4 = 21", trueAnswer: "correct"},
-    // {problem: "44 - 18 = 24", trueAnswer: "incorrect"},
-    // {problem: "<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>", trueAnswer: "incorrect"},
-    // {problem: "14 X 5 = 70", trueAnswer: "correct"},
-    // {problem: "28 &divide; 16 = 2", trueAnswer: "incorrect"},
-    // {problem: "<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>", trueAnswer: "incorrect"},
-    // {problem: "<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>", trueAnswer: "incorrect"},
-    // {problem: "<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>", trueAnswer: "correct"},
-    // {problem: "<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>", trueAnswer: "incorrect"} ,
-    {problem: "<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>", trueAnswer: "incorrect"} ,
-    // {problem: "<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>", trueAnswer: "incorrect"},
-    // {problem: "18 + 56 = 74", trueAnswer: "correct"}
+    //  trueAnswer: "right"},
+    // {problem: "27 + 323 = 350", trueAnswer: "right"},
+    // {problem: "112 - 88 = 24", trueAnswer: "right"},
+    // {problem: "5 X 15 = 65", trueAnswer: "wrong"},
+    // {problem: "27 + 234 = 251", trueAnswer: "wrong"},
+    // {problem: "84 &divide; 4 = 21", trueAnswer: "right"},
+    // {problem: "44 - 18 = 24", trueAnswer: "wrong"},
+    // {problem: "<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>", trueAnswer: "wrong"},
+    // {problem: "14 X 5 = 70", trueAnswer: "right"},
+    // {problem: "28 &divide; 16 = 2", trueAnswer: "wrong"},
+    // {problem: "<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>", trueAnswer: "wrong"},
+    // {problem: "<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>", trueAnswer: "wrong"},
+    // {problem: "<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>", trueAnswer: "right"},
+    // {problem: "<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>", trueAnswer: "wrong"} ,
+    {problem: "<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>", trueAnswer: "wrong"} ,
+    // {problem: "<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>", trueAnswer: "wrong"},
+    // {problem: "18 + 56 = 74", trueAnswer: "right"}
   ]
 };
 
@@ -223,7 +223,7 @@ var experiment = {
       var buttonPress = trialType.split('.')[1];
       console.log(buttonPress);
       console.log(experiment.currTrial.stimulus.trueAnswer);
-      var accuracy = (buttonPress === "notSure" ? "notSure" :
+      var accuracy = (buttonPress === "dontknow" ? "dontknow" :
 		      buttonPress === experiment.currTrial.stimulus.trueAnswer ?
 		      'accurate' : 'inaccurate');
       experiment.data.rating.push(accuracy);

@@ -19,7 +19,7 @@
       <br>
       <img src="images/stanfordu.png" alt="Stanford University">
       <p id='logo-text'>Stanford Psychology Department</p>
-      <p class="block-text">In this experiment, you will read statements related to math. We would like you to tell us how much you agree with each statement.</p>
+      <p class="block-text">In this part of the study, you will read some statements related to mathematics. We would like you to tell us how much you agree with each statement.</p>
       <button type="button" onclick="this.blur(); experiment.next()">Start</button>
 
       <p class="block-text" id="legal">By answering the following
@@ -83,7 +83,7 @@
       <br>
 
       <div align="center">
-	<p>How much do you agree with the following statement regarding math?</p><br>
+	<p>How much do you agree with the following statement?</p><br>
       </div>
 
       <!-- Show sentence from motivation scale -->
@@ -148,10 +148,8 @@
 	<p>The items below are about things that may bother you or
 	cause you to be nervous or anxious or tense when you have to
 	do them.</p>
-  <p>Choose the answer which best shows how nervous or
-	anxious or tense you would feel.</p>
-  <p>Please respond to all the	items. Choose only one response to each statement. You will
-	NOT be able to return to correct your answers after you click
+  <p>Choose the answer which best shows how nervous or anxious or tense you would feel.</p>
+  <p>Please respond to all the	items. Choose only one response to each statement. Note you will NOT be able to return to correct your answers after you click
 	the Next Button. Therefore, please make sure that you provide
 	your answers as accurately as possible.</p><br></div>
   <div class="center-text"><p>Please click Next to continue.</p><br>
@@ -174,7 +172,7 @@
       <br>
 
       <div align="center">
-	<p>How nervous would you be in the scenario described below?</p><br>
+	<p>How nervous would you be in the situation described below?</p><br>
       </div>
 
       <!-- Show sentence from MATH ANXIETY scale -->
@@ -240,7 +238,7 @@
       <br>
 
       <div align="center" text-align="center" class="block-text">
-	<p>A number of statements which people have used to describe themselves are given below. Read each statement and then circle the appropriate number to the rigth of the statement to indicate how you <strong>generally</strong> feel. There are no right or wrong answers. Do not spend too much time on any one statment but give the answer which seems to describe how you generally feel.</p><br></div>
+	<p>A number of statements which people have used to describe themselves are given below. Read each statement and select the appropriate number to indicate how you <strong>generally</strong> feel. There are no right or wrong answers. Do not spend too much time on any one statement, but rather give the answer which seems to describe how you generally feel.</p><br></div>
   <div class="center-text"><p>Please click Next to continue.</p><br>
       </div>
 
@@ -267,7 +265,7 @@
       <br>
 
       <div align="center">
-        <p>How often would you say the following statement applies to how you GENERALLY feel?</p><br>
+        <p>How often does the following statement apply to how you GENERALLY feel?</p><br>
       </div>
 
       <!-- Show sentence from  scale -->
@@ -325,11 +323,11 @@
   <div class="slide" id="PVTintro">
       <div style="width: 500px; margin: 0 auto; text-align: center; background-color: #8C1516; padding: 20px 15px 10px 10px">
       </div>
-      <p class="block-text">In the next section, you will be doing some fast math activities. You will be shown a series of math problems, one at a time. You won't need to figure out the answers to the problems, because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong.
+      <p class="block-text">In the next section, you will be doing some fast math activities. You will be shown a series of math problems, one at a time. You won't need to figure out the answers to the problems because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong.
       <p  class="block-text">
 	1. Please do <strong>NOT</strong> use pencil and paper or any type of calculator.
       <p  class="block-text">
-	2. Remember, it's a <strong>FAST</strong> math judgement task. So please make your judgement for each problem as <strong>quickly and accurately</strong> as possible.
+	2. Remember, it is a <strong>FAST</strong> math judgement task. So please make your judgement for each problem as <strong>quickly and accurately</strong> as possible.
       <p  class="block-text">
 	3. You will be given a maximum of <strong>10 seconds</strong> for each problem. The program will automatically proceed to the next problem after 10 seconds, with or without your answer. You will be shown a timer to remind you of the time remaining for each problem.
       <p  class="block-text">
@@ -355,14 +353,14 @@
       </div>
 
       <div align="center">
-  <button type="button" id="correct" onClick="experiment.log_response('performance.correct')">
+  <button type="button" id="right" onClick="experiment.log_response('performance.right')">
     Right</button>
 
   <div class="divider"></div>
-  <button type="button" id="incorrect" onClick="experiment.log_response('performance.incorrect')">
+  <button type="button" id="wrong" onClick="experiment.log_response('performance.wrong')">
     Wrong</button>
   <div class="divider"></div>
-  <button type="button" id="notsure" onClick="experiment.log_response('performance.notSure')">
+  <button type="button" id="dontknow" onClick="experiment.log_response('performance.dontknow')">
     Don't Know</button>
       </div>
     </div>
@@ -370,8 +368,8 @@
     <div class="slide" id="performanceintro">
         <div style="width: 500px; margin: 0 auto; text-align: center; background-color: #8C1516; padding: 20px 15px 10px 10px">
         </div>
-        <p class="block-text">That concludes the four practice trials. Following are a set of additional problems just like the ones you saw.
-        <p  class="block-text">Remember, you won't need to figure out the answers to the problems, because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong.</p><p class="block-text">You will have 10 seconds before the timer automatically moves to the next problem.</p>
+        <p class="block-text">That concludes the four practice trials. Following are a set of additional problems similar to the ones you just completed.
+        <p  class="block-text">Remember, you won't need to figure out the answers to the problems, because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong. You will have 10 seconds before the timer automatically moves to the next problem.</p><p class="block-text">Please click the Start button to begin the trial.</p>
     <button type="button" onclick="this.blur(); experiment.next()">Start</button>
       </div>
 
@@ -386,14 +384,14 @@
       </div>
 
       <div align="center">
-	<button type="button" id="correct" onClick="experiment.log_response('performance.correct')">
+	<button type="button" id="right" onClick="experiment.log_response('performance.right')">
 	  Right</button>
 
 	<div class="divider"></div>
-	<button type="button" id="incorrect" onClick="experiment.log_response('performance.incorrect')">
+	<button type="button" id="wrong" onClick="experiment.log_response('performance.wrong')">
 	  Wrong</button>
 	<div class="divider"></div>
-	<button type="button" id="notsure" onClick="experiment.log_response('performance.notSure')">
+	<button type="button" id="dontknow" onClick="experiment.log_response('performance.dontknow')">
 	  Don't Know</button>
       </div>
     </div>
@@ -457,7 +455,7 @@
 	    <option value="gradeSchool">Grade school</option>
 	    <option value="highSchool">High school</option>
 	    <option value="someCollege">Some college</option>
-	    <option value="4year">4-year college</option>
+	    <option value="4year">4-year college degree</option>
 	    <option value="someGrad">Some graduate school</option>
 	    <option value="Grad">Graduate degree</option>
 	  </select>
@@ -560,7 +558,7 @@
     <!-- The finish slide. -->
     <div class="slide" id="finished">
       <p>You're finished - thanks for participating! Submitting to Mechanical Turk...</p>
-      <p>This study was about...FILL IN DEBRIEFING SENTENCES HERE</p>
+      <p>This study was about measuring math motivation and math anxiety in a wide range of individuals, in order to see if these factors influence math performance on a difficult, fast-paced mathematics task. Thank you again for participating and making this research possible!</p>
     </div>
 
     <script src="mathmotivationsurveys.js"></script>
