@@ -5,23 +5,24 @@ To Dos (as of 3-8-16)
 
 CURRENT ISSUES: 
 
--How much to 'occlude" that it is a math survey and task? Title? title of HIT? each survey intro? 
-
--Ask about children demographic questions: do I want to include this? 
-
--Ask about 4th PVT practice question (keep exactly the same? probably - same methods, even if I don't agree with them) 
-
--
-
 *UNrandomize the 4 practice problems - want them always in the same order
 
 - Correct the missing countdown timer in the peformance trials
 
 **Randomize order of PVT (practice and performance) and (as a unit) the 3 surveys
 
+
+
+
+
 - Ask about exclusion principles (only want students? certain age range? Do this after participants are gathered, as exploratory analyses? Also with "do you have children?")
 
-*****Dont forget to pull the git repository to the server webspace after you push the final edits to git (otherwise the link will still be to the old html)*****
+-How much to 'occlude" that it is a math survey and task? Title? title of HIT? each survey intro? **DONE**
+
+-Ask about children demographic questions: do I want to include this? **DONE**
+
+-Ask about 4th PVT practice question (keep exactly the same? probably - same methods, even if I don't agree with them) **DONE** 
+
 
 
 ***********************************************************************
