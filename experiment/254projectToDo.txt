@@ -5,15 +5,21 @@ To Dos (as of 3-8-16)
 
 CURRENT ISSUES: 
 
-*UNrandomize the 4 practice problems - want them always in the same order
+--Add "do you help your child with math work? question 
 
-- Correct the missing countdown timer in the peformance trials
+--Figure out Cosub issues
 
-**Randomize order of PVT (practice and performance) and (as a unit) the 3 surveys
+--Figure out cosub to R pipeline
+
+--Clean up replication report and send to instructors
+
+***********************************************************************
 
 
+--Think about this to the pile: consider changing 3rd pvt practice 
 
 
+-Where and how do I organize the files for the json "mturk" download (to put onto R) **Done - I think**
 
 - Ask about exclusion principles (only want students? certain age range? Do this after participants are gathered, as exploratory analyses? Also with "do you have children?")
 
@@ -23,9 +29,15 @@ CURRENT ISSUES:
 
 -Ask about 4th PVT practice question (keep exactly the same? probably - same methods, even if I don't agree with them) **DONE** 
 
+*UNrandomize the 4 practice problems - want them always in the same order **DONE**
+
+- Correct the missing countdown timer in the peformance trials **DONE**
+
+**Randomize order of PVT (practice and performance) and (as a unit) the 3 surveys
+   **DONE**
 
 
-***********************************************************************
+
 
 -Add a few debriefing sentences on the debriefing slide (e.g. after the “what do you think this experiment was about?” question?) **DONE**
 

@@ -36,14 +36,53 @@ library(xtable)
 library(knitr)
 library(rjson)
 library(tidyjson)
+
+setwd("~/1. STANFORD/2nd Year 15-16/Psych254 Replication Methods/Psych254 Project")
+getwd()
+
 ```
 
 
 
 ```{r practice of loading data }
 
-setwd("~/1. STANFORD/2nd Year 15-16/Psych254 Replication Methods/Psych254 Project")
-getwd()
+
+###(Borrowed from other students' scripts) -- need to clean for this study
+#Reading the path
+path <- "C:\\Users\\Juan\\Documents\\1. STANFORD\\2nd Year 15-16\\Psych254 Replication Methods\\Psych254 Project"
+files <- dir(paste0(path,"production-results\\"), 
+             pattern = "*.json")
+d.b <- data.frame()
+
+#Transforming data from JSON format to dataframe
+
+jd
+
+#reading the json files and turning them into one data.frame
+for (f in files) {
+  jf <- paste0(path, "production-results\\",f)
+  jd <- fromJSON(paste(readLines(jf), collapse=""))
+  id <- data.frame(workerid = jd$WorkerId, 
+                   trial_number_block=       as.factor(jd$answers$data$trial_number_block),
+                    rating = as.numeric(jd$answers$data$rating),
+                    gender = jd$answers$data$gender,
+                    age = jd$answers$data$age,
+                    sentence = jd$answers$data$sentence,
+                    definition = jd$answers$data$definition,
+                    political = jd$answers$data$political,
+                    condition = as.factor(jd$answers$data$condition),
+                    homelang = jd$answers$data$homelang,
+                    income = jd$answers$data$income,
+                    education = jd$answers$data$education,
+                    ethnicity = jd$answers$data$ethnicity,
+                    aim=jd$answers$data$expt_aim)
+  d.b <- bind_rows(d.b, id)
+}
+# Number of participants
+length(unique(d.b$workerid))
+
+
+
 ##for (f in files) {
  ## jf <- paste0(path, "production-results/",f)
  

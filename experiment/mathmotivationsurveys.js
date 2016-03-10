@@ -132,11 +132,18 @@ PVTpractice: [
   ]
 };
 
-// Randomize block order (making sure that each block begins with intro slide
-var blockOrder = _.flatten(_.shuffle([["motivationIntroATTS", "mathMot"],
+var surveyblocks = (_.shuffle([["motivationIntroATTS", "mathMot"],
 				      ["mathanxIntroATTS", "mathAnx"],
-				      ["genanxIntroATTS", "genAnx"]]))
-      .concat(["PVTintro", "PVTpractice","performanceintro", "performance"]);
+				      ["genanxIntroATTS", "genAnx"]]));
+
+var pvtblocks = ["PVTintro", "PVTpractice","performanceintro", "performance"];
+
+
+// Randomize block order (making sure that each block begins with intro slide
+var blockOrder = _.flatten(_.shuffle([surveyblocks, pvtblocks]))
+
+console.log(blockOrder)
+
 
 // Calculate total number of trials, for progress bar
 var totalNumTrials = blockOrder.reduce(function(memo, blockName) {
@@ -147,9 +154,9 @@ var totalNumTrials = blockOrder.reduce(function(memo, blockName) {
 var trials = _.flatten(blockOrder.map(function(trialType, blockIndex) {
 
   //////////// NEW CODE TO NOT RANDOMIZE PVT practice trials /////////
-  var blockStimuli = (trialInfo === "PVTpractice" ?
+  var blockStimuli = (trialType === "PVTpractice" ?
     trialInfo[trialType] : _.shuffle(trialInfo[trialType]));
-    //  CANT GET IT TO WORK //
+    //  CANT GET IT TO WORK -- works!//
   //////////////////////////
 
   return blockStimuli.map(function(stimulus, stimulusIndex) {
@@ -326,6 +333,7 @@ var experiment = {
 	    showSlide("PVTpractice");
   	    $("#pracnumber").html(experiment.currTrial.stimulus.problem);
 	    experiment.startTime = (new Date()).getTime();
+      experiment.currTimer = '#seconds';
 	    experiment.CountdownTime();
 	    experiment.countdownCounter = setInterval(experiment.CountdownTime, 1000);
 	    experiment.log_stimulus(experiment.currTrial);
@@ -334,6 +342,7 @@ var experiment = {
 	    showSlide("performance");
   	    $("#number").html(experiment.currTrial.stimulus.problem);
 	    experiment.startTime = (new Date()).getTime();
+      experiment.currTimer = "#perfseconds";
 	    experiment.CountdownTime();
 	    experiment.countdownCounter = setInterval(experiment.CountdownTime, 1000);
 	    experiment.log_stimulus(experiment.currTrial);
@@ -352,11 +361,11 @@ var experiment = {
       var minutes = Math.floor(seconds / 60);
       seconds -= minutes * 60;
       $("#minutes").text(minutes < 10 ? "0" + minutes : minutes);
-      $("#seconds").text(seconds < 12 ? "Seconds left: " + seconds : seconds);
+      $(experiment.currTimer).text(seconds < 12 ? "Seconds left: " + seconds : seconds);
     } else {
       experiment.data.rating.push("not responded");
       experiment.data.rt.push("not responded");
-      experiment.next();
+      experiment.next();  
     }
   },
 
