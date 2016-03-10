@@ -5,24 +5,67 @@ To Dos (as of 3-8-16)
 
 CURRENT ISSUES: 
 
---Add red bar to intro slides 
+-Find out how to split worker ID from rest of data, generate another type of "subjectid", and use subject id when it is real data
 
---Add blank "add children" option
+-Make sure all variables are included as correct type (e.g. factor w/ levels, or binary 0 and 1, etc.)
 
--Reorder children questions
 
---Add "do you help your child with math work? question 
+-Add a "debriefing" slide before the "you're done...submitting" slide(?)
 
---Figure out Cosub issues
+--Consider changing 3rd pvt practice question (seems pretty hard compared to other practice and performance questions) 
 
---Figure out cosub to R pipeline
+
+
 
 --Clean up replication report and send to instructors
 
+
+
+
 ***********************************************************************
 
+COSUB COMMANDS:
 
---Think about this to the pile: consider changing 3rd pvt practice 
+cosub create   # create hit based on settings in settings.json
+cosub update   # update hit based on settings in settings.json
+cosub add <N> assignments
+cosub add <N> {days/hours/minutes}
+cosub expire   # expire hit
+cosub download # download results to sandbox-results/ or production-results/
+cosub status   # summarize HIT (settings, time left, # assignments, ...)
+cosub history  # show history of cosub actions
+
+By default, actions take place on the sandbox. You can run actions in production mode by adding '-p' after cosub, e.g., cosub -p create creates the HIT on the production site rather than the sandbox.
+
+*******
+
+NOTE ALSO:   When doing the COSUB commands (to get the project on mturk) run that from the Git CMD  (not Git Bash) but still do that from the necessary folder -- in this case it will be the Mturk folder (NOT the project_GIT folder) 
+
+NOTE TO SELF: do the AFS connecting from the GIT Bash command prompt (and probably from the psych254 project GIT folder -- at least it worked from there)
+
+1. Open your terminal or command line
+2. Type "ssh -x mkeil@corn.stanford.edu"
+3. This should log you into corn after you present your Axess password
+4. Once in Type "cd WWW"
+5. Then navigate to your project folder name, I assume it's something like "cd jmariasProject". 
+6. Once inside that folder just type "git pull" and that should update your project
+
+***********************************************************************
+
+Old To Do: 
+
+--Figure out cosub to R pipeline **DONE**
+
+--Add red bar to intro slides **Done**
+
+--Add blank "add children" option **Done**
+
+-Reorder children questions **Done**
+
+--Add "do you help your child with math work? question *Done*
+
+--Figure out Cosub issues **DONE!!!!!!**
+
 
 
 -Where and how do I organize the files for the json "mturk" download (to put onto R) **Done - I think**

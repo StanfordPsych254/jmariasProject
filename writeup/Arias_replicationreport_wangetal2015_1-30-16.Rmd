@@ -15,13 +15,7 @@ Contact information: email: stanfordpsych254 (at) gmail (dot) com
 
 Testable Experiment Webpage:
 
-http://web.stanford.edu/~jmarias/jmariasProject/experiment/mathmotivationsurveys.html
-
-
-
-#####Introduction
-
-The study presented here attempts to replicate the findings of Study 2 in Wang et al. (2015), which demonstrated that the relationship between math anxiety and math performance follows an inverted-U pattern among college undergraduate students with higher intrinsic math motivation, whereas this same relationship is linearly negative among students with lower intrinsic math motivation. The current study attempts to replicate and expand this finding using a broader participant pool obtained using Amazon's Mechanical Turk platform. 
+https://web.stanford.edu/~jmarias/jmariasProject/experiment/mathmotivationsurveys.html
 
 
 ```{r load packages, echo=F, results='hide', warning=FALSE, message=FALSE}
@@ -43,75 +37,12 @@ getwd()
 ```
 
 
+#####Introduction
 
-```{r practice of loading data }
-
-
-###(Borrowed from other students' scripts) -- need to clean for this study
-#Reading the path
-path <- "C:\\Users\\Juan\\Documents\\1. STANFORD\\2nd Year 15-16\\Psych254 Replication Methods\\Psych254 Project"
-files <- dir(paste0(path,"production-results\\"), 
-             pattern = "*.json")
-d.b <- data.frame()
-
-#Transforming data from JSON format to dataframe
-
-jd
-
-#reading the json files and turning them into one data.frame
-for (f in files) {
-  jf <- paste0(path, "production-results\\",f)
-  jd <- fromJSON(paste(readLines(jf), collapse=""))
-  id <- data.frame(workerid = jd$WorkerId, 
-                   trial_number_block=       as.factor(jd$answers$data$trial_number_block),
-                    rating = as.numeric(jd$answers$data$rating),
-                    gender = jd$answers$data$gender,
-                    age = jd$answers$data$age,
-                    sentence = jd$answers$data$sentence,
-                    definition = jd$answers$data$definition,
-                    political = jd$answers$data$political,
-                    condition = as.factor(jd$answers$data$condition),
-                    homelang = jd$answers$data$homelang,
-                    income = jd$answers$data$income,
-                    education = jd$answers$data$education,
-                    ethnicity = jd$answers$data$ethnicity,
-                    aim=jd$answers$data$expt_aim)
-  d.b <- bind_rows(d.b, id)
-}
-# Number of participants
-length(unique(d.b$workerid))
+The study presented here attempts to replicate the findings of Study 2 in Wang et al. (2015), which demonstrated that the relationship between math anxiety and math performance follows an inverted-U pattern among college undergraduate students with higher intrinsic math motivation, whereas this same relationship is linearly negative among students with lower intrinsic math motivation. The current study attempts to replicate and expand this finding using a broader participant pool obtained using Amazon's Mechanical Turk platform. 
 
 
 
-##for (f in files) {
- ## jf <- paste0(path, "production-results/",f)
- 
-  jf <- "testexperimentdata.json"
- jd <- fromJSON(paste(readLines(jf), collapse=""))
- 
- jd$stimulus
- 
-  id <- data.frame(workerid = jd$WorkerId, 
-                   trial_number_block=       as.factor(jd$answers$data$trial_number_block),
-                    rating = as.numeric(jd$answers$data$rating),
-                    gender = jd$answers$data$gender,
-                    age = jd$answers$data$age,
-                    sentence = jd$answers$data$sentence,
-                    definition = jd$answers$data$definition,
-                    political = jd$answers$data$political,
-                    condition = as.factor(jd$answers$data$condition),
-                    homelang = jd$answers$data$homelang,
-                    income = jd$answers$data$income,
-                    education = jd$answers$data$education,
-                    ethnicity = jd$answers$data$ethnicity,
-                    aim=jd$answers$data$expt_aim)
-  d.b <- bind_rows(d.b, id)
-##}
-# Number of participants
-length(unique(d.b$workerid))
-
-
-```
 #####Method
 
 ######Power Analysis
@@ -173,6 +104,53 @@ quadratic effects, we recentered math motivation at low (i.e., 1 SD below the me
 ######Data preparation
 	Data preparation following the analysis plan.
 	
+```{rloading data from mturk json}
+
+#Reading the path
+path <- "C:\\Users\\Juan\\Documents\\1. STANFORD\\2nd Year 15-16\\Psych254 Replication Methods\\Psych254 Project\\Psych254proj_mturk_DONTCOMMIT\\"
+files <- dir(paste0(path,"sandbox-results\\"), 
+             pattern = "*.json")
+d <- data.frame()
+
+#Transforming data from JSON format to dataframe
+
+
+#reading the json files and turning them into one data.frame
+for (f in files) {
+  jf <- paste0(path, "sandbox-results\\",f)
+  jd <- fromJSON(paste(readLines(jf), collapse=""))
+  id <- data.frame(workerid = jd$WorkerId,
+                   accepttime = as.character(jd$AcceptTime),
+                   submittime = as.character(jd$SubmitTime),
+                   trial_number = as.factor(jd$answers$data$trial_number),
+                   block_number = as.factor(jd$answers$data$block_number),
+                   trial_type = as.factor(jd$answers$data$trial_type),
+                   stimulus = jd$answers$data$stimulus,
+                   rating_raw = jd$answers$data$rating,
+                   RT = as.numeric(jd$answers$data$rt),
+                   ladder = as.numeric(jd$answers$data$ladder),
+                   age = jd$answers$data$age,
+                   gender = jd$answers$data$gender,
+                   education = as.factor(jd$answers$data$education),
+                   student = as.factor(jd$answers$data$student),
+                   homelang = as.character(jd$answers$data$homelang),
+                   ethnicity = jd$answers$data$ethnicity,
+                   race = jd$answers$data$race,
+                   children = as.factor(jd$answers$data$children),
+                   mathhwhelp = as.factor(jd$answers$data$mathhwhelp),
+                   childAgeOld = as.factor(jd$answers$data$childAgeOld),
+                   expt_aim = jd$answers$data$expt_aim,
+                   expt_gen = jd$answers$data$expt_gen)
+  
+     d <- bind_rows(d, id)
+}
+
+
+# Number of participants
+length(unique(d$workerid))
+
+```
+
 	
 ```{r data gathering and preparation}
 
@@ -180,57 +158,86 @@ quadratic effects, we recentered math motivation at low (i.e., 1 SD below the me
 
 ### Math Motivation (3-item; see Chiu & Zeng, 2008) ######
 
-  #No data prep needed aside from re-naming and calculating mean value for each participant
+
+                               
 
 ### Math Anxiety (30-item MARS-B; see Suinn & Winston, 2003) ###
-
-  #No data prep needed aside from re-naming and calculating mean value for each participant
+  #No data prep needed aside from re-naming and calculating mean value for each participant, below
 
 
 ### General Anxiety (20-item (Trait Anxiety); see State-Trait Anxiety Inventory, Spielberger, 1983)
 
-#Use "psych" package to make reverse-score key for the anxiety scale, taking the 20 items as either raw score (x1) or reverse score (x -1) 
 
-#genanxkey <- make.keys(d$genanx, list(general.anx=c("-ga1","ga2","-ga3","ga4","ga5","-ga6","-ga7","ga8","ga9","-ga10", "ga11","ga12","-ga13", "-ga14","ga15","-ga16","ga17","ga18","-ga19","ga20")))
+##### Reverse Scoring General Anxiety:
 
-#Then I assume I need to multiply one matrix by another? Might try the subtraction method first (below)
+#Setting stimulus variable as string
+d$stimulus <- as.character(d$stimulus)
 
+#generating a unique "accuracy" variable from stimulus for PVT practice and performance trials
+d1 <- d %>% 
+    mutate(accuracy = ifelse(trial_type=="PVTpractice" | 
+                             trial_type=="performance", 
+                      rating_raw, NA))
 
-########
-#Or, if data is still in wide format, to reverse score: 
+#Generating "pvt.acc" for accuracy on only the pvt performance trials (no practice)
+d1 <- d1 %>% 
+    mutate(pvt.acc = ifelse(trial_type=="performance",
+                            accuracy, NA))
 
-# select columns to reverse score
-revscore.cols <- c("ga1", "ga3", "ga6", "ga7", "ga10", "ga13", "ga14", "ga16", "ga19")
+#Generating numeric ratings from the raw rating variable for the surveys
+d2 <- d1 %>% 
+    mutate(rating_2rev = ifelse(trial_type =="genAnx" |
+                                trial_type == "mathAnx" |
+                                trial_type == "mathMot", 
+                      rating_raw, NA))
+d2$rating_2rev <- as.numeric(d2$rating_2rev)
 
-# Generating dataset with subraction to those scores to generate reverses (assuming d is dataset)
-# (check if can name new dataset dnew, or if it also has to be named d)
-# Using 5 - columns, b/c it is a 1-4 scale
-dnew[ ,revscore.cols] <-  5 - d[ ,revscore.cols]
-
-#confirm new dataset reflects correct reverse scoring, then convert:
-d <- dnew
-
-#Once this reverse-scoring is set, this general anxiety scale, as well as the math anxiety and math motivation scales (which do not need modification) are ready for finding mean index. 
+#Reverse scoring the 9 items from the general anxiety scale that need to be reversed
+d3 <- d2 %>% 
+      mutate(rating = ifelse(stimulus=='I feel pleasant.'|
+                             stimulus=='I feel satisfied with myself.' |
+                             stimulus=='I feel rested.' |
+                             stimulus=='I am "calm, cool, and collected".' |
+                             stimulus=='I am happy.' |
+                             stimulus=='I feel secure.' |
+                             stimulus=='I make decisions easily.' |
+                             stimulus=='I am content.' |
+                             stimulus=='I am a steady person.', 
+                    (5 - rating_2rev), rating_2rev))
+d <- d3
 
 ##########
 
-#### PROBABLY AFTER THIS STAGE, NEED TO GATHER DATA INTO TIDY FORM ######
+d <- d %>% 
+    mutate(mathmot = ifelse(trial_type =="mathMot",
+                      rating, NA))
 
-##**Double check how to do this** -- where do the reaction times go? 
-d.tidy <- d %>%
-  gather(question, response, mathmot, mathanx, genanx, pvt)
+d <- d %>% 
+    mutate(mathanx = ifelse(trial_type =="mathAnx",
+                      rating, NA))
+
+d <- d %>% 
+    mutate(genanx = ifelse(trial_type =="genAnx",
+                      rating, NA))
 
 
 ## Problem Verification Task (PVT) Performance  (see Rinne & Mazzocco, 2014) ####################
 
 
-#The following analyses assume dataframe is called "d", reaction time of PVT problems (in ms) is called "RT", accuracy (0 or 1) of each PVT problem is called "pvt.accuracy"
+#The following analyses assume dataframe is called "d", reaction time of all PVT problems (in ms) is called "RT", accuracy (0 or 1) of each PVT problem is called "pvt.acc"
+
+##Generating new RT variable to only include RTs for performance trials (probably unecessary, but playing it safe)
+
+d <- d %>% 
+  mutate(perf.RT = ifelse(trial_type=="performance",
+                            RT, NA))
+
 
 
 #Change reaction time (in ms) to reaction time in SECONDS
 #Following method in Wang et al. (2015; see pg. 1866) 
 d <- d %>% 
-  mutate(sec.RT = RT/1000)
+  mutate(sec.RT = perf.RT/1000)
 
 ####################################################################################
 
@@ -239,7 +246,7 @@ d <- d %>%
 
 #Calculate mean 
 subjectmeans <- d %>% 
-  group_by(subjectid) %>% 
+  group_by(workerid) %>% 
   summarise(mean.acc = mean(pvt.acc, na.rm=T), 
             mean.RT = mean(sec.RT, na.rm=T), 
             mean.mathmot = mean(mathmot, na.rm=T), 

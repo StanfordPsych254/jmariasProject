@@ -23,6 +23,7 @@
       <p id='logo-text'>Stanford Psychology Department</p>
       <br>
       <p class="block-text">In this study, you will complete three short surveys on your opinions and feelings towards a variety of items, as well as complete a few trials of a fast, problem-solving task.</p>
+      <p class="block-text">A blue progress bar will appear at the top of the screen to indicate how much of the HIT you have completed.</p>
       <button type="button" onclick="this.blur(); experiment.next()">Start</button>
 
       <p class="block-text" id="legal">By answering the following
@@ -54,6 +55,8 @@
     <!-- Questionnaire slide 1 INTRODUCTION , motivationIntro -->
 
     <div class="slide" id="motivationIntro">
+      <div style="width: 500px; margin: 0 auto; text-align: center; background-color: #8C1516; padding: 20px 15px 10px 10px">
+      </div>
       <br>
 
       <div class="block-text">
@@ -145,6 +148,8 @@
     <!-- Questionnaire slide 2 INTRODUCTION , anxietyIntro -->
 
     <div class="slide" id="mathanxIntro">
+      <div style="width: 500px; margin: 0 auto; text-align: center; background-color: #8C1516; padding: 20px 15px 10px 10px">
+      </div>
       <br>
 
       <div align="center" class="block-text">
@@ -238,6 +243,8 @@
     <!-- Questionnaire slide 3 INTRODUCTION , genanxIntro -->
 
     <div class="slide" id="genanxIntro">
+      <div style="width: 500px; margin: 0 auto; text-align: center; background-color: #8C1516; padding: 20px 15px 10px 10px">
+      </div>
       <br>
 
       <div align="center" text-align="center" class="block-text">
@@ -525,45 +532,46 @@
 	  </select>
 	</p>
 
-	<p><b>If you have children, how old is your <em>oldest</em> child?</b></p>
-	<p>
-	  <select name="oldest" id="oldestAge" form="demographics">
-	    <option value="">Choose an age</option>
-      <option value="">(No children)</option>
-	    <option value="0to1y">Less than 1 year old</option>
-	    <option value="1y">1 year old</option>
-	    <option value="2y">2 years old</option>
-	    <option value="3y">3 years old</option>
-	    <option value="4y">4 years old</option>
-	    <option value="5y">5 years old</option>
-	    <option value="6y">6 years old</option>
-	    <option value="7y">7 years old</option>
-	    <option value="8y">8 years old</option>
-	    <option value="9y">9 years old</option>
-	    <option value="10y">10 years old</option>
-      <option value="11y">11 years old</option>
-	    <option value="12y">12 years old</option>
-	    <option value="13y">13 years old</option>
-	    <option value="14y">14 years old</option>
-	    <option value="15y">15 years old</option>
-	    <option value="16y">16 years old</option>
-	    <option value="17y">17 years old</option>
-	    <option value="18y">18 years old</option>
-	    <option value="olderthan18">More than 18 years old</option>
-	  </select>
-
-    <p><b>If you have school-aged children, how often do you help them with their <em>math</em> homework?</b></p>
+    <p><b>If you have school-aged children, how frequently do you help them with their <em>math</em> homework?</b></p>
   	<p>
   	  <select name="mathhwhelp" id="mathhwhelp" form="demographics">
-  	    <option value="">(No children)</option>
+        <option value="">Choose an frequency</option>
+        <option value="">(No children)</option>
   	    <option value="Never">Never</option>
   	    <option value="Rarely">Rarely</option>
-  	    <option value="Occasionally">Occasionally</option>
+  	    <option value="Sometimes">Sometimes</option>
   	    <option value="Often">Often</option>
   	    <option value="Always">Always</option>
   	  </select>
   	</p>
 
+
+    	<p><b>If you have any children, how old is your <em>oldest</em> child?</b></p>
+    	<p>
+    	  <select name="oldest" id="oldestAge" form="demographics">
+    	    <option value="">Choose an age</option>
+          <option value="">(No children)</option>
+    	    <option value="0to1y">Less than 1 year old</option>
+    	    <option value="1y">1 year old</option>
+    	    <option value="2y">2 years old</option>
+    	    <option value="3y">3 years old</option>
+    	    <option value="4y">4 years old</option>
+    	    <option value="5y">5 years old</option>
+    	    <option value="6y">6 years old</option>
+    	    <option value="7y">7 years old</option>
+    	    <option value="8y">8 years old</option>
+    	    <option value="9y">9 years old</option>
+    	    <option value="10y">10 years old</option>
+          <option value="11y">11 years old</option>
+    	    <option value="12y">12 years old</option>
+    	    <option value="13y">13 years old</option>
+    	    <option value="14y">14 years old</option>
+    	    <option value="15y">15 years old</option>
+    	    <option value="16y">16 years old</option>
+    	    <option value="17y">17 years old</option>
+    	    <option value="18y">18 years old</option>
+    	    <option value="olderthan18">More than 18 years old</option>
+    	  </select>
 
 
 	<p><b>What do you think this experiment was about?</b></p>
