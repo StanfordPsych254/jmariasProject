@@ -5,17 +5,23 @@ To Dos (as of 3-8-16)
 
 CURRENT ISSUES: 
 
+-ADD additional PVT response buttons: 
+	-Add buttons themselves
+	-Set response mechanisms so that: if PVT response was answered, then "certainty" button moves slide forward. If PVT hasn't been answered, then certainty calls up "please answer!". And all buttons always logs answer, regardless of if other was clicked. And perhaps make PVT button move slide forward if the "certainty" button was already clicked.
+
+	-Add log response into data option (need additional "certainty" data point, b/c each slide is already using "rating" as the output for the PVT response) 
+
+
 -Find out how to split worker ID from rest of data, generate another type of "subjectid", and use subject id when it is real data
 
 -Make sure all variables are included as correct type (e.g. factor w/ levels, or binary 0 and 1, etc.)
 	-how to import age as a string, then auto-correct it to a number without generating NAs in case people put letters in the answer as well
 
-
+-
 
 
 -Add a "debriefing" slide before the "you're done...submitting" slide(?)
 
---Consider changing 3rd pvt practice question (seems pretty hard compared to other practice and performance questions) 
 
 
 

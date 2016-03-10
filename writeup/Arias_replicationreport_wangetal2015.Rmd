@@ -116,8 +116,20 @@ quadratic effects, we recentered math motivation at low (i.e., 1 SD below the me
 
 #### Data preparation
 	Data preparation following the analysis plan.
+
+```{r clearing environment setting themes, echo=F, results='hide', warnings=F}
+
+# Clearing the global environment
+rm(list = ls()) 
+ls()
+
+## setting style element for ggplot2
+theme_set(theme_bw())
+
+```
 	
 ```{r loading data from mturk json, warning=FALSE}
+
 
 #Reading the path
 path <- "C:\\Users\\Juan\\Documents\\1. STANFORD\\2nd Year 15-16\\Psych254 Replication Methods\\Psych254 Project\\Psych254proj_mturk_DONTCOMMIT\\"
@@ -289,7 +301,7 @@ subjectmeans$z.genanx <- scale(subjectmeans$mean.genanx, center = TRUE, scale = 
 	The analyses as specified in the analysis plan
 	
 	
-```{r Correlations between variables of interest, eval=FALSE}
+```{r CORRELATIONS between variables of interest, eval=FALSE}
 
 ##NOTE -- this correlation chunk is not being evaluated yet because need at least 4 data points to run
 
@@ -344,6 +356,16 @@ cor_table <- corstarsl(cor.means)
 
 #General Linear Models for Hierarchical Regression of Anxiety and Motivation on Performance 
 
+mathperflm0 <- lm(z.pvt ~ gender + z.genanx , data = subjectmeans)
+
+kable(summary(mathperflm0)$coef)
+
+
+mathperflm02 <- lm(z.pvt ~ gender + z.mathanx + z.mathmot, data = subjectmeans)
+
+kable(summary(mathperflm02)$coef)
+
+
 mathperflm1 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2), data = subjectmeans)
 
 kable(summary(mathperflm1)$coef)
@@ -360,6 +382,8 @@ kable(summary(mathperflm3)$coef)
 
 
 mathperflm4 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * z.mathmot + (I(z.mathanx^2) * z.mathmot), data = subjectmeans)
+
+summary(mathperflm4)$coef
 
 kable(summary(mathperflm4)$coef)
 
