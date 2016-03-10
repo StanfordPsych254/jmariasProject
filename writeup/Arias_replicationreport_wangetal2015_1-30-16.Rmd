@@ -13,9 +13,12 @@ Course Instructors: Dr. Michael Frank, Robert Hawkins, & Eric Smith
 
 Contact information: email: stanfordpsych254 (at) gmail (dot) com
 
-Testable Experiment Webpage:
-
+Testable Replication Experiment Webpage:
 https://web.stanford.edu/~jmarias/jmariasProject/experiment/mathmotivationsurveys.html
+
+
+Link to Original Study (Wang et al., 2015) PDF:
+http://pss.sagepub.com/content/early/2015/10/30/0956797615602471.full.pdf+html
 
 
 ```{r load packages, echo=F, results='hide', warning=FALSE, message=FALSE}
