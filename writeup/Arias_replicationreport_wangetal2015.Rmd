@@ -40,15 +40,15 @@ getwd()
 ```
 
 
-#####Introduction
+### Introduction
 
 The study presented here attempts to replicate the findings of Study 2 in Wang et al. (2015), which demonstrated that the relationship between math anxiety and math performance follows an inverted-U pattern among college undergraduate students with higher intrinsic math motivation, whereas this same relationship is linearly negative among students with lower intrinsic math motivation. The current study attempts to replicate and expand this finding using a broader participant pool obtained using Amazon's Mechanical Turk platform. 
 
 
 
-#####Method
+### Method
 
-######Power Analysis
+##### Power Analysis
 
 Original test: F-test: multiple, fixed-effects regression with 9 total predictors and one observed predictor for change in R-squared. 
 
@@ -65,7 +65,7 @@ Planned Sample
 	The planned sample will be 395 adult participants recruited from Amazon's Mechanical Turk platform. Study 2 of Wang et al. (2015) used 237 undergraduate students, 56% female, mean age = 19.53 years old (*SD* = 2.01, range = 18 - 39), for their participant sample.
 	
 
-#####Materials
+#### Materials
   
 Please see below for quoted descriptions of the materials used in the original study, which are also used in the present replication: 
 
@@ -77,21 +77,21 @@ Please see below for quoted descriptions of the materials used in the original s
 
 > The problem-verification task (Rinne & Mazzocco, 2014) was used to measure participants' math calculation fluency. Because the 64 easy items were far too easy for undergraduate students (mean accuracy = .93, SD = .06), we chose to focus on the 24 hard items. The hard items had wider performance variability (mean accuracy = .85, SD = .13) and were therefore a more proper measure of individual differences in calculation fluency in college students. An efficiency score was obtained by dividing the percentage of total correct responses by the mean reaction time across all items.
 
-*Replication differences of note*
+#### *Replication differences of note*
 Materials:
 The key differences between the original study and the current replication is that the surveys and the measure of math performance (the Problem-Verification Task), were presented to participants as a webpage, direct from the MTurk interface, rather than as a Qualtrics survey.
 
 Another difference: the PVT questions do not include the additional selection choices of "How sure are you of this answer? ('positively sure', 'kind of sure', or 'not sure')", as these selections were not used in the PVT efficiency calculation or later analyses in this particular study. 
 
 
-#####Procedure
+#### Procedure
 	Note: Block quote below is from Study 1 of same article, replicated in Study 2 and used to describe math performance task procedure
 	
 >  The problem-verification task was developed as a measure of calculation fluency and metacognition (Rinne & Mazzocco, 2014). We relied on the calculation-fluency component of this measure in the present study. On a laptop, participants were shown a series of two-operand arithmetic problems involving addition, subtraction, multiplication, division, and equivalency of fractions. For each arithmetic problem, a solution was shown that was correct or incorrect, and participants were asked to answer "right," "wrong," or "don't know" as quickly as possible without calculating. Participants were also asked to indicate whether they were "positively sure," "kind of sure," or "not sure" of their answer after each item. Each item was presented for a maximum of 10 s. If no response was given within that time, the program proceeded to the next item.
 	In total, participants were given 4 practice items followed by 88 test items. Among all test items, 64 were easy (e.g., single-digit arithmetic, common-denominator fraction, and solutions far from the correct answer), and 24 were hard (e.g., double-digit arithmetic, uncommon- denominator fraction, and solutions close to the correct answer). Reaction time (in seconds) was defined as the time between stimulus onset and response. For the current analyses, an efficiency score was calculated by dividing the percentage of total correct responses by the mean reaction time across all items.
 	
 	
-#####Analysis Plan
+#### Analysis Plan
 
 >	Hierarchical regression analysis was used to examine whether the quadratic relation between math anxiety and math cognition was further moderated by math motivation. Specifically, performance on the problem- verification task was predicted in four steps. In Step 1, covariates including age, sex, and linear and quadratic terms of general anxiety were entered. The linear term of math motivation and math anxiety was entered in Step 2. In Step 3, we entered the quadratic term of math anxiety and the interaction between math anxiety and math motivation. Finally, we entered the moderated quadratic interaction term between math anxiety and math motivation in Step 4. Math anxiety, math motivation, and general anxiety were standardized and centered prior to analyses in order to compute the interaction and higher-order terms. The outcome variable was also standardized to maintain consistency across the two studies.
  
@@ -101,20 +101,20 @@ Another difference: the PVT questions do not include the additional selection ch
 > *From Study 1: To further examine the four significant moderated
 quadratic effects, we recentered math motivation at low (i.e., 1 SD below the mean) and high (i.e., 1 SD above the mean) levels to examine the relations between math anx- iety and math performance across a wide range of math anxiety (3 SD, 2 SD, and 1 SD above and below the mean as well as at the mean) at these two different levels of math motivation (Aiken & West, 1991).
 
-#####Differences from Original Study
+#### Differences from Original Study
 
 (Post Data Collection) Methods Addendum
 
-######Actual Sample
+##### Actual Sample
 	sample size, demographics, data exclusions based on rules spelled out in analysis plan
 
-######Differences from pre-data collection methods plan
+##### Differences from pre-data collection methods plan
 	Any differences from what was described as the original plan, or "none".
 
 
-#####Results
+### Results
 
-######Data preparation
+#### Data preparation
 	Data preparation following the analysis plan.
 	
 ```{r loading data from mturk json, warning=FALSE}
@@ -285,7 +285,7 @@ subjectmeans$z.genanx <- scale(subjectmeans$mean.genanx, center = TRUE, scale = 
 
 ```
 
-#####Confirmatory analysis
+#### Confirmatory analysis
 	The analyses as specified in the analysis plan
 	
 	
@@ -404,7 +404,7 @@ kable(summary(mathperflm1)$coef)
 ```
 
 
-######Exploratory analyses
+#### Exploratory analyses
 
 Will be conducting exploratory analyses on effect of education level, current student status, and whether or not participant has school-aged children on math performance, both independent of an in conjunction with math anxiety and math motivation. 
 
