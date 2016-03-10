@@ -61,6 +61,9 @@ Planned Sample
 	
 
 #####Materials
+  
+Please see below for quoted descriptions of the materials used in the original study, which are also used in the present replication: 
+
 >  Participants self-reported math anxiety using the brief version of the Mathematics Anxiety Rating Scale (MARS-B; Suinn & Winston, 2003). The 30-item MARS-B is widely used to measure math anxiety in adults. Items are rated on a 5-point Likert-type scale (1 = not at all nervous, 5 = very very nervous). The MARS-B has excellent internal consistency (Cronbach's alpha = .94). 
 
 > The trait subscale from the State-Trait Anxiety Inventory (Spielberger, 1983) was used to measure participants' general anxiety. This subscale consists of 20 items that are rated on a 4-point Likert-type scale (1 = almost never, 4 = almost always). This scale has excellent internal consistency (Cronbach's alpha = .94). 
@@ -108,7 +111,7 @@ quadratic effects, we recentered math motivation at low (i.e., 1 SD below the me
 ######Data preparation
 	Data preparation following the analysis plan.
 	
-```{rloading data from mturk json}
+```{r loading data from mturk json}
 
 #Reading the path
 path <- "C:\\Users\\Juan\\Documents\\1. STANFORD\\2nd Year 15-16\\Psych254 Replication Methods\\Psych254 Project\\Psych254proj_mturk_DONTCOMMIT\\"
