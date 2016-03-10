@@ -61,8 +61,13 @@ Planned Sample
 	
 
 #####Materials
->  Participants self-reported math anxiety using the brief version of the Mathematics Anxiety Rating Scale (MARS-B; Suinn & Winston, 2003). The 30-item MARS-B is widely used to measure math anxiety in adults. Items are rated on a 5-point Likert-type scale (1 = not at all nervous, 5 = very very nervous). The MARS-B has excellent internal consistency (Cronbach's ?? = .94). The trait subscale from the State-Trait Anxiety
-Inventory (Spielberger, 1983) was used to measure participants' general anxiety. This subscale consists of 20 items that are rated on a 4-point Likert-type scale (1 = almost never, 4 = almost always). This scale has excellent internal consistency (Cronbach's ?? = .94). Participants self-reported their math motivation using the same three items from the scale used in Study 1 (M. M. Chiu and Zeng, 2008). The Cronbach's ?? for this scale is .82, which indicates good internal consistency. As in Study 1, the problem-verification task (Rinne & Mazzocco, 2014) was used to measure participants' math calculation fluency. Because the 64 easy items were far too easy for undergraduate students (mean accuracy = .93, SD = .06), we chose to focus on the 24 hard items. The hard items had wider performance variability (mean accuracy = .85, SD = .13) and were therefore a more proper measure of individual differences in calculation fluency in college students. An efficiency score was obtained by dividing the percentage of total correct responses by the mean reaction time across all items.
+>  Participants self-reported math anxiety using the brief version of the Mathematics Anxiety Rating Scale (MARS-B; Suinn & Winston, 2003). The 30-item MARS-B is widely used to measure math anxiety in adults. Items are rated on a 5-point Likert-type scale (1 = not at all nervous, 5 = very very nervous). The MARS-B has excellent internal consistency (Cronbach's alpha = .94). 
+
+> The trait subscale from the State-Trait Anxiety Inventory (Spielberger, 1983) was used to measure participants' general anxiety. This subscale consists of 20 items that are rated on a 4-point Likert-type scale (1 = almost never, 4 = almost always). This scale has excellent internal consistency (Cronbach's alpha = .94). 
+
+> Participants self-reported their math motivation using the same three items from the scale used in Study 1 (M. M. Chiu and Zeng, 2008). The Cronbach's alpha for this scale is .82, which indicates good internal consistency. 
+
+> The problem-verification task (Rinne & Mazzocco, 2014) was used to measure participants' math calculation fluency. Because the 64 easy items were far too easy for undergraduate students (mean accuracy = .93, SD = .06), we chose to focus on the 24 hard items. The hard items had wider performance variability (mean accuracy = .85, SD = .13) and were therefore a more proper measure of individual differences in calculation fluency in college students. An efficiency score was obtained by dividing the percentage of total correct responses by the mean reaction time across all items.
 
 *Replication differences of note - Materials:*
 The key differences between the original study and the current replication is that the surveys and the measure of math performance (the Problem-Verification Task), were presented to participants as a webpage, direct from the MTurk interface, rather than as a Qualtrics survey.
@@ -79,10 +84,9 @@ Another difference: the PVT questions do not include the additional selection ch
 	
 #####Analysis Plan
 
->	 All analyses were conducted using SPSS (Version 22.0). Descriptive statistics are shown in Table 7. All main study variables were distributed widely and normally across their respective scales. Correlations between main study variables are shown in Table 8. None of these variables varied as a function of age. Sex (0 = female, 1 = male) was positively associated with performance on the problem-verification task and negatively correlated with math anxiety. Additionally, general anxiety was not related to math performance. Finally, math anxiety was negatively associated with math performance, whereas math motivation was positively associated with math performance.
-  Hierarchical regression analysis was used to examine whether the quadratic relation between math anxiety and math cognition was further moderated by math motivation. Specifically, performance on the problem- verification task was predicted in four steps. In Step 1, covariates including age, sex, and linear and quadratic terms of general anxiety were entered. The linear term of math motivation and math anxiety was entered in Step 2. In Step 3, we entered the quadratic term of math anxiety and the interaction between math anxiety and math motivation. Finally, we entered the moderated quadratic interaction term between math anxiety and math motivation in Step 4. Math anxiety, math motivation, and general anxiety were standardized and centered prior to analyses in order to compute the interaction and higher-order terms. The outcome variable was also standardized to maintain consistency across the two studies.
+>	Hierarchical regression analysis was used to examine whether the quadratic relation between math anxiety and math cognition was further moderated by math motivation. Specifically, performance on the problem- verification task was predicted in four steps. In Step 1, covariates including age, sex, and linear and quadratic terms of general anxiety were entered. The linear term of math motivation and math anxiety was entered in Step 2. In Step 3, we entered the quadratic term of math anxiety and the interaction between math anxiety and math motivation. Finally, we entered the moderated quadratic interaction term between math anxiety and math motivation in Step 4. Math anxiety, math motivation, and general anxiety were standardized and centered prior to analyses in order to compute the interaction and higher-order terms. The outcome variable was also standardized to maintain consistency across the two studies.
  
->  Results of the hierarchical regression analyses are shown in Table 9. Overall, age and sex both negatively predicted task performance, which indicates that younger and male participants performed better on average than older and female participants, with a larger effect size for sex than for age. General anxiety did not predict math performance. Math anxiety negatively predicted math performance after we controlled for the effects of the covariates. Finally, after controlling for all the linear and two-way interaction effects, we found that the moderated quadratic interaction between math anxiety and math motivation was statistically significant and added incremental predictive effects on math performance.
+>  Overall, age and sex both negatively predicted task performance, which indicates that younger and male participants performed better on average than older and female participants, with a larger effect size for sex than for age. General anxiety did not predict math performance. Math anxiety negatively predicted math performance after we controlled for the effects of the covariates. Finally, after controlling for all the linear and two-way interaction effects, we found that the moderated quadratic interaction between math anxiety and math motivation was statistically significant and added incremental predictive effects on math performance.
   To further examine the moderated quadratic effects, we conducted post hoc analyses on the predictive effects of math anxiety at different levels of math anxiety and math motivation using the same procedures as in Study 1*. Results are shown in Table 10 and Figure 3. The findings were consistent with the results from Study 1. At low levels of math motivation, math anxiety was modestly negatively associated with task performance across all levels of math anxiety. At high levels of math motivation, there was an inverted-U curvilinear relation between math anxiety and math performance.
 	
 > *From Study 1: To further examine the four significant moderated
@@ -156,28 +160,31 @@ length(unique(d$workerid))
 
 ############ Prepping Survey Responses for Analyses ####################################
 
-### Math Motivation (3-item; see Chiu & Zeng, 2008) ######
+#Making age and gender numeric and factor variables, respectively
+#I'm sure I will have to clean this part up, but trying to keep moving forward
+d$age <- as.numeric(d$age)
+d$gender <- as.factor(d$gender)
 
-
-                               
-
-### Math Anxiety (30-item MARS-B; see Suinn & Winston, 2003) ###
-  #No data prep needed aside from re-naming and calculating mean value for each participant, below
-
-
-### General Anxiety (20-item (Trait Anxiety); see State-Trait Anxiety Inventory, Spielberger, 1983)
-
-
-##### Reverse Scoring General Anxiety:
 
 #Setting stimulus variable as string
 d$stimulus <- as.character(d$stimulus)
 
+
+
 #generating a unique "accuracy" variable from stimulus for PVT practice and performance trials
+#First as a string variable, including "dont know" and "not responded" as separate categories, then as a numeric binary, only including "accurate" as 1 and all else as 0. 
+
 d1 <- d %>% 
-    mutate(accuracy = ifelse(trial_type=="PVTpractice" | 
+    mutate(accuracy.string = ifelse(trial_type=="PVTpractice" | 
                              trial_type=="performance", 
-                      rating_raw, NA))
+                      rating_raw, NA)) %>% 
+    mutate(accuracy = ifelse(accuracy.string=="accurate",
+                            1, ifelse(accuracy.string=="inaccurate" |
+                                        accuracy.string=="dontknow" |
+                                        accuracy.string=="not responded",
+                            0, NA)))
+
+             
 
 #Generating "pvt.acc" for accuracy on only the pvt performance trials (no practice)
 d1 <- d1 %>% 
@@ -208,14 +215,19 @@ d <- d3
 
 ##########
 
+### Math Motivation (3-item; see Chiu & Zeng, 2008) ######
 d <- d %>% 
     mutate(mathmot = ifelse(trial_type =="mathMot",
                       rating, NA))
 
+
+### Math Anxiety (30-item MARS-B; see Suinn & Winston, 2003) ###
+  #No data prep needed aside from re-naming and calculating mean value for each participant, below
 d <- d %>% 
     mutate(mathanx = ifelse(trial_type =="mathAnx",
                       rating, NA))
 
+### General Anxiety (20-item (Trait Anxiety); see State-Trait Anxiety Inventory, Spielberger, 1983)
 d <- d %>% 
     mutate(genanx = ifelse(trial_type =="genAnx",
                       rating, NA))
@@ -243,10 +255,10 @@ d <- d %>%
 
 
 #### Mean Index and Standardized Scores for all measures #######
-
+#str(d)
 #Calculate mean 
 subjectmeans <- d %>% 
-  group_by(workerid) %>% 
+  group_by(gender, age, workerid) %>% 
   summarise(mean.acc = mean(pvt.acc, na.rm=T), 
             mean.RT = mean(sec.RT, na.rm=T), 
             mean.mathmot = mean(mathmot, na.rm=T), 
@@ -305,10 +317,13 @@ cor_table <- corstarsl(subjectmeans)
 ##To remove unwanted columns from dataframe before adding to correlation table (in order to replicate table from original study)
 
 cor.means <- subjectmeans %>% 
-  select()
+  select(age, gender, mean.genanx, mean.mathanx, mean.mathmot, pvt)
+##Create table from dataframe: 
+cor_table <- corstarsl(cor.means)
 
-## exporting tables to either html or .tex (I prefer .tex but you will have to install TeX)
-print.xtable(cor_table, type="html", file="filename.html")
+
+## exporting tables to html, if desired: 
+#print.xtable(cor_table, type="html", file="filename.html")
 
 
 
@@ -318,39 +333,61 @@ print.xtable(cor_table, type="html", file="filename.html")
 
 #General Linear Models for Hierarchical Regression of Anxiety and Motivation on Performance 
 
-###MAKE THESE THE STANDARDIZED VALUES (z.genanx)
-##CHANGE TO LM not GLM
+mathperflm1 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2), data = subjectmeans)
 
-mathperflm1 <- lm(pvt ~ age + sex + genanx + I(genanx^2), data = subjectmeans)
+kable(summary(mathperflm1)$coef)
 
-mathperflm2 <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot, data = subjectmeans)
 
-mathperflm3 <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot + I(mathanx^2) 
-                              + mathanx * mathmot, data = subjectmeans)
+mathperflm2 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot, data = subjectmeans)
 
-mathperflm4.alt <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx * mathmot + (I(mathanx^2) * mathmot),
-                      data = subjectmeans)
+kable(summary(mathperflm1)$coef)
+
+
+mathperflm3 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot + I(z.mathanx^2) + z.mathanx * z.mathmot, data = subjectmeans)
+
+kable(summary(mathperflm1)$coef)
+
+
+mathperflm4 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * z.mathmot + (I(z.mathanx^2) * z.mathmot), data = subjectmeans)
+
+kable(summary(mathperflm1)$coef)
+
 
 ##Alternatively, if the interaction terms don't already include those variables in the model
-mathperflm4 <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx + mathmot + I(mathanx^2) 
-                              + (mathanx * mathmot) + (I(mathanx^2) * mathmot), data = subjectmeans)
+mathperflm4.alt <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot + I(z.mathanx^2) + (z.mathanx * z.mathmot) + (I(z.mathanx^2) * z.mathmot), data = subjectmeans)
+
+kable(summary(mathperflm1)$coef)
 
 
+```
 
-##Look into using kable (in knitr package) to make nice table of model outputs 
+```{r basic plot of predicted values}
 
-kable(summary(modle1)$coef)
+ggplot(subjectmeans, aes(x = subjectmeans$mean.mathanx, y = subjectmeans$pvt)) + 
+  geom_point() +
+  geom_smooth(method = lm, data = mathperflm4) +
+  xlab("Math Anxiety") +
+  ylab("PVT Efficiency Performance") +
+  ggtitle("Math Performance on Math Anxiety") + 
+    theme(plot.title = element_text(lineheight=.8, face="bold"))
 
 
 ```
 
 ```{r model at different SDs }
 
-##Minus- 1 actually gives you 1 SD ABOVE b/c you areshifting the x axis "to the right" (mean becomes -1)
+##Minus-1  gives  1 SD ABOVE b/c you are shifting the x axis "to the right" (mean becomes -1)
 
-mathperflm4.alt <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx * I(mathmot - 1) + (I(mathanx^2) * I(mathmot - 1)), data = subjectmeans)
+mathperflm4_above <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot - 1) + (I(z.mathanx^2) * I(z.mathmot - 1)), data = subjectmeans)
 
-mathperflm4.alt <- lm(pvt ~ age + sex + genanx + I(genanx^2) + mathanx * I(mathmot + 1) + (I(mathanx^2) * I(mathmot + 1)), data = subjectmeans)
+kable(summary(mathperflm1)$coef)
+
+
+
+mathperflm4_below <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot + 1) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = subjectmeans)
+
+kable(summary(mathperflm1)$coef)
+
 
 
 ```

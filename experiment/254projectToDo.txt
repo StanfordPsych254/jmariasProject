@@ -8,6 +8,9 @@ CURRENT ISSUES:
 -Find out how to split worker ID from rest of data, generate another type of "subjectid", and use subject id when it is real data
 
 -Make sure all variables are included as correct type (e.g. factor w/ levels, or binary 0 and 1, etc.)
+	-how to import age as a string, then auto-correct it to a number without generating NAs in case people put letters in the answer as well
+
+
 
 
 -Add a "debriefing" slide before the "you're done...submitting" slide(?)
@@ -17,7 +20,7 @@ CURRENT ISSUES:
 
 
 
---Clean up replication report and send to instructors
+--Clean up replication report substantially
 
 
 
