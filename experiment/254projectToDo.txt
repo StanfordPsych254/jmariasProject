@@ -5,6 +5,12 @@ To Dos (as of 3-8-16)
 
 CURRENT ISSUES: 
 
+--Add red bar to intro slides 
+
+--Add blank "add children" option
+
+-Reorder children questions
+
 --Add "do you help your child with math work? question 
 
 --Figure out Cosub issues

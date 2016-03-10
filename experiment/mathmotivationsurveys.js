@@ -106,29 +106,29 @@ PVTpractice: [
   performance : [
     {problem: "13 X 4 = 47", trueAnswer: "wrong"},
     {problem:"22 - 6 = 16", trueAnswer: "right"},
-    // {problem:"35 &divide; 5 = 7", trueAnswer: "right"},
-    // {problem:"54 + 26 = 70", trueAnswer: "wrong"},
-    // {problem: "32 - 16 = 14", trueAnswer: "wrong"} ,
-    // {problem: "39 &divide; 16 = 3", trueAnswer: "wrong"},
-    // {problem: "3 X 13 = 39", trueAnswer: "right"},
-    // {problem: "<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>",
-    //  trueAnswer: "right"},
-    // {problem: "27 + 323 = 350", trueAnswer: "right"},
-    // {problem: "112 - 88 = 24", trueAnswer: "right"},
-    // {problem: "5 X 15 = 65", trueAnswer: "wrong"},
-    // {problem: "27 + 234 = 251", trueAnswer: "wrong"},
-    // {problem: "84 &divide; 4 = 21", trueAnswer: "right"},
-    // {problem: "44 - 18 = 24", trueAnswer: "wrong"},
-    // {problem: "<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>", trueAnswer: "wrong"},
-    // {problem: "14 X 5 = 70", trueAnswer: "right"},
-    // {problem: "28 &divide; 16 = 2", trueAnswer: "wrong"},
-    // {problem: "<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>", trueAnswer: "wrong"},
-    // {problem: "<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>", trueAnswer: "wrong"},
-    // {problem: "<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>", trueAnswer: "right"},
-    // {problem: "<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>", trueAnswer: "wrong"} ,
+    {problem:"35 &divide; 5 = 7", trueAnswer: "right"},
+    {problem:"54 + 26 = 70", trueAnswer: "wrong"},
+    {problem: "32 - 16 = 14", trueAnswer: "wrong"} ,
+    {problem: "39 &divide; 16 = 3", trueAnswer: "wrong"},
+    {problem: "3 X 13 = 39", trueAnswer: "right"},
+    {problem: "<sup>2</sup>&frasl;<sub>6</sub> = <sup>3</sup>&frasl;<sub>9</sub>",
+     trueAnswer: "right"},
+    {problem: "27 + 323 = 350", trueAnswer: "right"},
+    {problem: "112 - 88 = 24", trueAnswer: "right"},
+    {problem: "5 X 15 = 65", trueAnswer: "wrong"},
+    {problem: "27 + 234 = 251", trueAnswer: "wrong"},
+    {problem: "84 &divide; 4 = 21", trueAnswer: "right"},
+    {problem: "44 - 18 = 24", trueAnswer: "wrong"},
+    {problem: "<sup>5</sup>&frasl;<sub>12</sub> = <sup>2</sup>&frasl;<sub>6</sub>", trueAnswer: "wrong"},
+    {problem: "14 X 5 = 70", trueAnswer: "right"},
+    {problem: "28 &divide; 16 = 2", trueAnswer: "wrong"},
+    {problem: "<sup>8</sup>&frasl;<sub>4</sub> = <sup>16</sup>&frasl;<sub>9</sub>", trueAnswer: "wrong"},
+    {problem: "<sup>3</sup>&frasl;<sub>4</sub> + <sup>3</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>6</sub>", trueAnswer: "wrong"},
+    {problem: "<sup>12</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>", trueAnswer: "right"},
+    {problem: "<sup>76</sup>&frasl;<sub>10</sub> = <sup>7</sup>&frasl;<sub>1</sub>", trueAnswer: "wrong"} ,
     {problem: "<sup>8</sup>&frasl;<sub>2</sub> = <sup>6</sup>&frasl;<sub>1</sub>", trueAnswer: "wrong"} ,
-    // {problem: "<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>", trueAnswer: "wrong"},
-    // {problem: "18 + 56 = 74", trueAnswer: "right"}
+    {problem: "<sup>4</sup>&frasl;<sub>16</sub> + <sup>3</sup>&frasl;<sub>8</sub> = <sup>1</sup>&frasl;<sub>2</sub>", trueAnswer: "wrong"},
+    {problem: "18 + 56 = 74", trueAnswer: "right"}
   ]
 };
 
@@ -141,9 +141,6 @@ var pvtblocks = ["PVTintro", "PVTpractice","performanceintro", "performance"];
 
 // Randomize block order (making sure that each block begins with intro slide
 var blockOrder = _.flatten(_.shuffle([surveyblocks, pvtblocks]))
-
-console.log(blockOrder)
-
 
 // Calculate total number of trials, for progress bar
 var totalNumTrials = blockOrder.reduce(function(memo, blockName) {
@@ -201,6 +198,7 @@ var experiment = {
     race: [],
     children:[],
     childAgeOld:[],
+    mathhwhelp: [],
     expt_aim: [],
     expt_gen: []
   },
@@ -365,7 +363,7 @@ var experiment = {
     } else {
       experiment.data.rating.push("not responded");
       experiment.data.rt.push("not responded");
-      experiment.next();  
+      experiment.next();
     }
   },
 
@@ -396,6 +394,7 @@ var experiment = {
     experiment.data.ethnicity.push(document.getElementById("ethnicity").value);
     experiment.data.children.push(document.getElementById("children").value);
     experiment.data.childAgeOld.push(document.getElementById("oldestAge").value);
+    experiment.data.mathhwhelp.push(document.getElementById("mathhwhelp").value);
     experiment.data.expt_aim.push(document.getElementById("expthoughts").value);
     experiment.data.expt_gen.push(document.getElementById("expcomments").value);
     experiment.end();
