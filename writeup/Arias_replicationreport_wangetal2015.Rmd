@@ -117,7 +117,7 @@ quadratic effects, we recentered math motivation at low (i.e., 1 SD below the me
 ######Data preparation
 	Data preparation following the analysis plan.
 	
-```{r loading data from mturk json}
+```{r loading data from mturk json, warning=FALSE}
 
 #Reading the path
 path <- "C:\\Users\\Juan\\Documents\\1. STANFORD\\2nd Year 15-16\\Psych254 Replication Methods\\Psych254 Project\\Psych254proj_mturk_DONTCOMMIT\\"
@@ -289,7 +289,9 @@ subjectmeans$z.genanx <- scale(subjectmeans$mean.genanx, center = TRUE, scale = 
 	The analyses as specified in the analysis plan
 	
 	
-```{r Correlations between variables of interest, echo=FALSE, results='hide'}
+```{r Correlations between variables of interest, eval=FALSE}
+
+##NOTE -- this correlation chunk is not being evaluated yet because need at least 4 data points to run
 
 #Script for generating clean correlation table (bottom triangle only) with significance stars
 corstarsl <- function(x){ 
@@ -400,6 +402,8 @@ kable(summary(mathperflm1)$coef)
 
 
 ```
+
+
 ######Exploratory analyses
 
 Will be conducting exploratory analyses on effect of education level, current student status, and whether or not participant has school-aged children on math performance, both independent of an in conjunction with math anxiety and math motivation. 
