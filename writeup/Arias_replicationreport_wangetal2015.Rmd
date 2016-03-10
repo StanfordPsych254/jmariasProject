@@ -374,7 +374,7 @@ kable(summary(mathperflm4.alt)$coef)
 
 ```{r basic plot of predicted values}
 
-ggplot(subjectmeans, aes(x = subjectmeans$mean.mathanx, y = subjectmeans$pvt)) + 
+ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) + 
   geom_point() +
   geom_smooth(method = lm, data = mathperflm4) +
   xlab("Math Anxiety") +
@@ -385,7 +385,9 @@ ggplot(subjectmeans, aes(x = subjectmeans$mean.mathanx, y = subjectmeans$pvt)) +
 
 ```
 
-```{r model at different SDs, eval=FALSE}
+```{r model at different SDs}
+
+## NOTE that both of these models are giving the same result b/c there is not (apparent) variation across math motivation according to the model
 
 ##Minus-1  gives  1 SD ABOVE b/c you are shifting the x axis "to the right" (mean becomes -1)
 
@@ -395,20 +397,21 @@ kable(summary(mathperflm4_above)$coef)
 
 
 
-mathperflm4_below <- lm(z.pvt ~ 2 + age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot + 1) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = subjectmeans)
+mathperflm4_below <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot + 1) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = subjectmeans)
 
 kable(summary(mathperflm4_below)$coef)
 
 ```
 
-```{r plot of model at different motivation SDs, eval=FALSE}
+```{r plot of model at different motivation SDs}
 
-ggplot(subjectmeans, aes(x = subjectmeans$mean.mathanx, y = subjectmeans$pvt)) + 
+##ggplot of two predicted lines: for 
+ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) + 
   geom_smooth(method = lm, data = mathperflm4_above) +
   geom_smooth(method = lm, data = mathperflm4_below) +
-  xlab("Math Anxiety") +
-  ylab("PVT Efficiency Performance") +
-  ggtitle("Math Performance on Math Anxiety") + 
+  xlab("Math Anxiety (Standardized)") +
+  ylab("PVT Efficiency Performance (Standardized)") +
+  ggtitle("Predicted PVT performance as function of anxiety and motivation") + 
     theme(plot.title = element_text(lineheight=.8, face="bold"))
 
 
