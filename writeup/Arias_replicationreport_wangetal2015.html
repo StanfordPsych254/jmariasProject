@@ -385,7 +385,7 @@ kable(summary(mathperflm1)$coef)</code></pre>
 </table>
 <pre class="r"><code>mathperflm2 &lt;- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot, data = subjectmeans)
 
-kable(summary(mathperflm1)$coef)</code></pre>
+kable(summary(mathperflm2)$coef)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -415,7 +415,7 @@ kable(summary(mathperflm1)$coef)</code></pre>
 </table>
 <pre class="r"><code>mathperflm3 &lt;- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot + I(z.mathanx^2) + z.mathanx * z.mathmot, data = subjectmeans)
 
-kable(summary(mathperflm1)$coef)</code></pre>
+kable(summary(mathperflm3)$coef)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -445,7 +445,7 @@ kable(summary(mathperflm1)$coef)</code></pre>
 </table>
 <pre class="r"><code>mathperflm4 &lt;- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * z.mathmot + (I(z.mathanx^2) * z.mathmot), data = subjectmeans)
 
-kable(summary(mathperflm1)$coef)</code></pre>
+kable(summary(mathperflm4)$coef)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -476,7 +476,7 @@ kable(summary(mathperflm1)$coef)</code></pre>
 <pre class="r"><code>##Alternatively, if the interaction terms don't already include those variables in the model
 mathperflm4.alt &lt;- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot + I(z.mathanx^2) + (z.mathanx * z.mathmot) + (I(z.mathanx^2) * z.mathmot), data = subjectmeans)
 
-kable(summary(mathperflm1)$coef)</code></pre>
+kable(summary(mathperflm4.alt)$coef)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -517,64 +517,20 @@ kable(summary(mathperflm1)$coef)</code></pre>
 
 mathperflm4_above &lt;- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot - 1) + (I(z.mathanx^2) * I(z.mathmot - 1)), data = subjectmeans)
 
-kable(summary(mathperflm1)$coef)</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="right">Estimate</th>
-<th align="right">Std. Error</th>
-<th align="right">t value</th>
-<th align="right">Pr(&gt;|t|)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">(Intercept)</td>
-<td align="right">-7.2124892</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-</tr>
-<tr class="even">
-<td align="left">age</td>
-<td align="right">0.2828427</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-</tr>
-</tbody>
-</table>
-<pre class="r"><code>mathperflm4_below &lt;- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot + 1) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = subjectmeans)
+kable(summary(mathperflm4_above)$coef)
 
-kable(summary(mathperflm1)$coef)</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="right">Estimate</th>
-<th align="right">Std. Error</th>
-<th align="right">t value</th>
-<th align="right">Pr(&gt;|t|)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">(Intercept)</td>
-<td align="right">-7.2124892</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-</tr>
-<tr class="even">
-<td align="left">age</td>
-<td align="right">0.2828427</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-</tr>
-</tbody>
-</table>
+
+
+mathperflm4_below &lt;- lm(z.pvt ~ 2 + age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot + 1) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = subjectmeans)
+
+kable(summary(mathperflm4_below)$coef)</code></pre>
+<pre class="r"><code>ggplot(subjectmeans, aes(x = subjectmeans$mean.mathanx, y = subjectmeans$pvt)) + 
+  geom_smooth(method = lm, data = mathperflm4_above) +
+  geom_smooth(method = lm, data = mathperflm4_below) +
+  xlab(&quot;Math Anxiety&quot;) +
+  ylab(&quot;PVT Efficiency Performance&quot;) +
+  ggtitle(&quot;Math Performance on Math Anxiety&quot;) + 
+    theme(plot.title = element_text(lineheight=.8, face=&quot;bold&quot;))</code></pre>
 </div>
 <div id="exploratory-analyses" class="section level4">
 <h4>Exploratory analyses</h4>

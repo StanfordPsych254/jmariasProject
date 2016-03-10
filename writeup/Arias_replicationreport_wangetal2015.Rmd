@@ -351,23 +351,23 @@ kable(summary(mathperflm1)$coef)
 
 mathperflm2 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot, data = subjectmeans)
 
-kable(summary(mathperflm1)$coef)
+kable(summary(mathperflm2)$coef)
 
 
 mathperflm3 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot + I(z.mathanx^2) + z.mathanx * z.mathmot, data = subjectmeans)
 
-kable(summary(mathperflm1)$coef)
+kable(summary(mathperflm3)$coef)
 
 
 mathperflm4 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * z.mathmot + (I(z.mathanx^2) * z.mathmot), data = subjectmeans)
 
-kable(summary(mathperflm1)$coef)
+kable(summary(mathperflm4)$coef)
 
 
 ##Alternatively, if the interaction terms don't already include those variables in the model
 mathperflm4.alt <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot + I(z.mathanx^2) + (z.mathanx * z.mathmot) + (I(z.mathanx^2) * z.mathmot), data = subjectmeans)
 
-kable(summary(mathperflm1)$coef)
+kable(summary(mathperflm4.alt)$coef)
 
 
 ```
@@ -385,20 +385,31 @@ ggplot(subjectmeans, aes(x = subjectmeans$mean.mathanx, y = subjectmeans$pvt)) +
 
 ```
 
-```{r model at different SDs }
+```{r model at different SDs, eval=FALSE}
 
 ##Minus-1  gives  1 SD ABOVE b/c you are shifting the x axis "to the right" (mean becomes -1)
 
 mathperflm4_above <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot - 1) + (I(z.mathanx^2) * I(z.mathmot - 1)), data = subjectmeans)
 
-kable(summary(mathperflm1)$coef)
+kable(summary(mathperflm4_above)$coef)
 
 
 
-mathperflm4_below <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot + 1) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = subjectmeans)
+mathperflm4_below <- lm(z.pvt ~ 2 + age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot + 1) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = subjectmeans)
 
-kable(summary(mathperflm1)$coef)
+kable(summary(mathperflm4_below)$coef)
 
+```
+
+```{r plot of model at different motivation SDs, eval=FALSE}
+
+ggplot(subjectmeans, aes(x = subjectmeans$mean.mathanx, y = subjectmeans$pvt)) + 
+  geom_smooth(method = lm, data = mathperflm4_above) +
+  geom_smooth(method = lm, data = mathperflm4_below) +
+  xlab("Math Anxiety") +
+  ylab("PVT Efficiency Performance") +
+  ggtitle("Math Performance on Math Anxiety") + 
+    theme(plot.title = element_text(lineheight=.8, face="bold"))
 
 
 ```
