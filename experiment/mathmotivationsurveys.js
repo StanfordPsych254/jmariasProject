@@ -187,6 +187,7 @@ var experiment = {
     trial_type: [],
     stimulus: [],
     rating: [],
+    certainty: [],
     rt : [],
     ladder: [],
     age: [],
