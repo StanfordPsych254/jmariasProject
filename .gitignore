@@ -8,3 +8,7 @@ languages.json
 settings.json
 watch
 *.Rhistory
+auth.json
+mturk-and-gmail.txt
+arias-own-auth.json
+Thumbs.db

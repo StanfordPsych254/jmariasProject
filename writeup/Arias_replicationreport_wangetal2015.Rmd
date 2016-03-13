@@ -1,7 +1,7 @@
 ---
 title: "Wang et al. 2015 Replication Report"
 author: "Juan Miguel Arias"
-date: "March 10, 2016"
+date: "March 11, 2016"
 output: html_document
 ---
 
@@ -299,6 +299,13 @@ subjectmeans$z.mathanx <- scale(subjectmeans$mean.mathanx, center = TRUE, scale 
 subjectmeans$z.genanx <- scale(subjectmeans$mean.genanx, center = TRUE, scale = TRUE)
 
 
+##Just exploring - to delete
+
+dcut <- subjectmeans %>% 
+  filter(age != 40)
+
+
+
 ```
 
 #### Confirmatory analysis
@@ -360,16 +367,13 @@ cor_table <- corstarsl(cor.means)
 
 #General Linear Models for Hierarchical Regression of Anxiety and Motivation on Performance 
 
-mathperflm0 <- lm(z.pvt ~ gender + z.genanx , data = subjectmeans)
+## Linear model with only gender, z.Math Anxiety, z.Math Motivation
+mathperflm00 <- lm(z.pvt ~ gender + z.mathanx + z.mathmot, data = subjectmeans)
 
-kable(summary(mathperflm0)$coef)
+#Output nice knit table of model 00
+kable(summary(mathperflm00)$coef)
 
-
-mathperflm02 <- lm(z.pvt ~ gender + z.mathanx + z.mathmot, data = subjectmeans)
-
-kable(summary(mathperflm02)$coef)
-
-
+#Model 1 from study:  z.PVT Efficiency on Age, Gender, z.General Anx, z.General Anxiety squared
 mathperflm1 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2), data = subjectmeans)
 
 kable(summary(mathperflm1)$coef)
@@ -387,9 +391,8 @@ kable(summary(mathperflm3)$coef)
 
 mathperflm4 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * z.mathmot + (I(z.mathanx^2) * z.mathmot), data = subjectmeans)
 
-summary(mathperflm4)$coef
-
 kable(summary(mathperflm4)$coef)
+
 
 
 ##Alternatively, if the interaction terms don't already include those variables in the model

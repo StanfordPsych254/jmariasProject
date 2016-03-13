@@ -337,7 +337,7 @@
       <p class="block-text">In this section, you will be doing some fast math activities. You will be shown a series of math problems, one at a time. You won't need to figure out the answers to the problems because the answers will already be there. Your job is to decide whether the answer given to each problem is right or wrong.
       <p class="block-text"> You will choose by clicking <strong>Right</strong> if you think the given answer is right, <strong>Wrong</strong> if you think the given answer is wrong, and <strong>Don't Know</strong> if you do not know.
       <!-- <p class="block-text"> You will also select <strong>Positively Sure</strong> if you are very certain of your response, <strong>Kind of sure</strong> if you are somewhat certain of your response, and <strong>Not sure</strong> if you are very uncertain of your response. -->
-      <p  class="block-text"> 
+      <p  class="block-text">
 	1. Please do <strong>NOT</strong> use pencil and paper or any type of calculator.
       <p  class="block-text">
 	2. Remember, it is a <strong>FAST</strong> math judgement task. So please make your judgement for each problem as <strong>quickly and accurately</strong> as possible.
@@ -449,35 +449,9 @@
     <div class="slide" id="debriefing">
       <form id="demographics" onsubmit="experiment.submitcomments()">
 
-	<table width="100%">
-          <col style="width:30%">
-          <col style="width:70%">
-          <tr>
-            <td><img src="images/ladder.png"></td>
-            <td>
-              <p><b>Think of this ladder as representing where people stand in the United states.</b></p>
-              <p>At the top of the ladder are the people who are the best off - those who have the most money, the most education, and the most respected jobs. At the bottom are the people who are the worst off - who have the least money, least education, and the least respected jobs or no job. The higher up you are on this ladder, the closer you are to the people at the very top; the lower you are, the closer you are to the people at the very bottom.
-              </p>
-              <p><b>Where would you place yourself on this ladder?</b></p>
-              <p>
-		<select name="ladder" id="ladder" form="demographics">
-                  <option value="">Choose a rung</option>
-                  <option value="10">10 - Top</option>
-                  <option value="9">9</option>
-                  <option value="8">8</option>
-                  <option value="7">7</option>
-                  <option value="6">6</option>
-                  <option value="5">5</option>
-                  <option value="4">4</option>
-                  <option value="3">3</option>
-                  <option value="2">2</option>
-                  <option value="1">1 - Bottom</option>
-		</select>
-              </p>
-            </td>
-          </tr>
-	</table>
-	<br>
+    <div>
+      <p font-size= 24px><strong><em>Please answer the following demographic questions.</em></strong></p>
+    </div>
 
   <p><b>What is your age (in years)?</b></p>
   <p>
@@ -572,7 +546,7 @@
     <p><b>If you have school-aged children, how frequently do you help them with their <em>math</em> homework?</b></p>
   	<p>
   	  <select name="mathhwhelp" id="mathhwhelp" form="demographics">
-        <option value="">Choose an frequency</option>
+        <option value="">Choose a frequency</option>
         <option value="">(No children)</option>
   	    <option value="Never">Never</option>
   	    <option value="Rarely">Rarely</option>
@@ -616,15 +590,21 @@
 	  <textarea type="text" id="expthoughts" style="width:100%" name="expaim"></textarea>
 	</p>
 
-	<p><b>Any general comments about the experiment?</b></p>
+	<p><b>Any general comments about the experiment? (optional)</b></p>
 	<p>
 	  <textarea type="textarea" id="expcomments" style="width:100%" name="expgen"></textarea>
 	</p>
       </form>
 
+      <tr><td text-align="center">
+                <div id="debriefMessage"> </div>
+      </td></tr>
+
       <div align="center">
 	<button type="button" id="debriefsubmit" onClick="experiment.submit_comments()">Submit</button>
       </div>
+
+
     </div>
 
     <!-- The finish slide. -->

@@ -1,28 +1,16 @@
 *******
 Juan Arias, Psych 254 Project (Wang et al., "Math Anxiety/Motivation/Performance")
-To Dos (as of 3-8-16)
+To Dos (as of 3-12-16)
 *******
 
 CURRENT ISSUES: 
 
--ADD additional PVT response buttons: 
-	-Add buttons themselves
-	-Set response mechanisms so that: if PVT response was answered, then "certainty" button moves slide forward. If PVT hasn't been answered, then certainty calls up "please answer!". And all buttons always logs answer, regardless of if other was clicked. And perhaps make PVT button move slide forward if the "certainty" button was already clicked.
-
-	-Add log response into data option (need additional "certainty" data point, b/c each slide is already using "rating" as the output for the PVT response) 
+-check the debriefing verification
 
 
--Find out how to split worker ID from rest of data, generate another type of "subjectid", and use subject id when it is real data
 
 -Make sure all variables are included as correct type (e.g. factor w/ levels, or binary 0 and 1, etc.)
 	-how to import age as a string, then auto-correct it to a number without generating NAs in case people put letters in the answer as well
-
--
-
-
--Add a "debriefing" slide before the "you're done...submitting" slide(?)
-
-
 
 
 
@@ -47,13 +35,14 @@ cosub history  # show history of cosub actions
 By default, actions take place on the sandbox. You can run actions in production mode by adding '-p' after cosub, e.g., cosub -p create creates the HIT on the production site rather than the sandbox.
 
 *******
+AFS and COSUB: 
 
 NOTE ALSO:   When doing the COSUB commands (to get the project on mturk) run that from the Git CMD  (not Git Bash) but still do that from the necessary folder -- in this case it will be the Mturk folder (NOT the project_GIT folder) 
 
 NOTE TO SELF: do the AFS connecting from the GIT Bash command prompt (and probably from the psych254 project GIT folder -- at least it worked from there)
 
 1. Open your terminal or command line
-2. Type "ssh -x mkeil@corn.stanford.edu"
+2. Type "ssh -x jmarias@corn.stanford.edu"
 3. This should log you into corn after you present your Axess password
 4. Once in Type "cd WWW"
 5. Then navigate to your project folder name, I assume it's something like "cd jmariasProject". 
@@ -62,6 +51,16 @@ NOTE TO SELF: do the AFS connecting from the GIT Bash command prompt (and probab
 ***********************************************************************
 
 Old To Do: 
+
+-change the debriefing message, center, put it above submit **DONE**
+
+(note I moved the hit_modes.json file out of the mturk folder in order to potentially run the HIT again -- check this if things start not working) **DONE**
+
+-What should I have on my AFS space? (for this project and in general?) **DONE** (answer: just your git repository, basically) 
+
+-Find out how to split worker ID from rest of data, generate another type of "subjectid", and use subject id when it is real data **DONE** (code will be provided)
+
+-Add a "debriefing" slide before the "you're done...submitting" slide(?) **DONE**
 
 --Figure out cosub to R pipeline **DONE**
 
