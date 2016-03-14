@@ -150,28 +150,30 @@ for (f in files) {
   id <- data.frame(workerid = jd$WorkerId,
                    accepttime = as.character(jd$AcceptTime),
                    submittime = as.character(jd$SubmitTime),
-                   trial_number = as.factor(jd$answers$data$trial_number),
-                   block_number = as.factor(jd$answers$data$block_number),
-                   trial_type = as.factor(jd$answers$data$trial_type),
+                   trial_number = jd$answers$data$trial_number,
+                   block_number = jd$answers$data$block_number,
+                   trial_type = jd$answers$data$trial_type,
                    stimulus = jd$answers$data$stimulus,
                    rating_raw = jd$answers$data$rating,
                    RT = jd$answers$data$rt,
                    age = jd$answers$data$age,
                    gender = jd$answers$data$gender,
-                   education = as.factor(jd$answers$data$education),
-                   student = as.factor(jd$answers$data$student),
+                   education = jd$answers$data$education,
+                   student = jd$answers$data$student,
                    homelang = as.character(jd$answers$data$homelang),
                    ethnicity = jd$answers$data$ethnicity,
                    race = jd$answers$data$race,
-                   children = as.factor(jd$answers$data$children),
-                   mathhwhelp = as.factor(jd$answers$data$mathhwhelp),
-                   childAgeOld = as.factor(jd$answers$data$childAgeOld),
+                   children = jd$answers$data$children,
+                   mathhwhelp = jd$answers$data$mathhwhelp,
+                   childAgeOld = jd$answers$data$childAgeOld,
                    expt_aim = jd$answers$data$expt_aim,
                    expt_gen = jd$answers$data$expt_gen)
   
      d <- bind_rows(d, id)
 }
 
+
+warnings()
 
 # Number of participants
 length(unique(d$workerid))
