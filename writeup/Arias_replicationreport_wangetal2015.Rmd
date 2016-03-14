@@ -134,10 +134,11 @@ theme_set(theme_bw())
 
 
 #Reading the path
-path <- "C:\\Users\\Juan\\Documents\\1. STANFORD\\2nd Year 15-16\\Psych254 Replication Methods\\Psych254 Project\\Psych254proj_mturk_DONTCOMMIT\\"
+path <- "C:\\Users\\Juan\\Documents\\1. STANFORD\\2nd Year 15-16\\Psych254 Replication Methods\\Psych254 Project\\Psych254proj_mturk_DONTCOMMIT\\Arias 254 Pilot A\\"
 files <- dir(paste0(path,"sandbox-results\\"), 
              pattern = "*.json")
 d <- data.frame()
+
 
 #Transforming data from JSON format to dataframe
 
