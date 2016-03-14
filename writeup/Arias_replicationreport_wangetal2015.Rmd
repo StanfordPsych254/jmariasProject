@@ -13,10 +13,8 @@ Course Instructors: Dr. Michael Frank, Robert Hawkins, & Eric Smith
 
 Contact information: email: stanfordpsych254 (at) gmail (dot) com
 
-Testable Replication Experiment Webpage:
-https://web.stanford.edu/~jmarias/jmariasProject/experiment/mathmotivationsurveys.html
 
-Testable Replication Experiment Webpage: (what it will be called eventually)
+Testable Replication Experiment Webpage:
 https://web.stanford.edu/~jmarias/jmariasProject/experiment/254surveytask.html
 
 
@@ -157,7 +155,6 @@ for (f in files) {
                    stimulus = jd$answers$data$stimulus,
                    rating_raw = jd$answers$data$rating,
                    RT = as.numeric(jd$answers$data$rt),
-                   ladder = as.numeric(jd$answers$data$ladder),
                    age = jd$answers$data$age,
                    gender = jd$answers$data$gender,
                    education = as.factor(jd$answers$data$education),

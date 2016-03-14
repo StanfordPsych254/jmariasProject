@@ -188,7 +188,6 @@ var experiment = {
     stimulus: [],
     rating: [],
     rt : [],
-    ladder: [],
     age: [],
     gender: [],
     education: [],
@@ -383,7 +382,7 @@ var experiment = {
 
     if(age === "" | gender === "") {
       $("#debriefMessage").html('<font color="red">' +
-                  'Please make sure you have answered all the questions on this page' +
+                  'Please make sure you have answered all necessary questions on this page' +
                   '</font>');
     } else {
       // Loop through race buttons
@@ -392,7 +391,6 @@ var experiment = {
     experiment.data.race.push(races[i].value);
         }
       }
-      experiment.data.ladder.push(document.getElementById("ladder").value);
       experiment.data.age.push(document.getElementById("age").value);
       experiment.data.gender.push(document.getElementById("gender").value);
       experiment.data.education.push(document.getElementById("education").value);
