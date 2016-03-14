@@ -154,7 +154,7 @@ for (f in files) {
                    trial_type = as.factor(jd$answers$data$trial_type),
                    stimulus = jd$answers$data$stimulus,
                    rating_raw = jd$answers$data$rating,
-                   RT = as.numeric(jd$answers$data$rt),
+                   RT = jd$answers$data$rt,
                    age = jd$answers$data$age,
                    gender = jd$answers$data$gender,
                    education = as.factor(jd$answers$data$education),

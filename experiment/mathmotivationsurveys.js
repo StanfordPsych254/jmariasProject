@@ -196,8 +196,8 @@ var experiment = {
     ethnicity:[],
     race: [],
     children:[],
-    childAgeOld:[],
     mathhwhelp: [],
+    childAgeOld:[],
     expt_aim: [],
     expt_gen: []
   },
