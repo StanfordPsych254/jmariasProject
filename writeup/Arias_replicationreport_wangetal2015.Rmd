@@ -55,22 +55,25 @@ The study presented here attempts to replicate the findings of Study 2 in Wang e
 Original test: F-test: multiple, fixed-effects regression with 9 total predictors and one observed predictor for change in R-squared. 
 
 Original effect size: 
+
   - Of total R-squared: **.16**
   - Of change in R-squared for variable of interest (interaction of math anxiety squared and math motivation): **.02**.
 
-Power analysis: For an effect size of .02 from the above F-test with 219 participants and an alpha of .05, the estimated power achieved is:  55% 
+Power analysis: For an effect size of .02 from the above F-test with 219 participants and an alpha of .05, the estimated power achieved is: **55%**. 
 
  - Sample Size needed to achieve 80% power (assuming same effect size): **395**.
- - Sample Size needed to achieve 90% power: **528**.
- - Sample Size needed to achieve 95% power: **652**.
+ - Sample Size needed to achieve 90% power (assuming same effect size): **528**.
+ - Sample Size needed to achieve 95% power (assuming same effect size): **652**.
  
-##### Planned Sample:
-To achieve 80% power, the planned sample will be **395** adult participants recruited from Amazon's Mechanical Turk platform. Study 2 of Wang et al. (2015) used 237 undergraduate students, 56% female, mean age = 19.53 years old (*SD* = 2.01, range = 18 - 39), for their participant sample.
+#### Planned Sample:
+To achieve 80% power, the planned sample will be **395** adult participants recruited from Amazon's Mechanical Turk platform. 
+
+Study 2 of Wang et al. (2015) used 237 undergraduate students, 56% female, mean age = 19.53 years old (*SD* = 2.01, range = 18 - 39), for their participant sample.
 	
 
 #### Materials
   
-Please see below for quoted descriptions of the materials used in the original study, which were adapted for use by an online MTurk population in the present replication: 
+Please see below for quoted descriptions of the materials used in the original study, which were adapted for the present replication to be used by an online MTurk population: 
 
 >  Participants self-reported math anxiety using the brief version of the Mathematics Anxiety Rating Scale (MARS-B; Suinn & Winston, 2003). The 30-item MARS-B is widely used to measure math anxiety in adults. Items are rated on a 5-point Likert-type scale (1 = not at all nervous, 5 = very very nervous). The MARS-B has excellent internal consistency (Cronbach's alpha = .94). 
 
@@ -78,17 +81,12 @@ Please see below for quoted descriptions of the materials used in the original s
 
 > Participants self-reported their math motivation using the same three items from the scale used in Study 1 (M. M. Chiu and Zeng, 2008). The Cronbach's alpha for this scale is .82, which indicates good internal consistency. 
 
-> The problem-verification task (Rinne & Mazzocco, 2014) was used to measure participants' math calculation fluency. Because the 64 easy items were far too easy for undergraduate students (mean accuracy = .93, SD = .06), we chose to focus on the 24 hard items (e.g., double-digit arithmetic, uncommon- denominator fraction, and solutions close to the correct answer). The hard items had wider performance variability (mean accuracy = .85, SD = .13) and were therefore a more proper measure of individual differences in calculation fluency in college students. The problem-verification task was developed as a measure of calculation fluency and metacognition (Rinne & Mazzocco, 2014). On a laptop, participants were shown a series of two-operand arithmetic problems involving addition, subtraction, multiplication, division, and equivalency of fractions. For each arithmetic problem, a solution was shown that was correct or incorrect, and participants were asked to answer "right," "wrong," or "don't know" as quickly as possible without calculating. Each item was presented for a maximum of 10 s. If no response was given within that time, the program proceeded to the next item. Reaction time (in seconds) was defined as the time between stimulus onset and response. For the current analyses, an efficiency score was calculated by dividing the percentage of total correct responses by the mean reaction time across all items.
-
-#### *Replication differences of note*
-
-##### Materials:
- - The key differences between the original study and the current replication is that the surveys and the measure of math performance (the Problem-Verification Task), were presented to participants as a webpage, direct from the MTurk interface, rather than as a Qualtrics survey.
-
-#### Procedure
+> The problem-verification task (Rinne & Mazzocco, 2014) was used to measure participants' math calculation fluency. Because the 64 easy items were far too easy for undergraduate students (mean accuracy = .93, SD = .06), we chose to focus on the 24 hard items (e.g., double-digit arithmetic, uncommon- denominator fraction, and solutions close to the correct answer). The hard items had wider performance variability (mean accuracy = .85, SD = .13) and were therefore a more proper measure of individual differences in calculation fluency in college students. On a laptop, participants were shown a series of two-operand arithmetic problems involving addition, subtraction, multiplication, division, and equivalency of fractions. For each arithmetic problem, a solution was shown that was correct or incorrect, and participants were asked to answer "right," "wrong," or "don't know" as quickly as possible without calculating. Each item was presented for a maximum of 10 s. If no response was given within that time, the program proceeded to the next item. Reaction time (in seconds) was defined as the time between stimulus onset and response. For the current analyses, an efficiency score was calculated by dividing the percentage of total correct responses by the mean reaction time across all items.
 
 
-	
+### Procedure
+
+
 #### Analysis Plan
 
 Please see below for quoted descriptions of the relevant elements of the analysis plan from the original study, which were also conducted by the current replication. The embedded figure below (Figure 3) shows a comparison of the model predictions for individuals at 1 SD above and 1 SD below in math motivation, and is from the original Wang et al. (2015). See further below for differences of note between original and replication in the analysis plan. 
@@ -101,15 +99,29 @@ Please see below for quoted descriptions of the relevant elements of the analysi
 	
 
 ![Wang predicted model Figure 3](Wang2015_Figure3_predictedmodel.png)
-
-#### Differences from Original Study: 
-
-MENTION ADDITIONAL DEMOGRAPHIC QUESTIONS TO BE OBTAINED
-
+<br><br>
+<br><br>
+<br><br>
 
 
-#### Data preparation
-	Data preparation following the analysis plan.
+### *Replication differences from Original Study*
+
+#### Differences in Materials:
+
+ - The three surveys and the measure of math performance (the Problem-Verification Task), were presented to participants as a webpage, direct from the MTurk interface, rather than as a Qualtrics survey, as in the original study (Study 2 of Wang et al., 2015).
+
+#### Differences in Procedure/Analysis Plan:
+ - In addition to replicating the analyses conducted by the original study, this replication also intended to discern if any differences existed in the MTurk sample on math performance based on other potentially relevant predictors. Namely:
+    - Level of education
+    - Whether participant was currently a student
+    - Number of school-aged (5 - 18 yrs) children
+    - Self-described frequency with which participant "helped child with math homework"
+    - Amount of time being a parent (age of oldest child) 
+
+### Data preparation
+Data preparation following the analysis plan.
+
+### The data presented here is from Pilot B, conducted 3-14-16 with 3 MTurk participants
 
 ```{r clearing environment setting themes, echo=F, results='hide', warnings=F}
 
@@ -299,7 +311,7 @@ subjectmeans$z.genanx <- scale(subjectmeans$mean.genanx, center = TRUE, scale = 
 ```
 
 #### Confirmatory analysis
-	The analyses as specified in the analysis plan
+The analyses as specified in the analysis plan
 	
 	
 ```{r CORRELATIONS between variables of interest, eval=FALSE}
@@ -386,9 +398,8 @@ kable(summary(mathperflm4)$coef)
 
 
 ##Alternatively, if the interaction terms don't already include those variables in the model
-mathperflm4.alt <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot + I(z.mathanx^2) + (z.mathanx * z.mathmot) + (I(z.mathanx^2) * z.mathmot), data = subjectmeans)
-
-kable(summary(mathperflm4.alt)$coef)
+#mathperflm4.alt <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot + I(z.mathanx^2) + (z.mathanx * z.mathmot) + (I(z.mathanx^2) * z.mathmot), data = subjectmeans)
+#kable(summary(mathperflm4.alt)$coef)
 
 
 ```
@@ -400,7 +411,7 @@ ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) +
   geom_smooth(method = lm, data = mathperflm4) +
   xlab("Math Anxiety") +
   ylab("PVT Efficiency Performance") +
-  ggtitle("Math Performance on Math Anxiety") + 
+  ggtitle("PVT Efficiency on Math Anxiety") + 
     theme(plot.title = element_text(lineheight=.8, face="bold"))
 
 
@@ -439,9 +450,12 @@ ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) +
 ```
 
 
+### Note that the predicted model plot above has only 1 line, but includes 2 linear models ("mathperflm4-above" and "mathperflm4_below")
+The plot does not distinguish between these 2 models (nor looks like Figure 3 of original study), presumably because not enough data have been collected to generate differing models, but please check model construction and inform me if it needs to be corrected. 
+
 #### Exploratory analyses
 
-Will be conducting exploratory analyses on effect of education level, current student status, whether or not participant has school-aged children, and frequency with which they help children with math homework on math performance, both independent of (exploreperflm.a) and in conjunction with (exploreferflm4) math anxiety and math motivation. See below for planned analyses and plots of data. 
+Will be conducting exploratory analyses on effect of education level, current student status, whether or not participant has school-aged children, and frequency with which they help children with math homework on math performance, both independent of and in conjunction with math anxiety and math motivation. See below for planned analyses and plots of data. 
 
 
 ```{r EXPLORATORY ANALYSES subject means creation}
@@ -520,9 +534,7 @@ concise_exploratory_cor_table <- corstarsl(exploratory.cor.means)
 ```
 
 
-
-
-```{r EXPLORATORY ANALYSES Hierarchical Regression Models, eval=FALSE}
+```{r EXPLORATORY ANALYSES Hierarchical Regression Models}
 
 #Linear Model for Anxiety and Motivation, with Education and Children variables included: 
 
@@ -535,39 +547,95 @@ kable(summary(exploreperflm00)$coef)
 
 
 #Additional models with just demographic info: 
+#exploreperflm.a <- lm(z.pvt ~ age + gender + student + education + children + mathhwhelp + childAgeOld, data = expsubmeans)
+#kable(summary(exploreperflm.a)$coef)
 
-exploreperflm.a <- lm(z.pvt ~ age + gender + student + education + children + mathhwhelp + childAgeOld, data = expsubmeans)
-kable(summary(exploreperflm.a)$coef)
+
+######################################
+###MODEL SPECIFIC TO PILOT B GROUP (no deviation in student or education status, so these were omitted)
+exploreperflm.pilotB <- lm(z.pvt ~ age + gender + children + childAgeOld + mathhwhelp + z.mathanx, data = expsubmeans)
+kable(summary(exploreperflm.pilotB)$coef)
+######################################
+
 
 #Model 1 from study with additional demographics:  z.PVT Efficiency on Age, Gender, Student status, education, z.General Anx, z.Math Anx
-exploreperflm1 <- lm(z.pvt ~ age + gender + student + education + children + mathhwhelp + z.genanx + z.mathanx, data = expsubmeans)
-kable(summary(exploreperflm1)$coef)
+#exploreperflm1 <- lm(z.pvt ~ age + gender + student + education + children + mathhwhelp + z.genanx + z.mathanx, data = expsubmeans)
+#kable(summary(exploreperflm1)$coef)
 
 #Model 2 from study with additonal demographics:
-exploreperflm2 <- lm(z.pvt ~ age + gender + student + education + children + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot, data = expsubmeans)
+#exploreperflm2 <- lm(z.pvt ~ age + gender + student + education + children + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot, data = expsubmeans)
 
-kable(summary(exploreperflm2)$coef)
+#kable(summary(exploreperflm2)$coef)
 
 #Model 3 from study with additonal demographics:
-exploreperflm3 <- lm(z.pvt ~ age + gender+ student + education + children + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot + I(z.mathanx^2) + z.mathanx * z.mathmot, data = expsubmeans)
+#exploreperflm3 <- lm(z.pvt ~ age + gender+ student + education + children + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx + z.mathmot + I(z.mathanx^2) + z.mathanx * z.mathmot, data = expsubmeans)
 
-kable(summary(exploreperflm3)$coef)
+#kable(summary(exploreperflm3)$coef)
 
 #Model 4 from study with additonal demographics:
-exploreperflm4 <- lm(z.pvt ~ age + gender + student + education + children + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx * z.mathmot + (I(z.mathanx^2) * z.mathmot), data = expsubmeans)
+#exploreperflm4 <- lm(z.pvt ~ age + gender + student + education + children + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx * z.mathmot + (I(z.mathanx^2) * z.mathmot), data = expsubmeans)
+#kable(summary(exploreperflm4)$coef)
 
-kable(summary(exploreperflm4)$coef)
+######################################
+###TOTAL MODEL SPECIFIC TO PILOT B GROUP (no deviation in student or education status, so these were omitted)
+exploreperflm.TOTALpilotB <- lm(z.pvt ~ age + gender + children + childAgeOld + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx * z.mathmot + (I(z.mathanx^2) * z.mathmot), data = expsubmeans)
+kable(summary(exploreperflm.TOTALpilotB)$coef)
+######################################
+
 
 ```
 
-```{r EXPLORATORY ANALYSES plot of predicted values, eval=FALSE}
+```{r EXPLORATORY ANALYSES PLOT of predicted values}
 
 ggplot(expsubmeans, aes(x = z.mathanx, y = z.pvt)) + 
   geom_point() +
-  geom_smooth(method = lm, data = exploreperflm4) +
+  geom_smooth(method = lm, data = exploreperflm.TOTALpilotB) +
   xlab("Math Anxiety") +
   ylab("PVT Efficiency Performance") +
-  ggtitle("Math Performance on Math Anxiety") + 
+  ggtitle("EXPLORATORY Math Performance on Math Anxiety") + 
+    theme(plot.title = element_text(lineheight=.8, face="bold"))
+
+
+#Math Performance regressed on math anxiety, facetted by whether or not participant has school-aged children:
+#NOTE THAT THIS PLOT ONLY CONTAINS 3 TOTAL DATA POINTS FROM PILOT B
+ggplot(expsubmeans, aes(x = z.mathanx, y = z.pvt)) + 
+  geom_point() +
+  geom_smooth(method = lm, data = exploreperflm.TOTALpilotB) +
+  xlab("Math Anxiety") +
+  ylab("PVT Efficiency Performance") +
+  ggtitle("EXPLORATORY Math Performance on Math Anxiety") + 
+  theme(plot.title = element_text(lineheight=.8, face="bold")) +
+  facet_wrap(~children)  
+
+```
+
+```{r EXPLORATORY ANALYSIS model at different SDs}
+
+## NOTE that both of these models are giving the same result b/c there is not (apparent) variation across math motivation according to the model
+
+##Minus-1  gives  1 SD ABOVE b/c you are shifting the x axis "to the right" (mean becomes -1)
+
+mathperflm4.TOTALpilotB_above <- lm(z.pvt ~ age + gender + children + childAgeOld + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot - 1) + (I(z.mathanx^2) * I(z.mathmot - 1)), data = expsubmeans)
+
+kable(summary(mathperflm4.TOTALpilotB_above)$coef)
+
+
+
+mathperflm4.TOTALpilotB_below <- lm(z.pvt ~ age + gender + children + childAgeOld + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot + 1) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = expsubmeans)
+
+kable(summary(mathperflm4.TOTALpilotB_below)$coef)
+
+```
+
+```{r EXPLORATORY ANALYSIS plot of model at different motivation SDs}
+
+##ggplot of two predicted lines: for 
+ggplot(expsubmeans, aes(x = z.mathanx, y = z.pvt)) + 
+  geom_smooth(method = lm, data = mathperflm4.TOTALpilotB_above) +
+  geom_smooth(method = lm, data = mathperflm4.TOTALpilotB_below) +
+  xlab("Math Anxiety (Standardized)") +
+  ylab("PVT Efficiency Performance (Standardized)") +
+  ggtitle(expression(atop("EXPLORATORY Predicted PVT performance","as a function of anxiety and motivation"))) + 
     theme(plot.title = element_text(lineheight=.8, face="bold"))
 
 
@@ -594,11 +662,11 @@ Below is a quoted excerpt from the original text (emphasis added), describing th
 
 
 
-#####Discussion
+### Discussion
 
-######Summary of Replication Attempt
+#### Summary of Replication Attempt
 Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
 
-######Commentary
+#### Commentary
 Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
 
