@@ -5,13 +5,13 @@ To Dos (as of 3-12-16)
 
 CURRENT ISSUES: 
 
--check the debriefing verification
+-Correct exp_gen ("general comments" section) is not being imported by R 
+	-It is saved by the json, but doesn't get loaded correctly 
 
 
 
 -Make sure all variables are included as correct type (e.g. factor w/ levels, or binary 0 and 1, etc.)
 	-how to import age as a string, then auto-correct it to a number without generating NAs in case people put letters in the answer as well
-
 
 
 --Clean up replication report substantially
@@ -51,6 +51,8 @@ NOTE TO SELF: do the AFS connecting from the GIT Bash command prompt (and probab
 ***********************************************************************
 
 Old To Do: 
+
+-check the debriefing verification **DONE**
 
 -change the debriefing message, center, put it above submit **DONE**
 
