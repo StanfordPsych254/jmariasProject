@@ -5,16 +5,43 @@ To Dos (as of 3-12-16)
 
 CURRENT ISSUES: 
 
--Correct exp_gen ("general comments" section) is not being imported by R 
+
+
+*************************************************************************
+
+**DONE** I would add pilot A data and maybe run through yourself a few more times so that you can actually run the analyses you intend to do. This would make me more confident in all of the analyses will be able to be run once you have the full dataset. You can even make up some fake data if you'd like.
+
+**DONE** Where do you actually run the analysis comparing the model with the interaction term you are testing?  Make this super clear. I might suggest rather than printing these models separately, trying to recreate the chart that they used in their paper.  
+
+**DONE** Combine Pilot A and B data to see if analyses work 
+
+**DONE** Also, I'd move down their graph to your replication graph so the reader can compare them side-by-side.
+
+**DONE** If you want to give the authors a venue by which to voice concerns with the replication or otherwise, you can potentially pre-register those concerns as well, but I wouldn't necessarily change anything based on those communications, because we as a field want to be able to replicate work without author input
+
+**DONE** I might leave out "and expand this finding using a broader participant pool obtained using Amazon’s Mechanical Turk platform".  I would just way "replicate this finding with Amazon Mechanical Turk participants".  The expand part bothers me, because it seems further away from a replication...
+
+**DONE** Remember to add your +5% to planned sample, and explain doing this to have enough after removal of participants due to exclusion criteria or missing data.  
+
+**DONE** I'd reduce the font size for the original materials- it's odd it's bigger than the rest of the report.  
+
+**DONE** Your "Differences in Procedure/Analysis Plan:" section seem to be for exploring the data beyond the replication. So I would put this in supplementary analyses, explaining that the findings may be influences by these other things.
+
+**DONE** Don't reference Pilot B in your final write-up that you pre-register. It should have all the code, to be filled in with data.
+
+**DONE** (meaning, not done, but not doing it) Rather than using ifelse statements (as they are quite confusing), you should consider the dplyr spread function. I don't want to hold you back from doing your final data collection, but I'd play around with it for a bit to find a cleaner solution.
+
+
+-Correct exp_gen ("general comments" section) is not being imported by R **DONE**
 	-It is saved by the json, but doesn't get loaded correctly 
 
 
 
--Make sure all variables are included as correct type (e.g. factor w/ levels, or binary 0 and 1, etc.)
+-Make sure all variables are included as correct type (e.g. factor w/ levels, or binary 0 and 1, etc.) **DONE** (I think) 
 	-how to import age as a string, then auto-correct it to a number without generating NAs in case people put letters in the answer as well
 
 
---Clean up replication report substantially
+--Clean up replication report substantially 
 
 
 

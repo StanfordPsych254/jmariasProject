@@ -168,21 +168,24 @@ theme_set(theme_bw())
 	
 ```{r loading data from mturk json, warning=FALSE}
 
+#Temporarily changing wd to see where the error files are located within the vector of files in the json folder - to comment out
+#setwd("C:\\Users\\Juan\\Documents\\1. STANFORD\\2nd Year 15-16\\Psych254 Replication Methods\\Psych254 Project\\Psych254proj_mturk_DONTCOMMIT\\Arias 254 Full Replication\\production-results\\")
+#dir()
 
 #Reading the path
-path <- "C:\\Users\\Juan\\Documents\\1. STANFORD\\2nd Year 15-16\\Psych254 Replication Methods\\Psych254 Project\\Psych254proj_mturk_DONTCOMMIT\\Arias 254 Pilot B\\"
+path <- "C:\\Users\\Juan\\Documents\\1. STANFORD\\2nd Year 15-16\\Psych254 Replication Methods\\Psych254 Project\\Psych254proj_mturk_DONTCOMMIT\\Arias 254 Full Replication\\"
+
 files <- dir(paste0(path,"production-results\\"), 
              pattern = "*.json")
 d <- data.frame()
 
-
 #Transforming data from JSON format to dataframe
-
+#?fromJSON
 
 #reading the json files and turning them into one data.frame
 for (f in files) {
   jf <- paste0(path, "production-results\\",f)
-  jd <- fromJSON(paste(readLines(jf), collapse=""))
+  jd <- fromJSON(file = jf)                      #(paste(readLines(jf), collapse=""))
   id <- data.frame(workerid = jd$WorkerId,
                    accepttime = jd$AcceptTime,
                    submittime = jd$SubmitTime,
@@ -192,12 +195,16 @@ for (f in files) {
                    stimulus = jd$answers$data$stimulus,
                    rating_raw = jd$answers$data$rating,
                    RT = as.numeric(jd$answers$data$rt),
-                   age = as.numeric(jd$answers$data$age),
+                   age = jd$answers$data$age,  #age = as.numeric(jd$answers$data$age),
                    gender = jd$answers$data$gender,
-                   education = as.factor(jd$answers$data$education),
-                   student = as.factor(jd$answers$data$student),
-                   homelang = as.character(jd$answers$data$homelang),
-                   ethnicity = as.factor(jd$answers$data$ethnicity),
+                   education = jd$answers$data$education,  
+                          #education = as.factor(jd$answers$data$education),
+                   student = jd$answers$data$student,
+                   homelang = jd$answers$data$homelang,
+                   ethnicity = jd$answers$data$ethnicity,
+                             #student = as.factor(jd$answers$data$student),
+                             #homelang = as.character(jd$answers$data$homelang),
+                             #ethnicity = as.factor(jd$answers$data$ethnicity),
                    race = jd$answers$data$race,
                    children = jd$answers$data$children,
                    mathhwhelp = jd$answers$data$mathhwhelp,
@@ -208,6 +215,8 @@ for (f in files) {
 }
 
 
+
+warnings()
 #warnings()  ##(Commented out for now) -- shows lots of NAs introduced by coercion
 #Number of participants
 length(unique(d$workerid))
@@ -221,19 +230,18 @@ length(unique(d$workerid))
 
 #Making age and gender numeric and factor variables, respectively
 d$gender <- as.factor(d$gender)
-
+d$age <- as.numeric(d$age)
+d$education <- as.factor(d$education)
+d$student <- as.factor(d$student)
+d$homelang <- as.character(d$homelang)
+d$ethnicity <- as.factor(d$ethnicity)
 
 #Setting stimulus variable as string
 d$stimulus <- as.character(d$stimulus)
-
 d$race <- as.factor(d$race)
-
 d$children <- as.factor(d$children)
-
 d$mathhwhelp <- as.factor(d$mathhwhelp)
-
 d$childAgeOld <- as.factor(d$childAgeOld)
-
 d$expt_gen <- as.character(d$expt_gen)
 
 #generating a unique "accuracy" variable from stimulus for PVT practice and performance trials
@@ -334,12 +342,52 @@ subjectmeans <- d %>%
 
 
  #Generate z-scores for variables (using "scale" function) 
+subjectmeans$z.RT <- scale(subjectmeans$mean.RT, center = TRUE, scale = TRUE)
 subjectmeans$z.pvt <- scale(subjectmeans$pvt, center = TRUE, scale = TRUE)
 subjectmeans$z.mathmot <- scale(subjectmeans$mean.mathmot, center = TRUE, scale = TRUE)
 subjectmeans$z.mathanx <- scale(subjectmeans$mean.mathanx, center = TRUE, scale = TRUE)
 subjectmeans$z.genanx <- scale(subjectmeans$mean.genanx, center = TRUE, scale = TRUE)
 
 ```
+
+##### Finding and Excluding Outliers
+
+```{r finding and removing outliers }
+
+#str(subjectmeans)
+head(subjectmeans)
+
+ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) + 
+  geom_point(aes(color = z.mathmot)) +
+  geom_smooth(method = lm, data = mathperflm4) +
+  xlab("Math Anxiety") +
+  ylab("PVT Efficiency Performance") +
+  ggtitle("PVT Efficiency on Math Anxiety") + 
+    theme(plot.title = element_text(lineheight=.8, face="bold")) 
+
+
+qplot(subjectmeans$z.RT)
+
+sd(subjectmeans$mean.RT)
+mean(subjectmeans$mean.RT)
+
+z.toofast <- subjectmeans %>% 
+              filter(as.numeric(z.RT) <= -2.5)
+
+
+subjectstokeep <- subjectmeans %>% 
+                  filter(as.numeric(z.RT) > -2.5)
+
+subjectmeans <- subjectstokeep
+
+z.pvthigh <- subjectmeans %>% 
+                filter(as.numeric(z.pvt) > 2)
+
+#qplot(subjectmeans$mean.acc)
+
+
+```
+
 
 #### Confirmatory analysis
 The analyses as specified in the analysis plan
@@ -395,7 +443,6 @@ cor.confirm_table
 #print.xtable(cor_table, type="html")
 
 
-
 ```
 
 ```{r Hierarchical Regression Models }
@@ -437,38 +484,63 @@ mathperflm4 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * 
 
 ```
 
-### Key Model Replication Table
+## Key Model Replication Table
 
-Summary table for replication of model. Model of note is Model 4, in which interaction between squared term of math anxiety and term for math motivation are included as predictors. 
+##### Summary table for replication of model. Model of note is Model 4, in which interaction between squared term of math anxiety and term for math motivation are included as predictors. 
 
-If Model 4 below demonstrates a significant increase to the predictive quality of the model by including the interaction term of anxiety^2 and motivation, then the findings from the MTurk sample will have replicated the findings from the original Wang et al. 2015 undergraduate sample. 
+##### If Model 4 below demonstrates a significant increase to the predictive quality of the model by including the interaction term of anxiety^2 and motivation, then the findings from the MTurk sample will have replicated the findings from the original Wang et al. 2015 undergraduate sample. 
+
+##### This interaction term in Model 4 for the replication was not significant, thus the findings of Wang et al. (2015) did not replicate for this sample. Note, however, that the simple main effect of linear *math anxiety* is significantly predictive across models. See the Discussion section at the end of this report for a full discussion on these findings. 
 
 ```{r Summary table of model output}
 
-mtable123 <- mtable('Model 1' = mathperflm1,
+mtable1234 <- mtable('Model 1' = mathperflm1,
             'Model 2' = mathperflm2,
             'Model 3' = mathperflm3,
             'Model 4' = mathperflm4,
             summary.stats= c("sigma","R-squared", "adj. R-squared", "F","p","N"),
             signif.symbols=getOption("signif.symbols"))
 
-print(mtable123, file="mtabletest", format="HTML")
+mtable1234
+
+#print(mtable123, file="mtabletest", format="HTML")
 
 ```
+
+
+
+##### Below is the output table for the original 4-model comparison in Wang et al. (2015); note how the interaction term of math anxiety squared and math motivation adds predictive value to Model 4.
+
+![Wang predicted model Table 9](Wang2015_table9_model.png)
+<br><br>
+<br><br>
+<br><br>
 
 
 ```{r basic plot of predicted values}
 
 ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) + 
-  geom_point() +
+  geom_point(aes(color = z.mathmot, size = 1)) +
   geom_smooth(method = lm, data = mathperflm4) +
   xlab("Math Anxiety") +
   ylab("PVT Efficiency Performance") +
   ggtitle("PVT Efficiency on Math Anxiety") + 
+    theme(plot.title = element_text(lineheight=.8, face="bold")) 
+
+
+
+ggplot(subjectmeans, aes(x = z.mathmot, y = z.pvt)) + 
+  geom_jitter(aes(color = z.mathanx)) +
+  geom_smooth(method = lm, data = mathperflm4) +
+  xlab("Math Motivation") +
+  ylab("PVT Efficiency Performance") +
+  ggtitle("PVT Efficiency on Math Anxiety") + 
     theme(plot.title = element_text(lineheight=.8, face="bold"))
 
-
 ```
+
+
+
 
 ```{r model at different SDs}
 
@@ -476,24 +548,75 @@ ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) +
 
 ##Minus-1  gives  1 SD ABOVE b/c you are shifting the x axis "to the right" (mean becomes -1)
 
+#mathanxmodel <- lm(z.pvt ~ z.mathanx, data = subjectmeans)
+#kable(summary(mathanxmodel)$coef)
+
+#predicts = as.data.frame(predict(mathanxmodel, type="resp"))
+#predicts$mathanx <- subjectmeans$z.mathanx
+
+
 mathperflm4_above <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot - 1) + (I(z.mathanx^2) * I(z.mathmot - 1)), data = subjectmeans)
 
 #kable(summary(mathperflm4_above)$coef)
-
-
 
 mathperflm4_below <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot + 1) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = subjectmeans)
 
 #kable(summary(mathperflm4_below)$coef)
 
+# Find the linear model coefficients 
+above_lmcoefs <- coef(lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot - 1) + (I(z.mathanx^2) * I(z.mathmot - 1)), data = subjectmeans)) 
+#above_lmcoefs
+
+below_lmcoefs <- coef(lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot + 1) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = subjectmeans))
+#below_lmcoefs
+# Create a function to produce the fitted line 
+above_lmeq <- function(x) above_lmcoefs[1] + above_lmcoefs[7] * x  + above_lmcoefs[9]*x^2
+#above_lmeq
+
+below_lmeq <- function(x) below_lmcoefs[1] + below_lmcoefs[7] * x  + above_lmcoefs[9]*x^2
+#below_lmeq
+
+###########################################
+
+#mathperflm4_abovetest <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + (z.mathanx * I(z.mathmot)) + (I(z.mathanx^2) * I(z.mathmot)), data = subjectmeans)
+
+#kable(summary(mathperflm4_abovetest)$coef)
+
+#mathperflm4_belowtest <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + (z.mathanx * I(z.mathmot + 1)) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = subjectmeans)
+
+#kable(summary(mathperflm4_belowtest)$coef)
+
+###########################################
 
 mtable_abovebelow <- mtable('Model 1SD above' = mathperflm4_above,
             'Model 1SD below' = mathperflm4_below,
             summary.stats=c("R-squared", "N"),
             signif.symbols=getOption("signif.symbols"))
 
-print(mtable_abovebelow, format="HTML")
+mtable_abovebelow
 
+#print(mtable_abovebelow, format="HTML")
+#summary(mathperflm4_above)
+
+#predicts <- NA
+#predicts <- as.data.frame(predicts)
+#predicts <- data.frame(lm4abovepredicts=NA, lm4belowpredicts=NA)
+
+#rm(predicts)
+#predicts = as.data.frame(predict(mathperflm4_above, type="resp"))
+
+#predicts$lm4belowpredicts <- predict(mathperflm4_below, type="resp")
+#predicts$mathanx <- subjectmeans$z.mathanx
+###########################################
+#Testing different way to add model predictions
+#subjectmeans$lm4abovepredictstest <- predict(mathperflm4_abovetest, type="resp")
+#subjectmeans$lm4belowpredictstest <- predict(mathperflm4_belowtest, type="resp")
+#summary(subjectmeans$lm4abovepredictstest)
+#summary(subjectmeans$lm4belowpredictstest)
+###########################################
+
+#summary(subjectmeans$lm4abovepredicts)
+#summary(subjectmeans$lm4belowpredicts)
 
 ```
 
@@ -507,24 +630,15 @@ The embedded figure below it (Figure 3) is from the original Wang et al. (2015).
 
 ##ggplot of two predicted lines: for models of motivation 1SD above and 1SD below
 ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) + 
-  geom_smooth(method = lm, formula = y ~ poly(x, 2), data = mathperflm4_above, se=F) +
-  geom_smooth(method = lm, formula = y ~ poly(x, 2), data = mathperflm4_below, se=F) +
-  xlab("Math Anxiety (Standardized)") +
-  ylab("PVT Efficiency Performance (Standardized)") +
-  ggtitle("Predicted PVT performance as function of anxiety and motivation") + 
-    theme(plot.title = element_text(lineheight=.8, face="bold"))
-
-
-##TESTING QUADRATIC FIT MODELS: 
-##ggplot of two predicted lines: for models of motivation 1SD above and 1SD below
-ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) + 
-  geom_smooth(method = lm, formula = y ~ poly(x, 2), data = mathperflm4_above) +
-  geom_smooth(method = lm, formula = y ~ poly(x, 2), data = mathperflm4_below) +
-  xlab("Math Anxiety (Standardized)") +
-  ylab("PVT Efficiency Performance (Standardized)") +
-  ggtitle("Predicted PVT performance as function of anxiety and motivation") + 
-  theme(plot.title = element_text(lineheight=.8, face="bold"))
-
+  stat_function(fun = above_lmeq, aes(color = 'High Math Motivation')) +
+  stat_function(fun = below_lmeq, aes(color = 'Low Math Motivation')) +
+  scale_color_manual("Legend", values = c("red", "blue")) + 
+  xlab("Math Anxiety (Standardized Score)") +
+  ylab("PVT Performance (SD units)") +
+  ggtitle("PVT performance as function of anxiety and motivation") + 
+  theme(plot.title = element_text(lineheight=.8, face="bold")) +
+  xlim(-1, 1) + 
+  ylim(0, 1)
 
 
 ```
@@ -535,6 +649,24 @@ ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) +
 <br><br>
 <br><br>
 
+
+For full clarity, below are the plotted predicted models alongside the replication data values, plotted for the full range of standard deviation units, rather than the -1 to 1 math anxiety and 0 to 1 math performance units, as done in the previous 2 figures. 
+
+```{r plot of model at full range of different motivation SDs}
+
+##ggplot of two predicted lines: for models of motivation 1SD above and 1SD below
+ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) + 
+ geom_point() +
+  stat_function(fun = above_lmeq, aes(color = 'High Math Motivation')) +
+  stat_function(fun = below_lmeq, aes(color = 'Low Math Motivation')) +
+  scale_color_manual("Legend", values = c("red", "blue")) + 
+  xlab("Math Anxiety (Standardized Score)") +
+  ylab("PVT Performance (SD units)") +
+  ggtitle("PVT performance as function of anxiety and motivation") + 
+  theme(plot.title = element_text(lineheight=.8, face="bold")) #+
+
+
+```
 
 
 #### Exploratory analyses
@@ -565,10 +697,43 @@ expsubmeans <- d %>%
 
 
  #Generate z-scores for variables (using "scale" function) 
+expsubmeans$z.RT <- scale(expsubmeans$mean.RT, center = TRUE, scale = TRUE)
 expsubmeans$z.pvt <- scale(expsubmeans$pvt, center = TRUE, scale = TRUE)
 expsubmeans$z.mathmot <- scale(expsubmeans$mean.mathmot, center = TRUE, scale = TRUE)
 expsubmeans$z.mathanx <- scale(expsubmeans$mean.mathanx, center = TRUE, scale = TRUE)
 expsubmeans$z.genanx <- scale(expsubmeans$mean.genanx, center = TRUE, scale = TRUE)
+
+
+```
+
+```{r finding and removing EXPLORATORY outliers }
+
+#str(expsubmeans)
+#head(expsubmeans)
+
+require(dplyr)
+
+qplot(expsubmeans$z.RT)
+
+#sd(expsubmeans$mean.RT)
+#mean(expsubmeans$mean.RT)
+
+#z.exptoofast <- expsubmeans %>% 
+ #             filter(as.numeric(z.RT) <= -2.5)
+
+#class(expsubmeans$z.RT)
+expsubjectstokeep <- expsubmeans %>% 
+                  filter(as.numeric(z.RT) > -2.5)
+
+expsubmeans <- expsubjectstokeep
+
+#qplot(subjectmeans$mean.acc)
+
+
+expsubmeans$childAgeOld <- as.numeric(expsubmeans$childAgeOld)
+expsubmeans$children <- as.numeric(expsubmeans$children)
+expsubmeans$mathhwhelp <- as.numeric(expsubmeans$mathhwhelp)
+
 
 
 ```
@@ -635,7 +800,7 @@ exploreperflm3 <- lm(z.pvt ~ age + gender+ student + education + children + math
 #Model 4 from study with additonal demographics:
 exploreperflm4 <- lm(z.pvt ~ age + gender + student + education + children + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx * z.mathmot + (I(z.mathanx^2) * z.mathmot), data = expsubmeans)
 #kable(summary(exploreperflm4)$coef)
-
+#summary(exploreperflm4)
 
 ```
 
@@ -648,12 +813,15 @@ mtable.explore <- mtable('Model 1' = exploreperflm1,
             summary.stats=T,
             signif.symbols=getOption("signif.symbols"))
 
-print(mtable.explore, file="mtableexplore", format="HTML")
+mtable.explore
+
+#print(mtable.explore, file="mtableexplore", format="HTML")
 
 ```
 
 
 ```{r EXPLORATORY ANALYSES PLOT of predicted values}
+#Math Performance regressed on math anxiety, facetted by whether or not participant was currently a student:
 
 ggplot(expsubmeans, aes(x = z.mathanx, y = z.pvt)) + 
   geom_point() +
@@ -661,7 +829,8 @@ ggplot(expsubmeans, aes(x = z.mathanx, y = z.pvt)) +
   xlab("Math Anxiety") +
   ylab("PVT Efficiency Performance") +
   ggtitle("EXPLORATORY Math Performance on Math Anxiety") + 
-    theme(plot.title = element_text(lineheight=.8, face="bold"))
+    theme(plot.title = element_text(lineheight=.8, face="bold")) + 
+  facet_wrap(~student)
 
 
 #Math Performance regressed on math anxiety, facetted by whether or not participant has school-aged children:
@@ -682,28 +851,20 @@ ggplot(expsubmeans, aes(x = z.mathanx, y = z.pvt)) +
 
 ##Minus-1  gives  1 SD ABOVE b/c you are shifting the x axis "to the right" (mean becomes -1)
 
+#class(expsubmeans$children)
+
+
+
 mathperflm4.explore_above <- lm(z.pvt ~ age + gender + children + childAgeOld + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot - 1) + (I(z.mathanx^2) * I(z.mathmot - 1)), data = expsubmeans)
 
-kable(summary(mathperflm4.explore_above)$coef)
+#kable(summary(mathperflm4.explore_above)$coef)
 
 
 
 mathperflm4.explore_below <- lm(z.pvt ~ age + gender + children + childAgeOld + mathhwhelp + z.genanx + I(z.genanx^2) + z.mathanx * I(z.mathmot + 1) + (I(z.mathanx^2) * I(z.mathmot + 1)), data = expsubmeans)
 
-kable(summary(mathperflm4.explore_below)$coef)
+#kable(summary(mathperflm4.explore_below)$coef)
 
-```
-
-```{r EXPLORATORY ANALYSIS plot of model at different motivation SDs}
-
-##ggplot of two predicted lines: for 
-ggplot(expsubmeans, aes(x = z.mathanx, y = z.pvt)) + 
-  geom_smooth(method = lm, data = mathperflm4.explore_above) +
-  geom_smooth(method = lm, data = mathperflm4.explore_below) +
-  xlab("Math Anxiety (Standardized)") +
-  ylab("PVT Efficiency Performance (Standardized)") +
-  ggtitle(expression(atop("EXPLORATORY Predicted PVT performance","as a function of anxiety and motivation"))) + 
-    theme(plot.title = element_text(lineheight=.8, face="bold"))
 
 
 ```
@@ -713,12 +874,12 @@ ggplot(expsubmeans, aes(x = z.mathanx, y = z.pvt)) +
 
 #### Actual Sample
 
-	sample size, demographics, data exclusions based on rules spelled out in analysis plan
+The collected sample size was 415 MTurk participants. From this sample, 12 participants were excluded from the analyses due to unresolvable corruptions in the data files, and 6 were excluded due to random answers or non-compliance (see "Excluding Outliers" section, above). The total sample size used for analyses was thus *397* participants, which satisfies the participant goal for achieving 80% power. 
+
 
 #### Differences from pre-data collection methods plan
 
-	Any differences from what was described as the original plan, or "none".
-
+No operational changes were made from the pre-data collection methods plan. Some adjustments were made to the method by which the ggplot of the predicted models was created, but the model itself was the same as that outlined in the data plan. 
 
 ### Results
 
@@ -726,12 +887,19 @@ Below is a quoted excerpt from the original text (emphasis added), describing th
 
 >  Overall, age and sex both negatively predicted task performance, which indicates that younger and male participants performed better on average than older and female participants, with a larger effect size for sex than for age. General anxiety did not predict math performance. Math anxiety negatively predicted math performance after we controlled for the effects of the covariates. Finally, after controlling for all the linear and two-way interaction effects, we found that *the moderated quadratic interaction between math anxiety and math motivation was statistically significant and added incremental predictive effects on math performance*.
 
+The current study did not replicate the key finding of Wang et al. (2015), in that the interaction term of *math anxiety squared* and *math motivation* did not add significant predictive value to the model of math performance. In the original study, this interaction coefficient had a value of *-.10* (standardized units) and was significant at *p*<.05. In the current replication, this same coefficient had a value of *0.002* and a p-value of *0.923*. 
 
+Of note, the linear main effect term for math anxiety was significantly predictive, and was so across all relevant tested models. In Model 4, math anxiety had a coefficient of *-0.140* and was significant at *p*=.00039. This relationship can be seen by the fact that the plotted models all show a consistent linear decrease in math performance as math anxiety levels among individuals became higher. 
+
+This main effect of math anxiety was also the only term that remained significantly predictive when all demographic covariates were included in the regression models. In Model 4 of the exploratory analyses, math anxiety had a coefficient of *-0.141* and was significant at *p*=.00042.
 
 
 ### Discussion
 
 #### Summary of Replication Attempt
+
+As mentioned above,
+
 Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
 
 #### Commentary
