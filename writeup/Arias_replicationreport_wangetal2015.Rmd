@@ -110,7 +110,7 @@ Power analysis for original study: For an effect size of .02 from the above F-te
 #### Planned Sample
 To achieve 80% power, the planned sample will be **415** adult participants recruited from Amazon's Mechanical Turk platform. This total number is calculated as 5% above the 395 participants needed, in order to satisfy the power calculation after potentially removing participants due to missing data or other exclusion criteria. 
 
-Study 2 of Wang et al. (2015) used 237 undergraduate students, 56% female, mean age = 19.53 years old (*SD* = 2.01, range = 18 - 39), for their participant sample.
+Study 2 of Wang et al. (2015) initially collected data from 237 undergraduate students, 56% female, mean age = 19.53 years old (*SD* = 2.01, range = 18 - 39), for their participant sample (219 participants were kept for the full analyses). 
 	
 
 #### Materials
@@ -216,7 +216,7 @@ for (f in files) {
 
 
 
-warnings()
+#warnings()
 #warnings()  ##(Commented out for now) -- shows lots of NAs introduced by coercion
 #Number of participants
 length(unique(d$workerid))
@@ -355,11 +355,11 @@ subjectmeans$z.genanx <- scale(subjectmeans$mean.genanx, center = TRUE, scale = 
 ```{r finding and removing outliers }
 
 #str(subjectmeans)
-head(subjectmeans)
+#head(subjectmeans)
 
 ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) + 
   geom_point(aes(color = z.mathmot)) +
-  geom_smooth(method = lm, data = mathperflm4) +
+  geom_smooth(method = lm) +
   xlab("Math Anxiety") +
   ylab("PVT Efficiency Performance") +
   ggtitle("PVT Efficiency on Math Anxiety") + 
@@ -486,11 +486,11 @@ mathperflm4 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * 
 
 ## Key Model Replication Table
 
-##### Summary table for replication of model. Model of note is Model 4, in which interaction between squared term of math anxiety and term for math motivation are included as predictors. 
+#### Summary table for replication of model. Model of note is Model 4, in which interaction between squared term of math anxiety and term for math motivation are included as predictors. 
 
-##### If Model 4 below demonstrates a significant increase to the predictive quality of the model by including the interaction term of anxiety^2 and motivation, then the findings from the MTurk sample will have replicated the findings from the original Wang et al. 2015 undergraduate sample. 
+#### If Model 4 below demonstrates a significant increase to the predictive quality of the model by including the interaction term of anxiety^2 and motivation, then the findings from the MTurk sample will have replicated the findings from the original Wang et al. 2015 undergraduate sample. 
 
-##### This interaction term in Model 4 for the replication was not significant, thus the findings of Wang et al. (2015) did not replicate for this sample. Note, however, that the simple main effect of linear *math anxiety* is significantly predictive across models. See the Discussion section at the end of this report for a full discussion on these findings. 
+#### This interaction term in Model 4 for the replication was not significant, thus the findings of Wang et al. (2015) did not replicate for this sample. Note, however, that the simple main effect of linear *math anxiety* is significantly predictive across models. See the Discussion section at the end of this report for a full discussion on these findings. 
 
 ```{r Summary table of model output}
 
@@ -530,11 +530,11 @@ ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) +
 
 
 ggplot(subjectmeans, aes(x = z.mathmot, y = z.pvt)) + 
-  geom_jitter(aes(color = z.mathanx)) +
+  geom_jitter(aes(color = z.mathanx, size = 1)) +
   geom_smooth(method = lm, data = mathperflm4) +
   xlab("Math Motivation") +
   ylab("PVT Efficiency Performance") +
-  ggtitle("PVT Efficiency on Math Anxiety") + 
+  ggtitle("PVT Efficiency on Math Motivation") + 
     theme(plot.title = element_text(lineheight=.8, face="bold"))
 
 ```
@@ -664,7 +664,6 @@ ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) +
   ylab("PVT Performance (SD units)") +
   ggtitle("PVT performance as function of anxiety and motivation") + 
   theme(plot.title = element_text(lineheight=.8, face="bold")) #+
-
 
 ```
 
@@ -828,7 +827,7 @@ ggplot(expsubmeans, aes(x = z.mathanx, y = z.pvt)) +
   geom_smooth(method = lm, data = expsubmeans) +
   xlab("Math Anxiety") +
   ylab("PVT Efficiency Performance") +
-  ggtitle("EXPLORATORY Math Performance on Math Anxiety") + 
+  ggtitle("Math Performance on Math Anxiety, for Student Status") + 
     theme(plot.title = element_text(lineheight=.8, face="bold")) + 
   facet_wrap(~student)
 
@@ -839,7 +838,7 @@ ggplot(expsubmeans, aes(x = z.mathanx, y = z.pvt)) +
   geom_smooth(method = lm, data = expsubmeans) +
   xlab("Math Anxiety") +
   ylab("PVT Efficiency Performance") +
-  ggtitle("EXPLORATORY Math Performance on Math Anxiety") + 
+  ggtitle("Math Performance on Math Anxiety,for Number of Children") + 
   theme(plot.title = element_text(lineheight=.8, face="bold")) +
   facet_wrap(~children)  
 
@@ -898,10 +897,10 @@ This main effect of math anxiety was also the only term that remained significan
 
 #### Summary of Replication Attempt
 
-As mentioned above,
-
-Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
+As mentioned above, the primary result from the confirmatory analysis did not replicate the significant findings of Wang et al. (2015). A significant main effect of math anxiety on math performance was found, in that there is a negative predictive relationship between math anxiety and math performance. But the finding that math anxiety has different effects on math performance depending on math motivation was not found. As such, though a stable pattern between math anxiety and math performance was found, because no main effects of math motivation or interactions between motivation or anxiety were found, the current study failed to replicate original results. 
 
 #### Commentary
-Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
 
+Exploratory analyses attempted to discern if the relationship between math anxiety and math performance was differentially affected by relevant demographic characteristics of the MTurk population. None of the predictors included in a number of models significantly altered or improved the model of the relationship between anxiety and performance. Math anxiety remained significantly negatively predictive of math performance across a number of demographic characteristics, including the education level of participants, whether or not the participant was currently a student, and whether the participant had children and helped their children with math homework. 
+
+One of the key differences between the original study and this replication attempt is that the original used undergraduate students and this replication used MTurk participants, only some of whom were currently in any form of schooling. Given the lack of interaction between student status and the relationship between math anxiety and performance, however, this difference does not seem as impactful on a failure to replicate as potentially expected. The failure to replicate the findings from the original study may be more likely to the particularly small effect size of the interaction effect initially found (change in R-squared of *.02*). Even with increasing the sample size from 219 to 397, no significant effect of an interaction between anxiety and motivation was found. Despite a successful replication of the full interactive terms, the significant main effect of math anxiety on performance suggests the influence anxiety can have on such tasks, and highlights the importance of further research on math anxiety and the different ways its effects on performance can be mitigated. 
